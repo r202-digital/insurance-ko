@@ -1,40 +1,40 @@
-import { useState } from 'react'
-import Router from 'next/router'
-import Layout from '../components/layout'
+import { useState } from "react";
+import Router from "next/router";
+import Layout from "components/layout";
 
 const signin = async (email, password) => {
-  const response = await fetch('/api/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+  const response = await fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
-  })
+  });
 
   if (response.status !== 200) {
-    throw new Error(await response.text())
+    throw new Error(await response.text());
   }
 
-  Router.push('/profile')
-}
+  Router.push("/profile");
+};
 
 function Login() {
   const [userData, setUserData] = useState({
-    email: '',
-    password: '',
-    error: '',
-  })
+    email: "",
+    password: "",
+    error: "",
+  });
 
   async function handleSubmit(event) {
-    event.preventDefault()
-    setUserData({ ...userData, error: '' })
+    event.preventDefault();
+    setUserData({ ...userData, error: "" });
 
-    const email = userData.email
-    const password = userData.password
+    const email = userData.email;
+    const password = userData.password;
 
     try {
-      await signin(email, password)
+      await signin(email, password);
     } catch (error) {
-      console.error(error)
-      setUserData({ ...userData, error: error.message })
+      console.error(error);
+      setUserData({ ...userData, error: error.message });
     }
   }
 
@@ -105,7 +105,7 @@ function Login() {
         }
       `}</style>
     </Layout>
-  )
+  );
 }
 
-export default Login
+export default Login;

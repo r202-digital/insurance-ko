@@ -1,25 +1,17 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import useSWR from 'swr'
-import { withAuthSync } from '../utils/auth'
-import Layout from '../components/layout'
-
-const fetcher = (url) =>
-  fetch(url).then((res) => {
-    if (res.status >= 300) {
-      throw new Error('API Client error')
-    }
-
-    return res.json()
-  })
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+import { withAuthSync } from "../utils/auth";
+import Layout from "../components/layout";
+import fetcher from "lib/fetcher";
 
 const Profile = () => {
-  const router = useRouter()
-  const { data: user, error } = useSWR('/api/profile', fetcher)
+  const router = useRouter();
+  const { data: user, error } = useSWR("/api/profile", fetcher);
 
   useEffect(() => {
-    if (error) router.push('/')
-  }, [error, router])
+    if (error) router.push("/");
+  }, [error, router]);
 
   return (
     <Layout>
@@ -36,7 +28,7 @@ const Profile = () => {
         }
       `}</style>
     </Layout>
-  )
-}
+  );
+};
 
-export default withAuthSync(Profile)
+export default withAuthSync(Profile);
