@@ -14,7 +14,7 @@ export const CarouselGrid = styled.div`
   margin-top: 1em;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 18vh);
+  grid-template-rows: repeat(2, 21vh);
   grid-column-gap: 12px;
   grid-row-gap: 12px;
 `;
@@ -45,6 +45,7 @@ export const SectionHeading = styled(Text)`
     color === "white" ? theme.global.colors.white : theme.global.colors.brand};
   line-height: 1;
   margin: 0.5em 0;
+  margin-top: 0;
   font-weight: bold;
 `;
 
@@ -64,11 +65,18 @@ export const ParagraphText = styled(Text)`
   font-size: 0.875em;
   line-height: 1;
   margin: 0;
+  p {
+    font-family: Montserrat;
+    font-size: 1em;
+    line-height: 24px;
+    margin: 0;
+  }
 `;
 
 export const SectionBg = styled(SectionContainer)`
   background-image: url(${({ image }) => image});
   background-size: 100% 100%;
   margin: 0;
+  padding: 5.5em 0;
   max-width: initial;
 `;

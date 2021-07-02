@@ -1,1 +1,0 @@
-export { homeBannerStyles } from './homeBanner'
