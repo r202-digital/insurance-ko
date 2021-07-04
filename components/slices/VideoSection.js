@@ -46,13 +46,14 @@ const ItemParagraph = styled(Text)`
   line-height: 1.75;
 `;
 
-const ShowcaseGrid = ({ slice }) => {
+const VideoSection = ({ slice }) => {
   const { items, primary } = slice;
+  const { paragraph } = primary;
   const heading = extractText(primary.heading);
   const subheading = extractText(primary.subheading);
 
   return (
-    <SectionBg image={primary.background.url || "/section-bg.png"}>
+    <SectionBg image={primary.background.url || "/bg.png"}>
       <Container>
         <SectionHeading as="h2" color="white">
           {heading}
@@ -60,36 +61,12 @@ const ShowcaseGrid = ({ slice }) => {
         <ShowcaseText as="h3" color="yellow">
           {subheading}
         </ShowcaseText>
-        <GridContainer
-          columns={{
-            count: 3,
-            size: "auto",
-          }}
-          gap="large"
-        >
-          {items.map((item) => {
-            const { image } = item;
-            const itemHeading = extractText(item.item_heading);
-            const itemParagraph = extractText(item.item_paragraph);
-
-            return (
-              <Box>
-                <ShowcaseImageContainer>
-                  <ShowcaseImage src={image.url} />
-                </ShowcaseImageContainer>
-                <ItemHeading as="h3" margin="0.5em 0">
-                  {itemHeading}
-                </ItemHeading>
-                <ItemParagraph size="small" color="white">
-                  {itemParagraph}
-                </ItemParagraph>
-              </Box>
-            );
-          })}
-        </GridContainer>
+        <ParagraphText>
+          <RichText render={paragraph} />
+        </ParagraphText>
       </Container>
     </SectionBg>
   );
 };
 
-export default ShowcaseGrid;
+export default VideoSection;

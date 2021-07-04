@@ -6,4 +6,5 @@ export { default as ImageHighlight } from "./ImageHighlight";
 export { default as CarouselImageGrid } from "./CarouselImageGrid";
 export { default as SectionParagraph } from "./SectionParagraph";
 export { default as ShowcaseGrid } from "./ShowcaseGrid";
+export { default as VideoSection } from "./VideoSection";
 export { default as SliceZone } from "./SliceZone";

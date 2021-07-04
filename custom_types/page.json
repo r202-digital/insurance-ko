@@ -301,6 +301,52 @@
                 }
               }
             }
+          },
+          "video_section": {
+            "type": "Slice",
+            "fieldset": "Video Section",
+            "description": "Section with video",
+            "icon": "account_box",
+            "display": "list",
+            "non-repeat": {
+              "heading": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading2",
+                  "label": "Heading"
+                }
+              },
+              "subheading": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading3",
+                  "label": "Subheading"
+                }
+              },
+              "paragraph": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph",
+                  "label": "Paragraph"
+                }
+              },
+              "background": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Background"
+                }
+              },
+              "video": {
+                "type": "Link",
+                "config": {
+                  "select": "media",
+                  "label": "Video"
+                }
+              }
+            },
+            "repeat": {}
           }
         }
       }
