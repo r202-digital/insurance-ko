@@ -85,8 +85,6 @@ const VideoSection = ({ slice }) => {
   const heading = extractText(primary.heading);
   const subheading = extractText(primary.subheading);
 
-  console.log(primary);
-
   return (
     <SectionBg image={primary.background.url || "/bg.png"}>
       <SplitSection>

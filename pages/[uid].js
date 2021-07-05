@@ -1,7 +1,7 @@
 import React from "react";
 
 import DefaultLayout from "layouts";
-import { Header, SliceZone } from "components";
+import SliceZone from "components/SliceZone";
 
 import { queryRepeatableDocuments } from "utils/queries";
 
@@ -9,13 +9,12 @@ import { Client } from "utils/prismicHelpers";
 import ErrorPage from "pages/404";
 
 const Page = ({ doc, menu }) => {
-  console.log(doc);
-  console.log(menu);
+  // console.log(doc);
+  // console.log(menu);
   if (doc && doc.data) {
     return (
       <DefaultLayout menu={menu}>
         <div className="page">
-          {/* <Header menu={menu} /> */}
           <SliceZone sliceZone={doc.data.page_content} />
         </div>
       </DefaultLayout>
