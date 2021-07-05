@@ -1,6 +1,6 @@
 import React from "react";
 import DefaultLayout from "layouts";
-import { SliceZone } from "components";
+import SliceZone from "components/slices/SliceZone";
 import { Carousel, Image, Grid, Box, Text } from "grommet";
 import Container from "components/shared/container";
 import {
