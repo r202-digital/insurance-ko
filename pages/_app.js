@@ -1,4 +1,5 @@
 import { Grommet } from "grommet";
+import Head from "next/head";
 import theme from "lib/theme";
 import "@fontsource/open-sans";
 import "@fontsource/open-sans/700.css";
@@ -7,6 +8,9 @@ import "@fontsource/montserrat";
 function MyApp({ Component, pageProps }) {
   return (
     <Grommet theme={theme}>
+      <Head>
+        <title>InsuranceKo</title>
+      </Head>
       <style jsx global>{`
         *,
         *::before,

@@ -1,2 +1,2 @@
-export { footerStyles } from './footer'
-export { headerStyles } from './header'
+export { footerStyles } from "styles/layout/footer";
+export { headerStyles } from "styles/layout/header";

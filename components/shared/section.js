@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "grommet";
+import { Box, Image, Text, Button } from "grommet";
 import styled from "styled-components";
 import theme from "lib/theme";
 
@@ -79,4 +79,8 @@ export const SectionBg = styled(SectionContainer)`
   margin: 0;
   padding: 5.5em 0;
   max-width: initial;
+`;
+
+export const YellowTextButton = styled(Button)`
+  color: yellow;
 `;

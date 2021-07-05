@@ -342,6 +342,13 @@
                 "config": {
                   "label": "Video"
                 }
+              },
+              "button": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "hyperlink",
+                  "label": "Button"
+                }
               }
             },
             "repeat": {}

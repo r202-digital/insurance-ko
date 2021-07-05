@@ -17,7 +17,6 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="shortcut icon" href="/logo/logo.ico" />
-          <title>InsuranceKo</title>
           <link
             rel="preload"
             href="/fonts/RedRock.ttf"
