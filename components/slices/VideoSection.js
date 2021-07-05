@@ -46,6 +46,14 @@ const ItemParagraph = styled(Text)`
   line-height: 1.75;
 `;
 
+const SplitSection = styled(Container)`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+`;
+
 const VideoSection = ({ slice }) => {
   const { items, primary } = slice;
   const { paragraph } = primary;
@@ -54,17 +62,20 @@ const VideoSection = ({ slice }) => {
 
   return (
     <SectionBg image={primary.background.url || "/bg.png"}>
-      <Container>
-        <SectionHeading as="h2" color="white">
-          {heading}
-        </SectionHeading>
-        <ShowcaseText as="h3" color="yellow">
-          {subheading}
-        </ShowcaseText>
-        <ParagraphText>
-          <RichText render={paragraph} />
-        </ParagraphText>
-      </Container>
+      <SplitSection>
+        <div></div>
+        <div>
+          <SectionHeading as="h2" color="white">
+            {heading}
+          </SectionHeading>
+          <ShowcaseText as="h3" color="yellow">
+            {subheading}
+          </ShowcaseText>
+          <ParagraphText>
+            <RichText render={paragraph} />
+          </ParagraphText>
+        </div>
+      </SplitSection>
     </SectionBg>
   );
 };

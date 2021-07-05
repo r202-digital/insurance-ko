@@ -307,7 +307,6 @@
             "fieldset": "Video Section",
             "description": "Section with video",
             "icon": "account_box",
-            "display": "list",
             "non-repeat": {
               "heading": {
                 "type": "StructuredText",
@@ -339,9 +338,8 @@
                 }
               },
               "video": {
-                "type": "Link",
+                "type": "Embed",
                 "config": {
-                  "select": "media",
                   "label": "Video"
                 }
               }

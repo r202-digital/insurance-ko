@@ -320,9 +320,8 @@
                 }
               },
               "video": {
-                "type": "Link",
+                "type": "Embed",
                 "config": {
-                  "select": "media",
                   "label": "Video"
                 }
               }
