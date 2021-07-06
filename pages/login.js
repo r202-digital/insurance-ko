@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Router from "next/router";
-import Layout from "components/layout";
+import Layout from "../components/layout";
 
 const signin = async (email, password) => {
   const response = await fetch("/api/login", {

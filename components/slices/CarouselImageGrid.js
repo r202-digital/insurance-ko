@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel, Image } from "grommet";
-import Container from "components/shared/container";
+import Container from "../shared/container";
 import {
   CarouselContainer,
   CarouselGrid,
@@ -11,7 +11,7 @@ import {
   SectionHeading,
   HandwrittenText,
   ParagraphText,
-} from "components/shared/section";
+} from "../shared/section";
 
 const CarouselImageGrid = ({ slice }) => {
   const { items, primary } = slice;
