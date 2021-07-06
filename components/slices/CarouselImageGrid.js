@@ -19,7 +19,7 @@ const CarouselImageGrid = ({ slice }) => {
     <Container>
       <CarouselGrid>
         <CarouselContainer>
-          <Carousel fill>
+          <Carousel fill play="4000">
             {items.map((item) => (
               <Image fit="cover" src={item?.carousel_item?.url || ""} />
             ))}
