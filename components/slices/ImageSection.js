@@ -1,14 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Carousel, Image, Grid, Box, Text } from "grommet";
+import { Grid, Box, Text } from "grommet";
 import Container from "components/shared/container";
 import {
-  CarouselContainer,
-  CarouselGrid,
-  TopRightImage,
-  BottomRightImage,
-  GridImage,
-  SectionContainer,
   SectionHeading,
   HandwrittenText,
   ParagraphText,
@@ -17,37 +11,15 @@ import {
 } from "components/shared/section";
 import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
-import parse from "react-html-parser";
 
-const ShowcaseImage = styled.img`
-  height: 100%;
+const ImageSectionBg = styled(SectionBg)`
+  padding: 4em 0;
 `;
 
-const ShowcaseImageContainer = styled(Box)`
-  align-items: center;
-  height: 190px;
-  margin-bottom: 0.5em;
-`;
 
 const ShowcaseText = styled(HandwrittenText)`
   margin-bottom: 0.5em;
 `;
-
-const GridContainer = styled(Grid)`
-  margin: 0 6em;
-`;
-
-const ItemHeading = styled(Text)`
-  text-transform: uppercase;
-  color: yellow;
-  margin: 0.35em 0;
-  margin-bottom: 0.6em;
-`;
-
-const ItemParagraph = styled(Text)`
-  line-height: 1.75;
-`;
-
 const SplitSection = styled(Container)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -56,12 +28,14 @@ const SplitSection = styled(Container)`
   grid-row-gap: 0px;
 `;
 
-const VideoContainer = styled.div`
-  iframe {
-    width: 100%;
-    height: 100%;
-  }
+const ImageContainer = styled.div`
+  display: flex;
 `;
+
+const Image = styled.img`
+width: 80%;
+margin-left: auto;
+`
 
 const SectionButtonContainer = styled.div`
   p {
@@ -73,23 +47,33 @@ const SectionButton = styled(YellowTextButton)`
   margin: 20px 0;
 `;
 
+const ContentSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+
 const myCustomLink = (type, element, content, children, index) => (
   <a href={element.data.url}>
     <SectionButton primary label={content} />
   </a>
 );
 
-const VideoSection = ({ slice }) => {
+const ImageSection = ({ slice }) => {
   const { primary } = slice;
-  const { paragraph, video } = primary;
+  const { paragraph, image_highlight } = primary;
   const heading = extractText(primary.heading);
   const subheading = extractText(primary.subheading);
 
   return (
-    <SectionBg image={primary.background.url || "/bg.png"}>
+    <ImageSectionBg image={primary.background.url || "/bg.png"}>
       <SplitSection>
-        <VideoContainer>{parse(video.html)}</VideoContainer>
-        <div>
+        {image_highlight && 
+        <ImageContainer>
+          <Image src={image_highlight.url} alt={image_highlight.alt} />
+        </ImageContainer>}
+        <ContentSection>
           <SectionHeading as="h2" color="green">
             {heading}
           </SectionHeading>
@@ -105,10 +89,10 @@ const VideoSection = ({ slice }) => {
               serializeHyperlink={myCustomLink}
             />
           </SectionButtonContainer>
-        </div>
+        </ContentSection>
       </SplitSection>
-    </SectionBg>
+    </ImageSectionBg>
   );
 };
 
-export default VideoSection;
+export default ImageSection;

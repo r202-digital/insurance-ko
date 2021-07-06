@@ -352,6 +352,59 @@
               }
             },
             "repeat": {}
+          },
+          "image_section": {
+            "type": "Slice",
+            "fieldset": "Image Section",
+            "description": "Section with image",
+            "icon": "add_a_photo",
+            "non-repeat": {
+              "heading": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading2",
+                  "label": "Heading"
+                }
+              },
+              "subheading": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading3",
+                  "label": "Subheading"
+                }
+              },
+              "paragraph": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph",
+                  "label": "Paragraph"
+                }
+              },
+              "background": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Background"
+                }
+              },
+              "image_highlight": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Image Highlight"
+                }
+              },
+              "button": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "hyperlink",
+                  "label": "Button"
+                }
+              }
+            },
+            "repeat": {}
           }
         }
       }

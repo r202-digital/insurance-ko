@@ -8,6 +8,7 @@ import CarouselImageGrid from "./CarouselImageGrid";
 import SectionParagraph from "./SectionParagraph";
 import ShowcaseGrid from "./ShowcaseGrid";
 import VideoSection from "./VideoSection";
+import ImageSection from "./ImageSection";
 
 const SliceZone = ({ sliceZone }) => (
   <div className="container">
@@ -31,6 +32,8 @@ const SliceZone = ({ sliceZone }) => (
           return <ShowcaseGrid slice={slice} key={`slice-${index}`} />;
         case "video_section":
           return <VideoSection slice={slice} key={`slice-${index}`} />;
+        case "image_section":
+          return <ImageSection slice={slice} key={`slice-${index}`} />;
         default:
           return null;
       }
