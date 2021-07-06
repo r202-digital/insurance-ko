@@ -1,5 +1,4 @@
 export { errorStyles, globals, reset } from "./general";
-export { footerStyles, headerStyles } from "./layout";
 export {
   imageGalleryStyles,
   imageHighlightStyles,

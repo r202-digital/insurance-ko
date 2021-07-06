@@ -1,6 +1,6 @@
 import { Box, Image, Text, Button } from "grommet";
 import styled from "styled-components";
-import theme from "lib/theme";
+import theme from "../../lib/theme";
 
 export const CarouselContainer = styled(Box)`
   height: 26.6875em;
