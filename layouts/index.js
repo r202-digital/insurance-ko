@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import fetcher from "lib/fetcher";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
 const Layout = ({ menu, children }) => {
   const { data: user, error } = useSWR("/api/profile", fetcher);

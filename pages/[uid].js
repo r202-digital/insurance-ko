@@ -1,7 +1,7 @@
 import React from "react";
 
-import DefaultLayout from "../layouts";
-import SliceZone from "../components/slices/SliceZone.js";
+import DefaultLayout from "layouts";
+import SliceZone from "components/slices/SliceZone.js";
 
 import { queryRepeatableDocuments } from "utils/queries";
 

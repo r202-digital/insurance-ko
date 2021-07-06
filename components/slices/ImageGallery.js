@@ -1,7 +1,7 @@
 import React from "react";
 import { RichText } from "prismic-reactjs";
 
-import DocLink from "../DocLink";
+import DocLink from "DocLink";
 import { linkResolver } from "prismic-configuration";
 import { imageGalleryStyles } from "styles";
 

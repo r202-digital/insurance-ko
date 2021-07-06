@@ -1,5 +1,5 @@
 import React from "react";
-import DefaultLayout from "../layouts";
+import DefaultLayout from "layouts";
 
 const Page = () => {
   return (

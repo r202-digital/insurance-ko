@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import { withAuthSync } from "../utils/auth";
-import Layout from "../components/layout";
+import { withAuthSync } from "utils/auth";
+import Layout from "components/layout";
 import fetcher from "lib/fetcher";
 
 const Profile = () => {

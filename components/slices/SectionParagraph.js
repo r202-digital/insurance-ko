@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel, Image } from "grommet";
-import Container from "../shared/container";
+import Container from "shared/container";
 import {
   CarouselContainer,
   CarouselGrid,
@@ -11,7 +11,7 @@ import {
   SectionHeading,
   HandwrittenText,
   ParagraphText,
-} from "../shared/section";
+} from "shared/section";
 import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
 
