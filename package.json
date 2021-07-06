@@ -3,6 +3,7 @@
   "description": "Website for InsuranceKo",
   "author": "Sidney Ramos <sidney@r202digital.com>",
   "dependencies": {
+    "@fontsource/lato": "^4.4.5",
     "@fontsource/montserrat": "^4.4.5",
     "@fontsource/open-sans": "^4.4.5",
     "@prismicio/client": "^5.1.0",

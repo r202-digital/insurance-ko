@@ -158,6 +158,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
   integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
+"@fontsource/lato@^4.4.5":
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-4.4.5.tgz#82c16ef01ab1a1039f74d774e89ef1f76111def6"
+  integrity sha512-pm9am2tdLnK+21PKCK060oY8R8OKFVzTVvM6pPS+mS7JOZKe3mmDgfB2DGzzyHG/Azj3Pn6onU72BrQsh3XjNw==
+
 "@fontsource/montserrat@^4.4.5":
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/@fontsource/montserrat/-/montserrat-4.4.5.tgz#f97ebea605f4a2d6b9b23a19bc9bf8fc6f4c79d5"

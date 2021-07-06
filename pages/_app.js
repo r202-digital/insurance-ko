@@ -4,6 +4,10 @@ import theme from "lib/theme";
 import "@fontsource/open-sans";
 import "@fontsource/open-sans/700.css";
 import "@fontsource/montserrat";
+import "@fontsource/lato";
+import "@fontsource/lato/300.css";
+import "@fontsource/lato/700.css";
+import "@fontsource/lato/900.css";
 
 function MyApp({ Component, pageProps }) {
   return (
