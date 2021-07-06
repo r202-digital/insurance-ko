@@ -1,15 +1,13 @@
 import React from "react";
-import {
-  TextSection,
-  Quote,
-  FullWidthImage,
-  ImageGallery,
-  ImageHighlight,
-  CarouselImageGrid,
-  SectionParagraph,
-  ShowcaseGrid,
-  VideoSection,
-} from "./";
+import TextSection from "./TextSection";
+import Quote from "./Quote";
+import FullWidthImage from "./FullWidthImage";
+import ImageGallery from "./ImageGallery";
+import ImageHighlight from "./ImageHighlight";
+import CarouselImageGrid from "./CarouselImageGrid";
+import SectionParagraph from "./SectionParagraph";
+import ShowcaseGrid from "./ShowcaseGrid";
+import VideoSection from "./VideoSection";
 
 const SliceZone = ({ sliceZone }) => (
   <div className="container">
