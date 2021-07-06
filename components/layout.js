@@ -1,4 +1,4 @@
-import Header from "components/Header";
+import Header from "components/header";
 import useSWR from "swr";
 import fetcher from "lib/fetcher";
 
