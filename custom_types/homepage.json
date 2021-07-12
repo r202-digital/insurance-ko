@@ -387,6 +387,69 @@
               }
             },
             "repeat": {}
+          },
+          "multi-tab_section": {
+            "type": "Slice",
+            "fieldset": "Multi-tab Section",
+            "description": "Section with tabs",
+            "icon": "account_balance",
+            "non-repeat": {
+              "heading": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading2",
+                  "label": "Heading"
+                }
+              },
+              "subheading": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading3",
+                  "label": "Subheading"
+                }
+              },
+              "background": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Background"
+                }
+              }
+            },
+            "repeat": {
+              "tab_image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Tab Image"
+                }
+              },
+              "tab_label": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading4",
+                  "label": "Tab Label"
+                }
+              },
+              "tab_content": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph,heading4,strong,em,hyperlink,list-item,o-list-item",
+                  "allowTargetBlank": true,
+                  "label": "Tab Content"
+                }
+              },
+              "tab_button": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "hyperlink",
+                  "allowTargetBlank": true,
+                  "label": "Tab Button"
+                }
+              }
+            }
           }
         }
       }
