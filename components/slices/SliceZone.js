@@ -10,11 +10,12 @@ import ShowcaseGrid from "./ShowcaseGrid";
 import VideoSection from "./VideoSection";
 import ImageSection from "./ImageSection";
 import MultitabSection from "./MultitabSection";
+import HighlightCarousel from "./HighlightCarousel";
 
 const SliceZone = ({ sliceZone }) => (
   <div className="container">
     {sliceZone.map((slice, index) => {
-      console.log(slice)
+      // console.log(slice)
       switch (slice.slice_type) {
         case "text_section":
           return <TextSection slice={slice} key={`slice-${index}`} />;
@@ -38,6 +39,8 @@ const SliceZone = ({ sliceZone }) => (
           return <ImageSection slice={slice} key={`slice-${index}`} />;
         case "multi-tab_section":
           return <MultitabSection slice={slice} key={`slice-${index}`} />;
+        case "highlights_carousel":
+          return <HighlightCarousel slice={slice} key={`slice-${index}`} />;
         default:
           return null;
       }

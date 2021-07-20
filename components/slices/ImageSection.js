@@ -11,20 +11,24 @@ import {
 } from "components/shared/section";
 import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
+import theme from "lib/theme";
 
 const ImageSectionBg = styled(SectionBg)`
-  padding: 4em 0;
+  padding: ${({ isBig }) => isBig ? '10em' : '4em'} 0;
 `;
 
 
 const ShowcaseText = styled(HandwrittenText)`
   margin-bottom: 0.5em;
+  color: ${({ isBig }) => isBig ? theme.global.colors.brand : theme.global.colors.green};
+
 `;
+
 const SplitSection = styled(Container)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
-  grid-column-gap: 60px;
+  grid-column-gap: ${({ isBig }) => isBig ? '150px' : '60px'};
   grid-row-gap: 0px;
 `;
 
@@ -51,6 +55,7 @@ const ContentSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: ${({ isBig }) => isBig ? 'left' : 'center'};
 `;
 
 
@@ -62,22 +67,21 @@ const myCustomLink = (type, element, content, children, index) => (
 
 const ImageSection = ({ slice }) => {
   const { primary } = slice;
-  const { paragraph, image_highlight } = primary;
+  const { paragraph, image_highlight, big_version } = primary;
   const heading = extractText(primary.heading);
   const subheading = extractText(primary.subheading);
 
   return (
-    <ImageSectionBg image={primary.background.url || "/bg.png"}>
-      <SplitSection>
-        {image_highlight && 
+    <ImageSectionBg image={primary.background.url || "/bg.png"} isBig={big_version}>
+      <SplitSection isBig={big_version}>
         <ImageContainer>
-          <Image src={image_highlight.url} alt={image_highlight.alt} />
-        </ImageContainer>}
-        <ContentSection>
+          {image_highlight && !!Object.keys(image_highlight).length && <Image src={image_highlight.url} alt={image_highlight.alt} />}
+        </ImageContainer>
+        <ContentSection isBig={big_version}>
           <SectionHeading as="h2" color="green">
             {heading}
           </SectionHeading>
-          <ShowcaseText as="h3" color="brand">
+          <ShowcaseText as="h3" isBig={big_version}>
             {subheading}
           </ShowcaseText>
           <ParagraphText>

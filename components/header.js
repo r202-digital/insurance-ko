@@ -25,6 +25,8 @@ const StyledGrommetHeader = styled(GrommetHeader)`
   box-shadow: 0px -4px 8px 0px #000000;
   z-index: 1;
   background-color: white;
+  padding-left: 0;
+  padding-right: 0;
 `;
 
 const HeaderContainer = styled(Container)`

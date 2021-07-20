@@ -359,6 +359,13 @@
             "description": "Section with image",
             "icon": "add_a_photo",
             "non-repeat": {
+              "big_version": {
+                "type": "Boolean",
+                "config": {
+                  "default_value": false,
+                  "label": "Big Version"
+                }
+              },
               "heading": {
                 "type": "StructuredText",
                 "config": {
@@ -465,6 +472,62 @@
                   "single": "hyperlink",
                   "allowTargetBlank": true,
                   "label": "Tab Button"
+                }
+              }
+            }
+          },
+          "highlights_carousel": {
+            "type": "Slice",
+            "fieldset": "Highlights Carousel",
+            "description": "This is a carousel depicting highlights",
+            "icon": "dns",
+            "display": "list",
+            "non-repeat": {
+              "title": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading2",
+                  "label": "Title"
+                }
+              }
+            },
+            "repeat": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Image"
+                }
+              },
+              "highlight_title": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading3",
+                  "label": "Highlight Title"
+                }
+              },
+              "date": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "paragraph",
+                  "label": "Date"
+                }
+              },
+              "content": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink",
+                  "allowTargetBlank": true,
+                  "label": "Content"
+                }
+              },
+              "highlight_link": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "hyperlink",
+                  "allowTargetBlank": true,
+                  "label": "Highlight Link"
                 }
               }
             }

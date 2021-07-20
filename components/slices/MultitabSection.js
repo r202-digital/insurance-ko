@@ -90,7 +90,6 @@ const MultitabSection = ({ slice }) => {
   const { primary, items } = slice;
   const heading = extractText(primary.heading);
   const subheading = extractText(primary.subheading);
-  console.log(items)
 
   return (
     <MultitabSectionBg image={primary?.background?.url || "/bg.png"}>
