@@ -12,6 +12,12 @@
     "value": "page.json"
   },
   {
+    "id": "blog_post",
+    "name": "Blog Post",
+    "repeatable": true,
+    "value": "blog_post.json"
+  },
+  {
     "id": "menu",
     "name": "Menu",
     "repeatable": false,

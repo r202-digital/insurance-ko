@@ -7,14 +7,24 @@ import { queryRepeatableDocuments } from "utils/queries";
 
 import { Client } from "utils/prismicHelpers";
 import ErrorPage from "pages/404";
+import { RichText } from "prismic-reactjs";
+import Container from "components/shared/container";
 
 const Page = ({ doc, menu }) => {
   if (doc && doc.data) {
+    const { data } = doc;
     return (
       <DefaultLayout menu={menu}>
-        <div className="page">
-          <SliceZone sliceZone={doc.data.page_content} />
-        </div>
+        <Container>
+          <div>
+            {data.image && (
+              <img src={data.image.url || ""} width="500px" height="200px" />
+            )}
+            <p>{RichText.asText(doc.data.published_date)}</p>
+            <h1>{RichText.asText(doc.data.title)}</h1>
+            <p></p>
+          </div>
+        </Container>
       </DefaultLayout>
     );
   }
@@ -37,7 +47,8 @@ export async function getStaticProps({
   const client = Client();
 
   const doc =
-    (await client.getByUID("page", params.uid, ref ? { ref } : null)) || {};
+    (await client.getByUID("blog_post", params.uid, ref ? { ref } : null)) ||
+    {};
   const menu = (await client.getSingle("menu", ref ? { ref } : null)) || {};
 
   return {
@@ -51,10 +62,10 @@ export async function getStaticProps({
 
 export async function getStaticPaths() {
   const documents = await queryRepeatableDocuments(
-    (doc) => doc.type === "page"
+    (doc) => doc.type === "blog_post"
   );
   return {
-    paths: documents.map((doc) => `/${doc.uid}`),
+    paths: documents.map((doc) => `/blog/${doc.uid}`),
     fallback: true,
   };
 }

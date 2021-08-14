@@ -10,7 +10,7 @@ import {
 } from "components/shared/section";
 import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
-import { FiChevronRight } from 'react-icons/fi'
+import { FiChevronRight } from "react-icons/fi";
 import theme from "lib/theme";
 import { linkResolver } from "prismic-configuration";
 
@@ -27,6 +27,12 @@ const HighlightList = styled.ul`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const HighlightItem = styled.li`
@@ -42,7 +48,7 @@ const HighlightItem = styled.li`
   transition: transform 0.5s;
   position: relative;
   overflow: hidden;
-  
+
   display: flex;
   flex-direction: column;
 
@@ -53,8 +59,8 @@ const HighlightItem = styled.li`
 
 const HighlightImage = styled.img`
   height: 44%;
-  object-fit: cover
-`
+  object-fit: cover;
+`;
 
 const HighlightContent = styled.div`
   padding: 30px 40px;
@@ -70,7 +76,7 @@ const HighlightContent = styled.div`
   h3 {
     margin: 1rem 0;
   }
-`;  
+`;
 
 const HighlightLink = styled.a`
   color: white;
@@ -83,10 +89,12 @@ const HighlightLink = styled.a`
 
 const CarouselHeading = styled(SectionHeading)`
   margin-bottom: 2rem;
-`
+`;
 
 const myCustomLink = (type, element, content, children, index) => (
-  <HighlightLink href={element.data.url}>{content} <FiChevronRight /></HighlightLink>
+  <HighlightLink href={element.data.url}>
+    {content} <FiChevronRight />
+  </HighlightLink>
 );
 
 const HighlightCarousel = ({ slice }) => {
@@ -102,25 +110,22 @@ const HighlightCarousel = ({ slice }) => {
       </Container>
       <div>
         <HighlightList>
-          {
-            items.map((item) => {
-              console.log(item);
-              return (
-                <HighlightItem key={JSON.stringify(item)}>
-                  <HighlightImage src={item.image.url || ''} />
-                  <HighlightContent>
-                    <p>{RichText.asText(item.date)}</p>
-                    <h3>{RichText.asText(item.highlight_title)}</h3>
-                    <RichText render={item.content} linkResolver={linkResolver} />
-                    <RichText
-                      render={item.highlight_link}
-                      serializeHyperlink={myCustomLink}
-                    />
-                  </HighlightContent>
-                </HighlightItem>
-              )
-            })
-          }
+          {items.map((item, index) => {
+            return (
+              <HighlightItem key={`${JSON.stringify(item)}-${index}`}>
+                <HighlightImage src={item.image.url || ""} />
+                <HighlightContent>
+                  <p>{RichText.asText(item.date)}</p>
+                  <h3>{RichText.asText(item.highlight_title)}</h3>
+                  <RichText render={item.content} linkResolver={linkResolver} />
+                  <RichText
+                    render={item.highlight_link}
+                    serializeHyperlink={myCustomLink}
+                  />
+                </HighlightContent>
+              </HighlightItem>
+            );
+          })}
         </HighlightList>
       </div>
     </HighlightSectionBg>

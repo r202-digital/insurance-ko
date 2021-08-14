@@ -517,7 +517,7 @@
               "content": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, strong, em, hyperlink",
+                  "multi": "paragraph,strong,em,hyperlink",
                   "allowTargetBlank": true,
                   "label": "Content"
                 }
@@ -528,6 +528,108 @@
                   "single": "hyperlink",
                   "allowTargetBlank": true,
                   "label": "Highlight Link"
+                }
+              }
+            }
+          },
+          "blog_section": {
+            "type": "Slice",
+            "fieldset": "Blog Section",
+            "description": "This is a collection of blogs",
+            "icon": "add",
+            "non-repeat": {
+              "title": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading2",
+                  "label": "Title"
+                }
+              },
+              "background": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Background"
+                }
+              }
+            },
+            "repeat": {
+              "blog_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Blog Link",
+                  "select": null
+                }
+              },
+              "type": {
+                "type": "Select",
+                "config": {
+                  "options": ["popular", "front", "featured"],
+                  "default_value": "popular",
+                  "label": "Type"
+                }
+              }
+            }
+          },
+          "testimonials": {
+            "type": "Slice",
+            "fieldset": "Testimonials",
+            "description": "This is a testimonials component",
+            "icon": "contact_mail",
+            "non-repeat": {
+              "title": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading2",
+                  "label": "Title"
+                }
+              },
+              "subtitle": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph",
+                  "label": "Subtitle"
+                }
+              },
+              "background": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Background"
+                }
+              }
+            },
+            "repeat": {
+              "avatar": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Avatar"
+                }
+              },
+              "name": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading3",
+                  "label": "Name"
+                }
+              },
+              "position": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading4",
+                  "label": "Position"
+                }
+              },
+              "review": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+                  "allowTargetBlank": true,
+                  "label": "Review"
                 }
               }
             }

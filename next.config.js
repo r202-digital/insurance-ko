@@ -9,4 +9,7 @@ module.exports = {
     config.plugins.push(new CaseSensitivePathsPlugin());
     return config;
   },
+  images: {
+    domains: ["images.prismic.io"],
+  },
 };

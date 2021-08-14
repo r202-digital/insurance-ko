@@ -67,13 +67,13 @@ const ShowcaseGrid = ({ slice }) => {
           }}
           gap="large"
         >
-          {items.map((item) => {
+          {items.map((item, index) => {
             const { image } = item;
             const itemHeading = extractText(item.item_heading);
             const itemParagraph = extractText(item.item_paragraph);
 
             return (
-              <Box>
+              <Box key={`${JSON.stringify(item)}-${index}`}>
                 <ShowcaseImageContainer>
                   <ShowcaseImage src={image.url} />
                 </ShowcaseImageContainer>

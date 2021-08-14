@@ -1,21 +1,6 @@
 import React from "react";
 import DefaultLayout from "layouts";
 import SliceZone from "components/slices/SliceZone";
-import { Carousel, Image, Grid, Box, Text } from "grommet";
-import Container from "components/shared/container";
-import {
-  CarouselContainer,
-  CarouselGrid,
-  TopRightImage,
-  BottomRightImage,
-  GridImage,
-  SectionContainer,
-  SectionHeading,
-  HandwrittenText,
-  ParagraphText,
-  SectionBg,
-} from "components/shared/section";
-
 import { Client } from "utils/prismicHelpers";
 
 const HomePage = ({ doc, menu }) => {

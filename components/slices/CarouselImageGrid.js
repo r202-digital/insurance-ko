@@ -7,11 +7,13 @@ import {
   TopRightImage,
   BottomRightImage,
   GridImage,
-  SectionContainer,
-  SectionHeading,
-  HandwrittenText,
-  ParagraphText,
 } from "components/shared/section";
+import NextImage from "next/image";
+import styled from "styled-components";
+
+const StyledImage = styled(NextImage)`
+  object-fit: cover;
+`;
 
 const CarouselImageGrid = ({ slice }) => {
   const { items, primary } = slice;
@@ -19,9 +21,13 @@ const CarouselImageGrid = ({ slice }) => {
     <Container>
       <CarouselGrid>
         <CarouselContainer>
-          <Carousel fill play="4000">
-            {items.map((item) => (
-              <Image fit="cover" src={item?.carousel_item?.url || ""} />
+          <Carousel fill play={4000}>
+            {items.map((item, index) => (
+              <StyledImage
+                key={`${JSON.stringify(item)}-${index}`}
+                src={item?.carousel_item?.url || ""}
+                layout="fill"
+              />
             ))}
           </Carousel>
         </CarouselContainer>

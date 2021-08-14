@@ -11,11 +11,13 @@ import VideoSection from "./VideoSection";
 import ImageSection from "./ImageSection";
 import MultitabSection from "./MultitabSection";
 import HighlightCarousel from "./HighlightCarousel";
+import BlogSection from "./BlogSection";
+import Testimonials from "./Testimonials";
 
 const SliceZone = ({ sliceZone }) => (
   <div className="container">
     {sliceZone.map((slice, index) => {
-      // console.log(slice)
+      // console.log(slice);
       switch (slice.slice_type) {
         case "text_section":
           return <TextSection slice={slice} key={`slice-${index}`} />;
@@ -41,6 +43,10 @@ const SliceZone = ({ sliceZone }) => (
           return <MultitabSection slice={slice} key={`slice-${index}`} />;
         case "highlights_carousel":
           return <HighlightCarousel slice={slice} key={`slice-${index}`} />;
+        case "blog_section":
+          return <BlogSection slice={slice} key={`slice-${index}`} />;
+        case "testimonials":
+          return <Testimonials slice={slice} key={`slice-${index}`} />;
         default:
           return null;
       }
