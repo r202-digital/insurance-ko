@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useCallback } from "react";
 import styled from "styled-components";
 import { Text } from "grommet";
 import Container from "components/shared/container";
@@ -85,17 +85,32 @@ const ArrowRight = (props) => {
   );
 };
 
+const List = React.memo(({ items }) =>
+  items.map((item, index) => {
+    return (
+      <div className="keen-slider__slide">
+        <Slide>
+          <Avatar src={item.avatar.url} />
+        </Slide>
+      </div>
+    );
+  })
+);
+
 const Testimonials = ({ slice }) => {
-  const { items, primary } = slice;
+  const { items, primary } = useMemo(() => slice, [slice]);
   const title = extractText(primary.title);
   const subtitle = extractText(primary.subtitle);
   const [currentSlide, setCurrentSlide] = React.useState(items.length - 1);
 
   const convertToActiveIndex = (slideIndex, arrLength) =>
     slideIndex < arrLength * 2 - 1 ? slideIndex + 1 : 0;
+  const memoConvertToActiveIndex = useCallback(convertToActiveIndex, []);
 
   const convertToItemIndex = (slideIndex, arrLength) =>
     slideIndex < arrLength ? slideIndex : slideIndex - arrLength;
+  const memoConvertToItemIndex = useCallback(convertToItemIndex, []);
+
   const [sliderRef, slider] = useKeenSlider({
     slidesPerView: 3,
     mode: "free-snap",
@@ -103,7 +118,7 @@ const Testimonials = ({ slice }) => {
     loop: true,
     initial: items.length - 1,
     slideChanged: (s) => {
-      const slideIndex = convertToActiveIndex(
+      const slideIndex = memoConvertToActiveIndex(
         s.details().relativeSlide,
         items.length
       );
@@ -116,8 +131,8 @@ const Testimonials = ({ slice }) => {
       setCurrentSlide(slideIndex);
     },
   });
-  const activeIndex = convertToItemIndex(currentSlide, items.length);
-  const activeItem = items[activeIndex];
+  const activeIndex = memoConvertToItemIndex(currentSlide, items.length);
+  const activeItem = useMemo(() => items[activeIndex], [items, activeIndex]);
   const { review, name, position } = activeItem;
 
   return (
@@ -129,24 +144,8 @@ const Testimonials = ({ slice }) => {
         <Text color="white">{subtitle}</Text>
         <CarouselContainer>
           <Slider ref={sliderRef} className="keen-slider">
-            {items.map((item, index) => {
-              return (
-                <div className="keen-slider__slide">
-                  <Slide>
-                    <Avatar src={item.avatar.url} />
-                  </Slide>
-                </div>
-              );
-            })}
-            {items.map((item, index) => {
-              return (
-                <div className="keen-slider__slide">
-                  <Slide>
-                    <Avatar src={item.avatar.url} />
-                  </Slide>
-                </div>
-              );
-            })}
+            <List items={items} />
+            <List items={items} />
           </Slider>
           {slider && (
             <>
