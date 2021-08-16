@@ -2,11 +2,17 @@ import React, { useMemo, useCallback } from "react";
 import styled from "styled-components";
 import { Text } from "grommet";
 import Container from "components/shared/container";
-import { HandwrittenText, SectionBg } from "components/shared/section";
+import {
+  HandwrittenText,
+  SectionBg,
+  SectionContainer,
+} from "components/shared/section";
 import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
 import { useKeenSlider } from "keen-slider/react";
+import NextImage from "next/image";
 import "keen-slider/keen-slider.min.css";
+import { FaChevronCircleRight, FaChevronCircleLeft } from "react-icons/fa";
 
 const ShowcaseText = styled(HandwrittenText)`
   margin-bottom: 0.1em;
@@ -19,10 +25,12 @@ const Slide = styled.div`
   padding: 30px;
 `;
 
-const Avatar = styled.img`
+const AvatarContainer = styled.div`
   height: 80px;
   width: 80px;
   border-radius: 50%;
+  overflow: hidden;
+  position: relative;
 `;
 
 const CarouselContainer = styled.div`
@@ -32,65 +40,114 @@ const CarouselContainer = styled.div`
   margin-top: 20px;
 `;
 
-const Arrow = styled.svg`
-  width: 20px;
-  height: 20px;
+const ArrowButton = styled.button`
+  border: none;
+  background-color: initial;
+  padding: 0;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  fill: #fff;
   cursor: pointer;
 `;
 
-const ArrowLeftSvg = styled(Arrow)`
-  left: -10px;
+const ArrowLeftButton = styled(ArrowButton)`
+  left: -25px;
 `;
 
-const ArrowRightSvg = styled(Arrow)`
-  left: auto;
-  right: -10px;
+const ArrowRightButton = styled(ArrowButton)`
+  right: -25px;
 `;
 
 const Slider = styled.div`
   .active {
-    ${Avatar} {
+    ${AvatarContainer} {
       transform: scale(1.65);
       transition: 0.3s;
     }
   }
 `;
 
+const Dots = styled.div`
+  display: flex;
+  padding: 10px 0;
+  justify-content: center;
+`;
+
+const Dot = styled.button`
+  border: none;
+  width: 10px;
+  height: 10px;
+  background: white;
+  opacity: 50%;
+  border-radius: 50%;
+  margin: 0 5px;
+  padding: 5px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.active {
+    opacity: 100%;
+  }
+`;
+
+const TestimonialContainer = styled(SectionContainer)`
+  padding: 0;
+  color: white;
+  width: 60%;
+
+  p:first-of-type {
+    margin-bottom: 2rem;
+  }
+`;
+
+const Name = styled.h3`
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+`;
+
+const Position = styled.p`
+  margin: 0;
+  padding: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+`;
+
 const ArrowLeft = (props) => {
   return (
-    <ArrowLeftSvg
-      onClick={props.onClick}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-    >
-      <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
-    </ArrowLeftSvg>
+    <ArrowLeftButton onClick={props.onClick}>
+      <FaChevronCircleLeft size="25px" color="white" />
+    </ArrowLeftButton>
   );
 };
 
 const ArrowRight = (props) => {
   return (
-    <ArrowRightSvg
-      onClick={props.onClick}
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-    >
-      <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
-    </ArrowRightSvg>
+    <ArrowRightButton onClick={props.onClick}>
+      <FaChevronCircleRight size="25px" color="white" />
+    </ArrowRightButton>
   );
 };
 
 const List = React.memo(({ items }) =>
   items.map((item, index) => {
     return (
-      <div className="keen-slider__slide">
+      <div
+        className="keen-slider__slide"
+        key={`${JSON.stringify(item)}-${index}`}
+      >
         <Slide>
-          <Avatar src={item.avatar.url} />
+          <AvatarContainer>
+            <NextImage
+              src={item?.avatar?.url || ""}
+              layout="fill"
+              blur="true"
+            />
+          </AvatarContainer>
         </Slide>
       </div>
     );
@@ -135,6 +192,12 @@ const Testimonials = ({ slice }) => {
   const activeItem = useMemo(() => items[activeIndex], [items, activeIndex]);
   const { review, name, position } = activeItem;
 
+  const itemKeys = Object.keys(items);
+  const dotsArray = [
+    ...itemKeys.slice(-1),
+    ...itemKeys.slice(0, items.length - 1),
+  ].map((it) => parseInt(it));
+
   return (
     <SectionBg image={primary.background.url || "/section-bg.png"}>
       <Container>
@@ -160,11 +223,26 @@ const Testimonials = ({ slice }) => {
             </>
           )}
         </CarouselContainer>
-        <div>
+        <TestimonialContainer>
           <RichText render={review} />
-          <h3>{RichText.asText(name)}</h3>
-          <p>{RichText.asText(position)}</p>
-        </div>
+          <Name>{RichText.asText(name)}</Name>
+          <Position>{RichText.asText(position)}</Position>
+        </TestimonialContainer>
+        {slider && (
+          <Dots>
+            {dotsArray.map((item, index) => {
+              return (
+                <Dot
+                  key={`${JSON.stringify(item)}-${index}`}
+                  onClick={() => {
+                    slider.moveToSlide(item);
+                  }}
+                  className={index === activeIndex ? " active" : ""}
+                />
+              );
+            })}
+          </Dots>
+        )}
       </Container>
     </SectionBg>
   );

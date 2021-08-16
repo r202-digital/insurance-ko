@@ -182,12 +182,12 @@ const BlogSection = ({ slice }) => {
         <Grid>
           <div>
             <FrontList>
-              {blogObject.front.map((blog) => {
+              {blogObject.front.map((blog, blogIndex) => {
                 const { data, first_publication_date } = blog;
                 const { image, content, title } = data;
 
                 return (
-                  <FrontListItem>
+                  <FrontListItem key={`${JSON.stringify(blog)}-${blogIndex}`}>
                     <div>
                       <TabListImage src={image.url || ""} />
                     </div>

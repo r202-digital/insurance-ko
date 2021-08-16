@@ -17,7 +17,6 @@ import Testimonials from "./Testimonials";
 const SliceZone = ({ sliceZone }) => (
   <div className="container">
     {sliceZone.map((slice, index) => {
-      // console.log(slice);
       switch (slice.slice_type) {
         case "text_section":
           return <TextSection slice={slice} key={`slice-${index}`} />;

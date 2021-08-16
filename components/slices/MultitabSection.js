@@ -36,7 +36,7 @@ const ImageContainer = styled.div`
 const Image = styled.img`
   width: 80%;
   margin: 0 auto;
-`
+`;
 
 const SectionButtonContainer = styled.div`
   text-align: initial;
@@ -66,16 +66,15 @@ const ItemContent = styled.div`
   ul {
     padding-left: 1.375rem;
 
-    li { 
+    li {
       padding-left: 0.625rem;
       list-style-image: url(check.svg);
-  
+
       &::marker {
         line-height: 1;
       }
-    } 
+    }
   }
-
 `;
 
 const myCustomLink = (type, element, content, children, index) => (
@@ -96,32 +95,34 @@ const MultitabSection = ({ slice }) => {
       <SectionHeading as="h2" color="brand">
         {heading}
       </SectionHeading>
-      <ShowcaseText>
-        {subheading}
-      </ShowcaseText>
+      <ShowcaseText>{subheading}</ShowcaseText>
 
       <Tabs activeIndex={index} onActive={onActive}>
-        {
-          items.map((item) => <Tab title={RichText.asText(item.tab_label)}>
-          <SplitSection>
-            <ContentSection>
-              <ItemContent>
-                <RichText render={item.tab_content} />
-              </ItemContent>
-              <SectionButtonContainer>
-                <RichText
-                  render={item.tab_button}
-                  serializeHyperlink={myCustomLink}
-                />
-              </SectionButtonContainer>
-            </ContentSection>
-            {!!Object.keys(item.tab_image).length && 
-            <ImageContainer>
-              <Image src={item.tab_image.url} alt={item.tab_image.alt} />
-            </ImageContainer>}
-          </SplitSection>
-        </Tab>)
-        }
+        {items.map((item, index) => (
+          <Tab
+            key={`${JSON.stringify(item)}-${index}`}
+            title={RichText.asText(item.tab_label)}
+          >
+            <SplitSection>
+              <ContentSection>
+                <ItemContent>
+                  <RichText render={item.tab_content} />
+                </ItemContent>
+                <SectionButtonContainer>
+                  <RichText
+                    render={item.tab_button}
+                    serializeHyperlink={myCustomLink}
+                  />
+                </SectionButtonContainer>
+              </ContentSection>
+              {!!Object.keys(item.tab_image).length && (
+                <ImageContainer>
+                  <Image src={item.tab_image.url} alt={item.tab_image.alt} />
+                </ImageContainer>
+              )}
+            </SplitSection>
+          </Tab>
+        ))}
       </Tabs>
     </MultitabSectionBg>
   );
