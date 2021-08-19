@@ -42,7 +42,7 @@ const HighlightItem = styled.li`
   height: 500px;
   margin-right: 45px;
   border-radius: 10px;
-  background: #006700;
+  background: ${theme.global.colors.brandDark};
   transform-origin: center center;
   transform: scale(1);
   transition: transform 0.5s;
