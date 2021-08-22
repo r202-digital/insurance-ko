@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import theme from "lib/theme";
-import { up } from "styled-breakpoints";
+import { breakpoint } from "styled-components-breakpoint";
 
 const FooterContainer = styled.footer`
   background-color: ${theme.global.colors.brandDark};
   padding: 1.5rem 3rem;
   color: white;
 
-  ${up("md")`
+  ${breakpoint("lg")`
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr;
@@ -19,7 +19,7 @@ const FooterContainer = styled.footer`
 
 const HalfDivider = styled.div`
   display: initial;
-  ${up("md")`
+  ${breakpoint("lg")`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
@@ -36,7 +36,7 @@ const List = styled.ul`
 
 const DesktopOnly = styled.div`
   display: none;
-  ${up("md")`
+  ${breakpoint("lg")`
         display: initial;
     `}
 `;
