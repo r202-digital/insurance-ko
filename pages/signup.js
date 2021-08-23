@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Router from "next/router";
-import Layout from "components/layout";
+import DefaultLayout from "layouts";
+import { Client } from "utils/prismicHelpers";
 
-function Signup() {
+const Signup = ({ metadata }) => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -35,7 +36,7 @@ function Signup() {
   }
 
   return (
-    <Layout>
+    <DefaultLayout metadata={metadata}>
       <div className="signup">
         <form onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
@@ -100,8 +101,24 @@ function Signup() {
           color: brown;
         }
       `}</style>
-    </Layout>
+    </DefaultLayout>
   );
+};
+
+export async function getStaticProps({ preview = null, previewData = {} }) {
+  const { ref } = previewData;
+
+  const client = Client();
+
+  const metadata =
+    (await client.getSingle("metadata", ref ? { ref } : null)) || {};
+
+  return {
+    props: {
+      metadata,
+      preview,
+    },
+  };
 }
 
 export default Signup;

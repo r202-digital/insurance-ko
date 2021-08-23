@@ -5,7 +5,7 @@ import { Client } from "utils/prismicHelpers";
 const Page = ({ metadata }) => {
   return (
     <DefaultLayout metadata={metadata}>
-      <div className="page">404 page</div>
+      <div className="page">Contact Us</div>
     </DefaultLayout>
   );
 };

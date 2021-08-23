@@ -1,15 +1,13 @@
-import React from 'react'
-import { RichText } from 'prismic-reactjs'
+import React from "react";
+import { RichText } from "prismic-reactjs";
 
-import { linkResolver } from 'prismic-configuration'
-import { customLink } from 'utils/prismicHelpers'
-import { textSectionStyles } from 'styles'
+import { linkResolver } from "prismic-configuration";
+import { customLink } from "utils/prismicHelpers";
 
 const TextSection = ({ slice }) => {
-  const sectionClass =
-    slice.slice_label ?
-    `text-section-${slice.slice_label}` :
-    'text-section-1col'
+  const sectionClass = slice.slice_label
+    ? `text-section-${slice.slice_label}`
+    : "text-section-1col";
 
   return (
     <section className={`content-section ${sectionClass}`}>
@@ -18,9 +16,8 @@ const TextSection = ({ slice }) => {
         linkResolver={linkResolver}
         serializeHyperlink={customLink}
       />
-      <style jsx global>{textSectionStyles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default TextSection
+export default TextSection;

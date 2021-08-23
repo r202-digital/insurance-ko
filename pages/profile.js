@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { withAuthSync } from "utils/auth";
-import Layout from "components/layout";
+import DefaultLayout from "layouts";
 import fetcher from "lib/fetcher";
+import { Client } from "utils/prismicHelpers";
 
-const Profile = () => {
+const Profile = ({ metadata }) => {
   const router = useRouter();
   const { data: user, error } = useSWR("/api/profile", fetcher);
 
@@ -14,7 +15,7 @@ const Profile = () => {
   }, [error, router]);
 
   return (
-    <Layout>
+    <DefaultLayout metadata={metadata}>
       {error ? (
         <h1>An error has occurred: {error.message}</h1>
       ) : user ? (
@@ -27,8 +28,24 @@ const Profile = () => {
           margin-bottom: 0;
         }
       `}</style>
-    </Layout>
+    </DefaultLayout>
   );
 };
+
+export async function getStaticProps({ preview = null, previewData = {} }) {
+  const { ref } = previewData;
+
+  const client = Client();
+
+  const metadata =
+    (await client.getSingle("metadata", ref ? { ref } : null)) || {};
+
+  return {
+    props: {
+      metadata,
+      preview,
+    },
+  };
+}
 
 export default withAuthSync(Profile);

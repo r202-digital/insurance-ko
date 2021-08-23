@@ -2,7 +2,6 @@ import React from "react";
 import { RichText } from "prismic-reactjs";
 import DocLink from "components/DocLink";
 import { linkResolver } from "prismic-configuration";
-import { imageHighlightStyles } from "styles";
 
 const ImageHighlight = ({ slice }) => (
   <section className="highlight content-section">
@@ -21,9 +20,6 @@ const ImageHighlight = ({ slice }) => (
         alt={slice.primary.featured_image.alt}
       />
     </div>
-    <style jsx global>
-      {imageHighlightStyles}
-    </style>
   </section>
 );
 

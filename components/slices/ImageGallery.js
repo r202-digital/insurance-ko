@@ -3,7 +3,6 @@ import { RichText } from "prismic-reactjs";
 
 import DocLink from "components/DocLink";
 import { linkResolver } from "prismic-configuration";
-import { imageGalleryStyles } from "styles";
 
 const ImageGallery = ({ slice }) => (
   <section className="image-gallery content-section">
@@ -16,9 +15,6 @@ const ImageGallery = ({ slice }) => (
         <GalleryItem item={item} key={index} />
       ))}
     </div>
-    <style jsx global>
-      {imageGalleryStyles}
-    </style>
   </section>
 );
 

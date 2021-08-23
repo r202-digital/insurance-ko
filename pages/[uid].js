@@ -8,10 +8,10 @@ import { queryRepeatableDocuments } from "utils/queries";
 import { Client } from "utils/prismicHelpers";
 import ErrorPage from "pages/404";
 
-const Page = ({ doc, menu }) => {
+const Page = ({ doc, menu, metadata }) => {
   if (doc && doc.data) {
     return (
-      <DefaultLayout menu={menu}>
+      <DefaultLayout menu={menu} metadata={metadata}>
         <div className="page">
           <SliceZone sliceZone={doc.data.page_content} />
         </div>
@@ -39,11 +39,14 @@ export async function getStaticProps({
   const doc =
     (await client.getByUID("page", params.uid, ref ? { ref } : null)) || {};
   const menu = (await client.getSingle("menu", ref ? { ref } : null)) || {};
+  const metadata =
+    (await client.getSingle("metadata", ref ? { ref } : null)) || {};
 
   return {
     props: {
       preview,
       menu,
+      metadata,
       doc,
     },
   };
@@ -53,9 +56,10 @@ export async function getStaticPaths() {
   const documents = await queryRepeatableDocuments(
     (doc) => doc.type === "page"
   );
+
   return {
     paths: documents.map((doc) => `/${doc.uid}`),
-    fallback: true,
+    fallback: false,
   };
 }
 

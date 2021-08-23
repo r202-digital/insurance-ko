@@ -25,11 +25,14 @@ export async function getStaticProps({ preview = null, previewData = {} }) {
 
   const doc = (await client.getSingle("homepage", ref ? { ref } : null)) || {};
   const menu = (await client.getSingle("menu", ref ? { ref } : null)) || {};
+  const metadata =
+    (await client.getSingle("metadata", ref ? { ref } : null)) || {};
 
   return {
     props: {
       doc,
       menu,
+      metadata,
       preview,
     },
   };

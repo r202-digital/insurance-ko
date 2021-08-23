@@ -1,0 +1,46 @@
+{
+  "Main": {
+    "facebook": {
+      "type": "Link",
+      "config": {
+        "label": "Facebook",
+        "select": null
+      }
+    },
+    "linkedin": {
+      "type": "Link",
+      "config": {
+        "label": "Linkedin",
+        "select": null
+      }
+    },
+    "instagram": {
+      "type": "Link",
+      "config": {
+        "label": "Instagram",
+        "select": null
+      }
+    },
+    "address": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph",
+        "label": "Address"
+      }
+    },
+    "email": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Email"
+      }
+    },
+    "contact_number": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Contact Number"
+      }
+    }
+  }
+}
