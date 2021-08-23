@@ -2,9 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import theme from "lib/theme";
 import { breakpoint } from "styled-components-breakpoint";
+import { Anchor } from "grommet";
+import Link from "next/link";
+
+const Logo = styled.img`
+  height: 100%;
+`;
+
+const LogoContainer = styled.div`
+  height: 80px;
+  margin-bottom: 2rem;
+
+  ${breakpoint("lg")`
+    height: 56px;
+  `}
+`;
 
 const FooterContainer = styled.footer`
-  background-color: ${theme.global.colors.brandDark};
+  background-color: ${theme.global.colors.brandDarkTwo};
   padding: 1.5rem 3rem;
   color: white;
 
@@ -32,6 +47,7 @@ const List = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
+  padding-bottom: 2em;
 `;
 
 const DesktopOnly = styled.div`
@@ -44,7 +60,13 @@ const DesktopOnly = styled.div`
 const Footer = () => (
   <FooterContainer>
     <div>
-      <div>IK LOGO</div>
+      <Link href="/">
+        <Anchor>
+          <LogoContainer>
+            <Logo src="/logo/logo-white.svg" alt="InsuranceKo" />
+          </LogoContainer>
+        </Anchor>
+      </Link>
       <DesktopOnly>
         <p>Privacy Policy | Website Policy</p>
         <p>© 2021 InsuranceKo | All rights reserved</p>
@@ -72,11 +94,15 @@ const Footer = () => (
         <List>
           <li>+63 921 123 434</li>
           <li>insuranceko@gmail.com</li>
-          <li>Something Street, Manila, Philippines</li>
+          <li>Something Street, Manila</li>
+          <li>Philippines 1000</li>
         </List>
       </div>
     </HalfDivider>
-    <div>Questions? Comments? Email us at info@insuranceko.com</div>
+    <List>
+      <li>Questions? Comments?</li>
+      <li>Email us at info@insuranceko.com</li>
+    </List>
     <div>Back to top</div>
   </FooterContainer>
 );

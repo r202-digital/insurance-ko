@@ -13,6 +13,7 @@ import MultitabSection from "./MultitabSection";
 import HighlightCarousel from "./HighlightCarousel";
 import BlogSection from "./BlogSection";
 import Testimonials from "./Testimonials";
+import HighlightSection from "./HighlightSection";
 
 const SliceZone = ({ sliceZone }) => (
   <div className="container">
@@ -38,6 +39,8 @@ const SliceZone = ({ sliceZone }) => (
           return <VideoSection slice={slice} key={`slice-${index}`} />;
         case "image_section":
           return <ImageSection slice={slice} key={`slice-${index}`} />;
+        case "highlight_section":
+          return <HighlightSection slice={slice} key={`slice-${index}`} />;
         case "multi-tab_section":
           return <MultitabSection slice={slice} key={`slice-${index}`} />;
         case "highlights_carousel":

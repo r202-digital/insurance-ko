@@ -633,6 +633,44 @@
                 }
               }
             }
+          },
+          "highlight_section": {
+            "type": "Slice",
+            "fieldset": "Highlight Section",
+            "description": "Section with a highlight",
+            "icon": "account_balance_wallet",
+            "non-repeat": {
+              "heading": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading2",
+                  "label": "Heading"
+                }
+              },
+              "paragraph": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph",
+                  "label": "Paragraph"
+                }
+              },
+              "background": {
+                "type": "Image",
+                "config": {
+                  "constraint": {},
+                  "thumbnails": [],
+                  "label": "Background"
+                }
+              },
+              "button": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "hyperlink",
+                  "label": "Button"
+                }
+              }
+            },
+            "repeat": {}
           }
         }
       }

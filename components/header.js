@@ -15,6 +15,7 @@ import Container from "components/shared/container";
 const LogoContainer = styled(Box)`
   height: 56px;
 `;
+
 const Logo = styled.img`
   height: 100%;
 `;
