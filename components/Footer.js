@@ -4,6 +4,7 @@ import theme from "lib/theme";
 import { breakpoint } from "styled-components-breakpoint";
 import { Anchor } from "grommet";
 import Link from "next/link";
+import { SocialIcons } from "./shared/icons";
 
 const Logo = styled.img`
   height: 100%;
@@ -57,54 +58,59 @@ const DesktopOnly = styled.div`
     `}
 `;
 
-const Footer = () => (
-  <FooterContainer>
-    <div>
-      <Link href="/">
-        <Anchor>
-          <LogoContainer>
-            <Logo src="/logo/logo-white.svg" alt="InsuranceKo" />
-          </LogoContainer>
-        </Anchor>
-      </Link>
+const Footer = () => {
+  return (
+    <FooterContainer>
+      <div>
+        <Link href="/">
+          <Anchor>
+            <LogoContainer>
+              <Logo src="/logo/logo-white.svg" alt="InsuranceKo" />
+            </LogoContainer>
+          </Anchor>
+        </Link>
+        <DesktopOnly>
+          <p>Privacy Policy | Website Policy</p>
+          <p>© 2021 InsuranceKo | All rights reserved</p>
+        </DesktopOnly>
+      </div>
       <DesktopOnly>
-        <p>Privacy Policy | Website Policy</p>
-        <p>© 2021 InsuranceKo | All rights reserved</p>
+        <HalfDivider>
+          <div>NAVIGATION</div>
+          <div>
+            <List>
+              <li>Homepage</li>
+              <li>Homepage</li>
+              <li>Homepage</li>
+              <li>Homepage</li>
+              <li>Homepage</li>
+            </List>
+          </div>
+        </HalfDivider>
       </DesktopOnly>
-    </div>
-    <DesktopOnly>
       <HalfDivider>
-        <div>NAVIGATION</div>
+        <DesktopOnly>
+          <div>CONTACT US</div>
+        </DesktopOnly>
         <div>
           <List>
-            <li>Homepage</li>
-            <li>Homepage</li>
-            <li>Homepage</li>
-            <li>Homepage</li>
-            <li>Homepage</li>
+            <li>+63 921 123 434</li>
+            <li>insuranceko@gmail.com</li>
+            <li>Something Street, Manila</li>
+            <li>Philippines 1000</li>
           </List>
         </div>
       </HalfDivider>
-    </DesktopOnly>
-    <HalfDivider>
-      <DesktopOnly>
-        <div>CONTACT US</div>
-      </DesktopOnly>
-      <div>
-        <List>
-          <li>+63 921 123 434</li>
-          <li>insuranceko@gmail.com</li>
-          <li>Something Street, Manila</li>
-          <li>Philippines 1000</li>
-        </List>
-      </div>
-    </HalfDivider>
-    <List>
-      <li>Questions? Comments?</li>
-      <li>Email us at info@insuranceko.com</li>
-    </List>
-    <div>Back to top</div>
-  </FooterContainer>
-);
+      <List>
+        <li>Questions? Comments?</li>
+        <li>Email us at info@insuranceko.com</li>
+        <li>
+          <SocialIcons color="white" />
+        </li>
+      </List>
+      <div>Back to top</div>
+    </FooterContainer>
+  );
+};
 
 export default Footer;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import DefaultLayout from "layouts";
 import SliceZone from "components/slices/SliceZone.js";
@@ -7,11 +7,18 @@ import { queryRepeatableDocuments } from "utils/queries";
 
 import { Client } from "utils/prismicHelpers";
 import ErrorPage from "pages/404";
+import MetadataContext from "components/shared/context/metadata";
 
 const Page = ({ doc, menu, metadata }) => {
+  const metadataContext = MetadataContext.useContainer();
+
+  useEffect(() => {
+    metadataContext.setContextMetadata(metadata.data);
+  }, []);
+
   if (doc && doc.data) {
     return (
-      <DefaultLayout menu={menu} metadata={metadata}>
+      <DefaultLayout menu={menu}>
         <div className="page">
           <SliceZone sliceZone={doc.data.page_content} />
         </div>

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DefaultLayout from "layouts";
 import SliceZone from "components/slices/SliceZone";
 import { Client } from "utils/prismicHelpers";
+import MetadataContext from "components/shared/context/metadata";
 
-const HomePage = ({ doc, menu }) => {
+const HomePage = ({ doc, metadata }) => {
+  const metadataContext = MetadataContext.useContainer();
+
+  useEffect(() => {
+    metadataContext.setContextMetadata(metadata.data);
+  }, []);
   if (doc && doc.data) {
     return (
       <DefaultLayout>

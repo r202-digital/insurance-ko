@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   min-height: calc(100vh - 460px);
   ${breakpoint("lg")`
     min-height: calc(100vh - 320px);
@@ -14,7 +16,6 @@ const Container = styled.div`
 
 const Layout = ({ menu, children, metadata }) => {
   const { data: user, error } = useSWR("/api/profile", fetcher);
-  console.log(metadata);
 
   return (
     <>
@@ -24,7 +25,7 @@ const Layout = ({ menu, children, metadata }) => {
         <Container>{children}</Container>
       </main>
 
-      <Footer />
+      <Footer metadata={metadata} />
     </>
   );
 };

@@ -8,6 +8,7 @@ import "@fontsource/lato";
 import "@fontsource/lato/300.css";
 import "@fontsource/lato/700.css";
 import "@fontsource/lato/900.css";
+import MetadataContext from "components/shared/context/metadata";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -30,7 +31,9 @@ function MyApp({ Component, pageProps }) {
         }
 
         html,
-        body {
+        body,
+        main {
+          height: 100%;
           margin: 0;
           line-height: 1.5;
           font-weight: 400;
@@ -39,7 +42,9 @@ function MyApp({ Component, pageProps }) {
           width: inherit;
         }
       `}</style>
-      <Component {...pageProps} />
+      <MetadataContext.Provider>
+        <Component {...pageProps} />
+      </MetadataContext.Provider>
     </Grommet>
   );
 }

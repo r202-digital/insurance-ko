@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Router from "next/router";
 import DefaultLayout from "layouts";
 import { Client } from "utils/prismicHelpers";
+import MetadataContext from "components/shared/context/metadata";
 
 const Signup = ({ metadata }) => {
+  const metadataContext = MetadataContext.useContainer();
+
+  useEffect(() => {
+    metadataContext.setContextMetadata(metadata.data);
+  }, []);
+
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -36,7 +43,7 @@ const Signup = ({ metadata }) => {
   }
 
   return (
-    <DefaultLayout metadata={metadata}>
+    <DefaultLayout>
       <div className="signup">
         <form onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>

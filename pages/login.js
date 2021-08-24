@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Router from "next/router";
 import DefaultLayout from "layouts";
 import { Client } from "utils/prismicHelpers";
+import MetadataContext from "components/shared/context/metadata";
 
 const signin = async (email, password) => {
   const response = await fetch("/api/login", {
@@ -18,6 +19,12 @@ const signin = async (email, password) => {
 };
 
 const Login = ({ metadata }) => {
+  const metadataContext = MetadataContext.useContainer();
+
+  useEffect(() => {
+    metadataContext.setContextMetadata(metadata.data);
+  }, []);
+
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -40,7 +47,7 @@ const Login = ({ metadata }) => {
   }
 
   return (
-    <DefaultLayout metadata={metadata}>
+    <DefaultLayout>
       <div className="login">
         <form onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>

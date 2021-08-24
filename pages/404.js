@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DefaultLayout from "layouts";
 import { Client } from "utils/prismicHelpers";
+import MetadataContext from "components/shared/context/metadata";
 
 const Page = ({ metadata }) => {
+  const metadataContext = MetadataContext.useContainer();
+
+  useEffect(() => {
+    metadataContext.setContextMetadata(metadata.data);
+  }, []);
+
   return (
-    <DefaultLayout metadata={metadata}>
+    <DefaultLayout>
       <div className="page">404 page</div>
     </DefaultLayout>
   );

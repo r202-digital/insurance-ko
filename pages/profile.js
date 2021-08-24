@@ -5,17 +5,23 @@ import { withAuthSync } from "utils/auth";
 import DefaultLayout from "layouts";
 import fetcher from "lib/fetcher";
 import { Client } from "utils/prismicHelpers";
+import MetadataContext from "components/shared/context/metadata";
 
 const Profile = ({ metadata }) => {
   const router = useRouter();
   const { data: user, error } = useSWR("/api/profile", fetcher);
+  const metadataContext = MetadataContext.useContainer();
+
+  useEffect(() => {
+    metadataContext.setContextMetadata(metadata.data);
+  }, []);
 
   useEffect(() => {
     if (error) router.push("/");
   }, [error, router]);
 
   return (
-    <DefaultLayout metadata={metadata}>
+    <DefaultLayout>
       {error ? (
         <h1>An error has occurred: {error.message}</h1>
       ) : user ? (
