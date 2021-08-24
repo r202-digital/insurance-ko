@@ -5,6 +5,9 @@ import { breakpoint } from "styled-components-breakpoint";
 import { Anchor } from "grommet";
 import Link from "next/link";
 import { SocialIcons } from "./shared/icons";
+import MetadataContext from "./shared/context/metadata";
+import { extractText } from "lib/utils";
+import { RichText } from "prismic-reactjs";
 
 const Logo = styled.img`
   height: 100%;
@@ -58,7 +61,18 @@ const DesktopOnly = styled.div`
     `}
 `;
 
+const AddressContainer = styled.li`
+  p {
+    margin: 0;
+  }
+`;
+
 const Footer = () => {
+  const metadataContainer = MetadataContext.useContainer();
+  const { contextMetadata } = metadataContainer;
+  const { email, contact_number, address } = contextMetadata;
+  const emailContext = extractText(email);
+  const numberContext = extractText(contact_number);
   return (
     <FooterContainer>
       <div>
@@ -94,10 +108,11 @@ const Footer = () => {
         </DesktopOnly>
         <div>
           <List>
-            <li>+63 921 123 434</li>
-            <li>insuranceko@gmail.com</li>
-            <li>Something Street, Manila</li>
-            <li>Philippines 1000</li>
+            <li>{numberContext}</li>
+            <li>{emailContext}</li>
+            <AddressContainer>
+              <RichText render={address} />
+            </AddressContainer>
           </List>
         </div>
       </HalfDivider>

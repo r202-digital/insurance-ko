@@ -14,6 +14,7 @@ import HighlightCarousel from "./HighlightCarousel";
 import BlogSection from "./BlogSection";
 import Testimonials from "./Testimonials";
 import HighlightSection from "./HighlightSection";
+import ContactForm from "./ContactForm";
 
 const SliceZone = ({ sliceZone }) => (
   <div className="container">
@@ -49,6 +50,8 @@ const SliceZone = ({ sliceZone }) => (
           return <BlogSection slice={slice} key={`slice-${index}`} />;
         case "testimonials":
           return <Testimonials slice={slice} key={`slice-${index}`} />;
+        case "contact_form":
+          return <ContactForm slice={slice} key={`slice-${index}`} />;
         default:
           return null;
       }

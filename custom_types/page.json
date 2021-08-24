@@ -11,18 +11,7 @@
       "type": "Slices",
       "fieldset": "Slice zone",
       "config": {
-        "labels": {
-          "text_section": [
-            {
-              "name": "1col",
-              "display": "1 Column"
-            },
-            {
-              "name": "2col",
-              "display": "2 Columns"
-            }
-          ]
-        },
+        "labels": null,
         "choices": {
           "text_section": {
             "type": "Slice",
@@ -667,6 +656,44 @@
                 "config": {
                   "single": "hyperlink",
                   "label": "Button"
+                }
+              }
+            },
+            "repeat": {}
+          },
+          "contact_form": {
+            "type": "Slice",
+            "fieldset": "Contact Form",
+            "description": "This is a form for contact us",
+            "icon": "local_phone",
+            "display": "list",
+            "non-repeat": {
+              "heading": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading1",
+                  "label": "Heading"
+                }
+              },
+              "subheading": {
+                "type": "StructuredText",
+                "config": {
+                  "single": "heading2",
+                  "label": "Subheading"
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink",
+                  "label": "Description"
+                }
+              },
+              "map_description": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph, strong, em, hyperlink",
+                  "label": "Map Description"
                 }
               }
             },
