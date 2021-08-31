@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel, Image } from "grommet";
-import Container from "components/shared/container";
+import { DesktopContainer } from "components/shared/container";
 import {
   CarouselContainer,
   CarouselGrid,
@@ -18,7 +18,7 @@ const StyledImage = styled(NextImage)`
 const CarouselImageGrid = ({ slice }) => {
   const { items, primary } = slice;
   return (
-    <Container>
+    <DesktopContainer>
       <CarouselGrid>
         <CarouselContainer>
           <Carousel fill play={4000}>
@@ -40,7 +40,7 @@ const CarouselImageGrid = ({ slice }) => {
           <GridImage fit="cover" src="/img/carousel-3.png" />
         </BottomRightImage>
       </CarouselGrid>
-    </Container>
+    </DesktopContainer>
   );
 };
 

@@ -10,7 +10,7 @@ import {
 import { GrMenu } from "react-icons/gr";
 import Link from "next/link";
 import styled from "styled-components";
-import Container from "components/shared/container";
+import { Container } from "components/shared/container";
 
 const LogoContainer = styled(Box)`
   height: 56px;

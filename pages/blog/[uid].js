@@ -8,7 +8,7 @@ import { queryRepeatableDocuments } from "utils/queries";
 import { Client } from "utils/prismicHelpers";
 import ErrorPage from "pages/404";
 import { RichText } from "prismic-reactjs";
-import Container from "components/shared/container";
+import { Container } from "components/shared/container";
 
 const Page = ({ doc, menu }) => {
   if (doc && doc.data) {

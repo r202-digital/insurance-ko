@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Tab, Tabs, Box, Text } from "grommet";
-import Container from "components/shared/container";
+import { Container } from "components/shared/container";
 import {
   SectionHeading,
   ParagraphText,

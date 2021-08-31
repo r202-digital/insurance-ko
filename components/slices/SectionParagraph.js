@@ -1,6 +1,6 @@
 import React from "react";
 import { Carousel, Image } from "grommet";
-import Container from "components/shared/container";
+import { Container } from "components/shared/container";
 import {
   CarouselContainer,
   CarouselGrid,

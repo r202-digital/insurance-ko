@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback } from "react";
 import styled from "styled-components";
 import { Text } from "grommet";
-import Container from "components/shared/container";
+import { Container } from "components/shared/container";
 import {
   HandwrittenText,
   SectionBg,

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Grid, Box, Text } from "grommet";
-import Container from "components/shared/container";
+import { Container } from "components/shared/container";
 import {
   SectionHeading,
   HandwrittenText,

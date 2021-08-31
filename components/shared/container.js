@@ -1,12 +1,25 @@
 import styled from "styled-components";
+import { breakpoint } from "styled-components-breakpoint";
 
-const Container = styled.div`
+export const Container = styled.div`
   max-width: 87.5%;
   width: 100%;
   margin: 0 auto;
   p, h1: {
     word-break: break-all;
   }
+`;
+
+export const DesktopContainer = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  p, h1: {
+    word-break: break-all;
+  }
+
+  ${breakpoint("lg")`
+    max-width: 87.5%;
+  `}
 `;
 
 export default Container;

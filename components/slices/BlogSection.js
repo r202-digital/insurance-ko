@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Grommet, Image, Box, Text, Tabs, Tab } from "grommet";
-import Container from "components/shared/container";
+import { Container } from "components/shared/container";
 import { SectionHeading, SectionBg } from "components/shared/section";
 import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";

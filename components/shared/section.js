@@ -1,30 +1,45 @@
 import { Box, Image, Text, Button } from "grommet";
 import styled from "styled-components";
 import theme from "lib/theme";
+import { breakpoint } from "styled-components-breakpoint";
 
 export const CarouselContainer = styled(Box)`
-  height: 26.6875em;
+  height: 13.6875em;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  grid-area: 1 / 1 / 3 / 3;
+
+  ${breakpoint("lg")`
+    height: 100%;
+    overflow: hidden;
+    grid-area: 1 / 1 / 3 / 3;
+  `}
 `;
 
 export const CarouselGrid = styled.div`
-  margin-top: 1em;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 21vh);
-  grid-column-gap: 12px;
-  grid-row-gap: 12px;
+  margin-top: 0;
+  ${breakpoint("lg")`
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 21vh);
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+  `}
 `;
 
 export const TopRightImage = styled.div`
-  grid-area: 1 / 3 / 2 / 4;
+  display: none;
+  ${breakpoint("lg")`
+    display: initial;
+    grid-area: 1 / 3 / 2 / 4;
+  `}
 `;
 
 export const BottomRightImage = styled.div`
+  display: none;
+  ${breakpoint("lg")`
+  display: initial;
   grid-area: 2 / 3 / 3 / 4;
+`}
 `;
 
 export const GridImage = styled(Image)`

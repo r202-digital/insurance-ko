@@ -685,18 +685,27 @@
               "description": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, strong, em, hyperlink",
+                  "multi": "paragraph,strong,em,hyperlink",
                   "label": "Description"
                 }
               },
               "map_description": {
                 "type": "StructuredText",
                 "config": {
-                  "multi": "paragraph, strong, em, hyperlink",
+                  "multi": "paragraph,strong,em,hyperlink",
                   "label": "Map Description"
                 }
               }
             },
+            "repeat": {}
+          },
+          "shop_section": {
+            "type": "Slice",
+            "fieldset": "Shop Section",
+            "description": "This is a section for shop",
+            "icon": "directions_run",
+            "display": "list",
+            "non-repeat": {},
             "repeat": {}
           }
         }
