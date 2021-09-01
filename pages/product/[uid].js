@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import DefaultLayout from "layouts";
 import SliceZone from "components/slices/SliceZone.js";
@@ -8,40 +8,33 @@ import { queryRepeatableDocuments } from "utils/queries";
 import { Client } from "utils/prismicHelpers";
 import ErrorPage from "pages/404";
 import { RichText } from "prismic-reactjs";
-import { Container } from "components/shared/container";
+import { Container, DesktopContainer } from "components/shared/container";
 import axios from "axios";
-import { getProducts } from "lib/product";
+import { getProduct, getProducts } from "lib/product";
+import MetadataContext from "components/shared/context/metadata";
 
-const ProductPage = ({ doc, menu }) => {
+const ProductPage = ({ productProps = {}, metadata = {} }) => {
+  const metadataContext = MetadataContext.useContainer();
+  useEffect(() => {
+    metadataContext.setContextMetadata(metadata.data);
+  }, []);
+
+  if (!!Object.keys(productProps).length) {
+    return (
+      <DefaultLayout>
+        <DesktopContainer>
+          <div>This is a {productProps.name} page</div>
+        </DesktopContainer>
+      </DefaultLayout>
+    );
+  }
+
+  // Call the standard error page if the document was not found
   return (
-    <DefaultLayout>
-      <div>This is a product page</div>
-    </DefaultLayout>
+    <>
+      <ErrorPage />
+    </>
   );
-  // if (doc && doc.data) {
-  //   const { data } = doc;
-  //   return (
-  //     <DefaultLayout menu={menu}>
-  //       <Container>
-  //         <div>
-  //           {data.image && (
-  //             <img src={data.image.url || ""} width="500px" height="200px" />
-  //           )}
-  //           <p>{RichText.asText(doc.data.published_date)}</p>
-  //           <h1>{RichText.asText(doc.data.title)}</h1>
-  //           <p></p>
-  //         </div>
-  //       </Container>
-  //     </DefaultLayout>
-  //   );
-  // }
-
-  // // Call the standard error page if the document was not found
-  // return (
-  //   <>
-  //     <ErrorPage />
-  //   </>
-  // );
 };
 
 export async function getStaticProps({
@@ -53,16 +46,30 @@ export async function getStaticProps({
 
   const client = Client();
 
-  // const doc =
-  //   (await client.getByUID("blog_post", params.uid, ref ? { ref } : null)) ||
-  //   {};
-  const menu = (await client.getSingle("menu", ref ? { ref } : null)) || {};
+  const promiseArray = [
+    client.getSingle("menu", ref ? { ref } : null),
+    client.getSingle("metadata", ref ? { ref } : null),
+    getProduct(params.uid),
+  ];
+
+  const promises = await Promise.all(promiseArray);
+
+  const menu = promises[0] || {};
+  const metadata = promises[1] || {};
+  const product = promises[2] || {};
+
+  let productProps = {};
+
+  if (!product.error) {
+    productProps = product;
+  }
 
   return {
     props: {
       preview,
       menu,
-      // doc,
+      metadata,
+      productProps,
     },
   };
 }

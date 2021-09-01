@@ -1,6 +1,8 @@
 import { DesktopContainer } from "components/shared/container";
 import ProductContext from "components/shared/context/product";
 import { Accordion, AccordionPanel, Box, Select } from "grommet";
+import theme from "lib/theme";
+import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
@@ -17,11 +19,18 @@ const ProductList = styled.ul`
   grid-row-gap: 10px;
 
   ${breakpoint("lg")`
-  grid-template-columns: repeat(4, 1fr);
+    margin-top: 0;
+    grid-template-columns: repeat(4, 1fr);
   `}
 `;
 
 const ProductListItem = styled.li`
+  position: relative;
+  padding: 0.5em;
+  background-color: white;
+`;
+
+const ProductListItemContainer = styled.div`
   padding: 0.5em;
   background-color: white;
 `;
@@ -30,10 +39,48 @@ const ProductImage = styled.img`
   width: 100%;
 `;
 
+const ProductLink = styled.a`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+  ${breakpoint("lg")`
+    display: none;
+  `}
+`;
+
 const Description = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 0.8125em;
+`;
+
+const TopTag = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+const PromoTag = styled.span`
+  display: block;
+  padding: 0.5em;
+  padding-left: 0.75em;
+  padding-right: 1em;
+  color: white;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: ${({ color }) => {
+    switch (color) {
+      case "yellow":
+        return theme.global.colors.tagYellow;
+      case "red":
+        return theme.global.colors.tagRed;
+      default:
+        return theme.global.colors.brand;
+    }
+  }};
 `;
 
 const BottomTag = styled.div`
@@ -50,7 +97,9 @@ const BottomTag = styled.div`
 `;
 
 const DesktopGrid = styled.div`
+  margin-top: 1em;
   display: block;
+
   ${breakpoint("lg")`
     display: grid;
     grid-template-columns: 20% 80%;
@@ -71,6 +120,11 @@ const StyledAccordionPanel = styled(AccordionPanel)`
 
 const AccordionContent = styled.div`
   padding: 10px;
+`;
+
+const DescriptionLink = styled.a`
+  text-decoration: none;
+  color: inherit;
 `;
 
 const FilterSection = () => {
@@ -102,18 +156,28 @@ const FilterSection = () => {
   );
 };
 
-const Product = ({ image, name, price }) => {
+const Product = ({ image, name, price, promos, id }) => {
   return (
     <ProductListItem>
-      {/* TODO: ADD IMAGE */}
-      <ProductImage src="https://via.placeholder.com/200" />
-      <BottomTag>
-        <span>₱3M coverage</span>
-      </BottomTag>
-      <Description>
-        <span>{name}</span>
-        <strong>₱{price}</strong>
-      </Description>
+      <ProductLink href={`/product/${id}`} />
+      <ProductListItemContainer>
+        <TopTag>
+          {promos.map((promo) => (
+            <PromoTag color={promo.color}>{promo.name}</PromoTag>
+          ))}
+        </TopTag>
+        {/* TODO: ADD IMAGE */}
+        <ProductImage src="https://via.placeholder.com/200" />
+        <BottomTag>
+          <span>₱3M coverage</span>
+        </BottomTag>
+        <Description>
+          <Link href={`/product/${id}`}>
+            <DescriptionLink href={`/product/${id}`}>{name}</DescriptionLink>
+          </Link>
+          <strong>₱{price}</strong>
+        </Description>
+      </ProductListItemContainer>
     </ProductListItem>
   );
 };
@@ -121,16 +185,18 @@ const Product = ({ image, name, price }) => {
 const ShopSection = () => {
   const productContainer = ProductContext.useContainer();
   const { contextProduct } = productContainer;
+  console.log(contextProduct);
   return (
     <DesktopContainer>
       <DesktopGrid>
         <FilterSection />
         <ProductList>
-          {contextProduct.map(({ uid, price, name }, index) => (
+          {contextProduct.map(({ uid, price, name, promos }, index) => (
             <Product
               id={uid}
               price={price}
               name={name}
+              promos={promos}
               key={`product-${index}-${name}`}
             />
           ))}
