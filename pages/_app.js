@@ -9,6 +9,7 @@ import "@fontsource/lato/300.css";
 import "@fontsource/lato/700.css";
 import "@fontsource/lato/900.css";
 import MetadataContext from "components/shared/context/metadata";
+import ProductContext from "components/shared/context/product";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -42,9 +43,11 @@ function MyApp({ Component, pageProps }) {
           width: inherit;
         }
       `}</style>
-      <MetadataContext.Provider>
-        <Component {...pageProps} />
-      </MetadataContext.Provider>
+      <ProductContext.Provider>
+        <MetadataContext.Provider>
+          <Component {...pageProps} />
+        </MetadataContext.Provider>
+      </ProductContext.Provider>
     </Grommet>
   );
 }

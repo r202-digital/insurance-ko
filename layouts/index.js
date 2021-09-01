@@ -9,23 +9,24 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 460px);
+  background-color: #fafafa;
   ${breakpoint("lg")`
     min-height: calc(100vh - 320px);
   `}
 `;
 
-const Layout = ({ menu, children, metadata }) => {
+const Layout = ({ children }) => {
   const { data: user, error } = useSWR("/api/profile", fetcher);
 
   return (
     <>
-      <Header menu={menu} hasUser={!!user} />
+      <Header hasUser={!!user} />
 
       <main>
         <Container>{children}</Container>
       </main>
 
-      <Footer metadata={metadata} />
+      <Footer />
     </>
   );
 };

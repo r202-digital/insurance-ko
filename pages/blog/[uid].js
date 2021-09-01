@@ -14,7 +14,7 @@ const Page = ({ doc, menu }) => {
   if (doc && doc.data) {
     const { data } = doc;
     return (
-      <DefaultLayout menu={menu}>
+      <DefaultLayout>
         <Container>
           <div>
             {data.image && (

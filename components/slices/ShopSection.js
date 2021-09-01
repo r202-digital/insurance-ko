@@ -1,5 +1,9 @@
-import React from "react";
+import { DesktopContainer } from "components/shared/container";
+import ProductContext from "components/shared/context/product";
+import { Accordion, AccordionPanel, Box, Select } from "grommet";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { breakpoint } from "styled-components-breakpoint";
 
 const ProductList = styled.ul`
   margin: 0;
@@ -11,7 +15,10 @@ const ProductList = styled.ul`
   grid-template-rows: repeat(auto-fill, 1fr);
   grid-column-gap: 10px;
   grid-row-gap: 10px;
-  background-color: #fafafa;
+
+  ${breakpoint("lg")`
+  grid-template-columns: repeat(4, 1fr);
+  `}
 `;
 
 const ProductListItem = styled.li`
@@ -42,9 +49,63 @@ const BottomTag = styled.div`
   }
 `;
 
+const DesktopGrid = styled.div`
+  display: block;
+  ${breakpoint("lg")`
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: repeat(auto-fill, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+  `}
+`;
+
+const StyledAccordion = styled(Accordion)`
+  background-color: white;
+`;
+
+const StyledAccordionPanel = styled(AccordionPanel)`
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+`;
+
+const AccordionContent = styled.div`
+  padding: 10px;
+`;
+
+const FilterSection = () => {
+  const refineOptions = ["Lorem", "Ipsum", "Sample", "Hello"];
+  const [refineOption, setRefineOption] = useState(refineOptions[0]);
+  return (
+    <Box>
+      <StyledAccordion multiple>
+        <StyledAccordionPanel label="Refine by">
+          <AccordionContent>
+            <Select
+              id="select"
+              name="select"
+              placeholder="Select"
+              value={refineOption}
+              options={refineOptions}
+              onChange={({ option }) => setRefineOption(option)}
+            />
+          </AccordionContent>
+        </StyledAccordionPanel>
+        <StyledAccordionPanel label="Categories">
+          <AccordionContent>Panel 2 contents</AccordionContent>
+        </StyledAccordionPanel>
+        <StyledAccordionPanel label="Price">
+          <AccordionContent>Panel 3 contents</AccordionContent>
+        </StyledAccordionPanel>
+      </StyledAccordion>
+    </Box>
+  );
+};
+
 const Product = ({ image, name, price }) => {
   return (
     <ProductListItem>
+      {/* TODO: ADD IMAGE */}
       <ProductImage src="https://via.placeholder.com/200" />
       <BottomTag>
         <span>₱3M coverage</span>
@@ -58,39 +119,24 @@ const Product = ({ image, name, price }) => {
 };
 
 const ShopSection = () => {
+  const productContainer = ProductContext.useContainer();
+  const { contextProduct } = productContainer;
   return (
-    <div>
-      <ProductList>
-        <Product
-          price={329.99}
-          name="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-        />
-        <Product
-          price={329.99}
-          name="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-        />
-        <Product
-          price={329.99}
-          name="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-        />
-        <Product
-          price={329.99}
-          name="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-        />
-        <Product
-          price={329.99}
-          name="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-        />
-        <Product
-          price={329.99}
-          name="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-        />
-        <Product
-          price={329.99}
-          name="Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
-        />
-      </ProductList>
-    </div>
+    <DesktopContainer>
+      <DesktopGrid>
+        <FilterSection />
+        <ProductList>
+          {contextProduct.map(({ uid, price, name }, index) => (
+            <Product
+              id={uid}
+              price={price}
+              name={name}
+              key={`product-${index}-${name}`}
+            />
+          ))}
+        </ProductList>
+      </DesktopGrid>
+    </DesktopContainer>
   );
 };
 
