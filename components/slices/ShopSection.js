@@ -1,3 +1,4 @@
+import { Colors } from "components/shared/colors";
 import { DesktopContainer } from "components/shared/container";
 import ProductContext from "components/shared/context/product";
 import { Accordion, AccordionPanel, Box, Select } from "grommet";
@@ -74,11 +75,11 @@ const PromoTag = styled.span`
   background-color: ${({ color }) => {
     switch (color) {
       case "yellow":
-        return theme.global.colors.tagYellow;
+        return Colors.tagYellow;
       case "red":
-        return theme.global.colors.tagRed;
+        return Colors.tagRed;
       default:
-        return theme.global.colors.brand;
+        return Colors.brand;
     }
   }};
 `;
@@ -185,7 +186,6 @@ const Product = ({ image, name, price, promos, id }) => {
 const ShopSection = () => {
   const productContainer = ProductContext.useContainer();
   const { contextProduct } = productContainer;
-  console.log(contextProduct);
   return (
     <DesktopContainer>
       <DesktopGrid>

@@ -12,6 +12,7 @@ import { Container, DesktopContainer } from "components/shared/container";
 import axios from "axios";
 import { getProduct, getProducts } from "lib/product";
 import MetadataContext from "components/shared/context/metadata";
+import ProductHero from "components/product/hero";
 
 const ProductPage = ({ productProps = {}, metadata = {} }) => {
   const metadataContext = MetadataContext.useContainer();
@@ -23,7 +24,7 @@ const ProductPage = ({ productProps = {}, metadata = {} }) => {
     return (
       <DefaultLayout>
         <DesktopContainer>
-          <div>This is a {productProps.name} page</div>
+          <ProductHero product={productProps} />
         </DesktopContainer>
       </DefaultLayout>
     );

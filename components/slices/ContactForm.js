@@ -10,6 +10,7 @@ import theme from "lib/theme";
 import { SocialIcons } from "components/shared/icons";
 import MapComponent from "components/map";
 import ContactUsForm from "components/forms/contact-us";
+import { Colors } from "components/shared/colors";
 
 const ContactBg = styled(SectionContainer)`
   flex: 1;
@@ -50,7 +51,7 @@ const ContactBubble = styled.div`
 
 const ShowcaseText = styled(HandwrittenText)`
   margin-bottom: 0.5rem;
-  color: ${theme.global.colors.brand};
+  color: ${Colors.brand};
 `;
 
 const List = styled.ul`
@@ -65,7 +66,7 @@ const MapSection = styled.div`
 `;
 
 const ParagraphHeading = styled.h4`
-  color: ${theme.global.colors.brandDark};
+  color: ${Colors.brandDark};
   margin: 0;
   margin-bottom: 1rem;
   padding: 0;
@@ -107,7 +108,7 @@ const ContactForm = () => {
               <li>Philippines 1000</li>
             </List>
             <ParagraphHeading>Follow our socials</ParagraphHeading>
-            <SocialIcons color={theme.global.colors.brandLight} />
+            <SocialIcons color={Colors.brandLight} />
           </MapSection>
         </ContactBubble>
       </ContactBg>

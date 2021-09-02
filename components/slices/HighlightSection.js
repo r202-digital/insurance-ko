@@ -14,6 +14,7 @@ import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
 import { breakpoint } from "styled-components-breakpoint";
 import theme from "lib/theme";
+import { Colors } from "components/shared/colors";
 
 const HighlightSectionBg = styled(SectionContainer)`
   padding: 0;
@@ -29,7 +30,7 @@ const HighlightSectionBg = styled(SectionContainer)`
 
 const ShowcaseText = styled(HandwrittenText)`
   margin-bottom: 0.5em;
-  color: ${theme.global.colors.brand};
+  color: ${Colors.brand};
 `;
 
 const SplitSection = styled(Container)`

@@ -2,6 +2,7 @@ import { Box, Image, Text, Button } from "grommet";
 import styled from "styled-components";
 import theme from "lib/theme";
 import { breakpoint } from "styled-components-breakpoint";
+import { Colors } from "./colors";
 
 export const CarouselContainer = styled(Box)`
   height: 13.6875em;
@@ -56,8 +57,7 @@ export const SectionContainer = styled.div`
 
 export const SectionHeading = styled(Text)`
   font-size: 1.5em;
-  color: ${({ color }) =>
-    color === "white" ? theme.global.colors.white : theme.global.colors.brand};
+  color: ${({ color }) => (color === "white" ? Colors.white : Colors.brand)};
   line-height: 1;
   margin: 0.5em 0;
   margin-top: 0;
@@ -68,9 +68,7 @@ export const HandwrittenText = styled(Text)`
   font-family: RedRock;
   font-size: 4em;
   color: ${({ color }) =>
-    color === "yellow"
-      ? theme.global.colors.yellow
-      : theme.global.colors.lightgreen};
+    color === "yellow" ? Colors.yellow : Colors.lightgreen};
   line-height: 1;
   margin: 0.2em 0;
 `;

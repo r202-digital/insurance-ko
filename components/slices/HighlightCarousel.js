@@ -13,6 +13,7 @@ import { extractText } from "lib/utils";
 import { FiChevronRight } from "react-icons/fi";
 import theme from "lib/theme";
 import { linkResolver } from "prismic-configuration";
+import { Colors } from "components/shared/colors";
 
 const HighlightSectionBg = styled(SectionBg)`
   padding: 4em 0;
@@ -42,7 +43,7 @@ const HighlightItem = styled.li`
   height: 500px;
   margin-right: 45px;
   border-radius: 10px;
-  background: ${theme.global.colors.brandDark};
+  background: ${Colors.brandDark};
   transform-origin: center center;
   transform: scale(1);
   transition: transform 0.5s;

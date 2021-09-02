@@ -12,7 +12,7 @@ import {
 import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
 import { breakpoint } from "styled-components-breakpoint";
-import theme from "lib/theme";
+import { Colors } from "components/shared/colors";
 
 const ImageSectionBg = styled(SectionBg)`
   padding: ${({ isBig }) => (isBig ? "10em" : "4em")} 0;
@@ -20,8 +20,7 @@ const ImageSectionBg = styled(SectionBg)`
 
 const ShowcaseText = styled(HandwrittenText)`
   margin-bottom: 0.5em;
-  color: ${({ isBig }) =>
-    isBig ? theme.global.colors.brand : theme.global.colors.green};
+  color: ${({ isBig }) => (isBig ? Colors.brand : Colors.green)};
 `;
 
 const SplitSection = styled(Container)`

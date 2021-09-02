@@ -8,6 +8,7 @@ import { SocialIcons } from "./shared/icons";
 import MetadataContext from "./shared/context/metadata";
 import { extractText } from "lib/utils";
 import { RichText } from "prismic-reactjs";
+import { Colors } from "./shared/colors";
 
 const Logo = styled.img`
   height: 100%;
@@ -23,7 +24,7 @@ const LogoContainer = styled.div`
 `;
 
 const FooterContainer = styled.footer`
-  background-color: ${theme.global.colors.brandDarkTwo};
+  background-color: ${Colors.brandDarkTwo};
   padding: 1.5rem 3rem;
   color: white;
 
