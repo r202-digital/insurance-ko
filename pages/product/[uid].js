@@ -1,18 +1,15 @@
 import React, { useEffect } from "react";
-
 import DefaultLayout from "layouts";
-import SliceZone from "components/slices/SliceZone.js";
-
-import { queryRepeatableDocuments } from "utils/queries";
-
 import { Client } from "utils/prismicHelpers";
 import ErrorPage from "pages/404";
 import { RichText } from "prismic-reactjs";
-import { Container, DesktopContainer } from "components/shared/container";
+import { DesktopContainer } from "components/shared/container";
 import axios from "axios";
 import { getProduct, getProducts } from "lib/product";
 import MetadataContext from "components/shared/context/metadata";
 import ProductHero from "components/product/hero";
+import ProductTabs from "components/product/tabs";
+import VariantContext from "components/product/context";
 
 const ProductPage = ({ productProps = {}, metadata = {} }) => {
   const metadataContext = MetadataContext.useContainer();
@@ -23,9 +20,12 @@ const ProductPage = ({ productProps = {}, metadata = {} }) => {
   if (!!Object.keys(productProps).length) {
     return (
       <DefaultLayout>
-        <DesktopContainer>
-          <ProductHero product={productProps} />
-        </DesktopContainer>
+        <VariantContext.Provider>
+          <DesktopContainer>
+            <ProductHero product={productProps} />
+            <ProductTabs product={productProps} />
+          </DesktopContainer>
+        </VariantContext.Provider>
       </DefaultLayout>
     );
   }

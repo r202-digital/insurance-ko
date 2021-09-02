@@ -14,6 +14,7 @@ import {
   PrimaryYellowGreenButton,
   SecondaryYellowGreenButton,
 } from "components/shared/section";
+import VariantContext from "./context";
 
 const HeroContainer = styled.div`
   background-color: white;
@@ -182,9 +183,12 @@ const ActionSection = styled.div`
 `;
 
 const ProductHero = ({ product }) => {
-  const { price } = product;
-  const planOptions = ["Regular", "Bronze", "Silver", "Gold"];
-  const [planOption, setPlanOption] = useState(planOptions[0]);
+  const variantContext = VariantContext.useContainer();
+
+  // console.log(variantContext.contextVariant);
+  const { price, planOptions } = product;
+  const mapOptions = planOptions.map((option) => option.name);
+
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [sliderRef] = useKeenSlider({
     initial: 0,
@@ -256,9 +260,11 @@ const ProductHero = ({ product }) => {
             <Select
               name="plan-select"
               placeholder="Select"
-              value={planOption}
-              options={planOptions}
-              onChange={({ option }) => setPlanOption(option)}
+              value={mapOptions[variantContext.contextVariant]}
+              options={mapOptions}
+              onChange={({ option }) => {
+                variantContext.setContextVariant(mapOptions.indexOf(option));
+              }}
             />
           </PlanSelection>
           <ActionSection>
