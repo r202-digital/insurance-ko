@@ -97,3 +97,23 @@ export const SectionBg = styled(SectionContainer)`
 export const YellowTextButton = styled(Button)`
   color: yellow;
 `;
+
+const BiggerButton = styled(Button)`
+  padding: 0.5em 1em;
+  border-radius: 1.5em;
+  font-weight: bold;
+`;
+
+export const PrimaryYellowGreenButton = styled((props) => (
+  <BiggerButton primary {...props} />
+))`
+  background-color: ${Colors.yellowGreen};
+  border-color: ${Colors.yellowGreen};
+`;
+
+export const SecondaryYellowGreenButton = styled((props) => (
+  <BiggerButton secondary {...props} />
+))`
+  border-color: ${Colors.yellowGreen};
+  color: ${Colors.yellowGreen};
+`;

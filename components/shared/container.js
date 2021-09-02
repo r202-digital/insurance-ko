@@ -22,4 +22,7 @@ export const DesktopContainer = styled.div`
   `}
 `;
 
+export const Flex = styled.div`
+  display: flex;
+`;
 export default Container;

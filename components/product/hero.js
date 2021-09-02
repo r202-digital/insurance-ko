@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import NextImage from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
 import { useKeenSlider } from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
-import { Box, Button } from "grommet";
+import { Anchor, Button, Select } from "grommet";
 import { RiHeart3Line } from "react-icons/ri";
+import { IoIosArrowDropleft } from "react-icons/io";
 import { Colors } from "components/shared/colors";
+import { Flex } from "components/shared/container";
+import "keen-slider/keen-slider.min.css";
+import {
+  PrimaryYellowGreenButton,
+  SecondaryYellowGreenButton,
+} from "components/shared/section";
 
 const HeroContainer = styled.div`
-  display: initial;
+  background-color: white;
+  display: block;
   ${breakpoint("lg")`
+    padding: 10px;
+    margin-top: 1em;
     display: grid;
     grid-template-columns: 10% 40% 50%;
     grid-template-rows: 1fr;
@@ -89,7 +99,92 @@ const Selection = styled.div`
   `}
 `;
 
+const ShopLink = styled.a`
+  display: none;
+
+  ${breakpoint("lg")`
+    display: flex;
+    align-items: center;
+    color: ${Colors.brand};
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    margin-top: 1.33em;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 20px;
+    font-size: 0.75em;
+
+    span {
+      margin-left: 0.5em;
+    }s
+  `}
+`;
+
+const Description = styled.div`
+  padding: 1em;
+`;
+
+const ProductName = styled.h1`
+  font-size: 1.375em;
+  color: ${Colors.titleGray};
+  margin: 0;
+  padding: 0;
+`;
+
+const Price = styled.h3`
+  font-size: 1.8125em;
+  margin: 1em 0;
+  margin-bottom: 0.5em;
+
+  ${breakpoint("lg")`
+    margin: 0;
+  `}
+`;
+
+const StatusTag = styled.p`
+  color: ${Colors.brand};
+  margin: 0;
+`;
+
+const PlanSelection = styled.div`
+  margin-top: 1em;
+
+  button {
+    width: 100%;
+
+    input {
+      padding-left: 1.25em;
+      padding-right: 1em;
+      color: ${Colors.titleGray};
+    }
+  }
+`;
+
+const ButtonRow = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 1em;
+  grid-row-gap: 0px;
+`;
+
+const ActionSection = styled.div`
+  display: block;
+  ${breakpoint("lg")`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
+    padding: 2em 1.5em;
+    border: 1px solid ${Colors.borderGray};
+    border-radius: 20px;
+  `}
+`;
+
 const ProductHero = ({ product }) => {
+  const { price } = product;
+  const planOptions = ["Regular", "Bronze", "Silver", "Gold"];
+  const [planOption, setPlanOption] = useState(planOptions[0]);
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [sliderRef] = useKeenSlider({
     initial: 0,
@@ -118,34 +213,77 @@ const ProductHero = ({ product }) => {
   ];
 
   return (
-    <HeroContainer>
-      <Selection>
-        {items.map((item, index) => (
-          <SelectionSlide key={`${JSON.stringify(item)}-${index}`}>
-            <NextImage src={item?.carousel_item?.url || ""} layout="fill" />
-          </SelectionSlide>
-        ))}
-      </Selection>
-      <CarouselContainer>
-        <Carousel ref={sliderRef} className="keen-slider">
+    <>
+      <Flex>
+        <Link href="/shop">
+          <ShopLink href="/shop">
+            <IoIosArrowDropleft size="20px" color={Colors.brand} />
+            <span>Back to Shop</span>
+          </ShopLink>
+        </Link>
+      </Flex>
+      <HeroContainer>
+        <Selection>
           {items.map((item, index) => (
-            <ImageContainer
-              className="keen-slider__slide"
-              key={`${JSON.stringify(item)}-${index}`}
-            >
+            <SelectionSlide key={`${JSON.stringify(item)}-${index}`}>
               <NextImage src={item?.carousel_item?.url || ""} layout="fill" />
-            </ImageContainer>
+            </SelectionSlide>
           ))}
-        </Carousel>
-        <LikeButton>
-          <Button icon={<RiHeart3Line />} />
-        </LikeButton>
-        <SlideTag>
-          {currentSlide + 1}/{items.length}
-        </SlideTag>
-      </CarouselContainer>
-      <div>This is a {product.name} page</div>
-    </HeroContainer>
+        </Selection>
+        <CarouselContainer>
+          <Carousel ref={sliderRef} className="keen-slider">
+            {items.map((item, index) => (
+              <ImageContainer
+                className="keen-slider__slide"
+                key={`${JSON.stringify(item)}-${index}`}
+              >
+                <NextImage src={item?.carousel_item?.url || ""} layout="fill" />
+              </ImageContainer>
+            ))}
+          </Carousel>
+          <LikeButton>
+            <Button icon={<RiHeart3Line />} />
+          </LikeButton>
+          <SlideTag>
+            {currentSlide + 1}/{items.length}
+          </SlideTag>
+        </CarouselContainer>
+        <Description>
+          <ProductName>{product.name}</ProductName>
+          <StatusTag>Available</StatusTag>
+          <PlanSelection>
+            <label>Plan options:</label>
+            <Select
+              name="plan-select"
+              placeholder="Select"
+              value={planOption}
+              options={planOptions}
+              onChange={({ option }) => setPlanOption(option)}
+            />
+          </PlanSelection>
+          <ActionSection>
+            <Price>₱{price}</Price>
+            <ButtonRow>
+              <SecondaryYellowGreenButton
+                label="Add to Cart"
+                onClick={() => {}}
+              />
+              <PrimaryYellowGreenButton label="Buy Now" onClick={() => {}} />
+            </ButtonRow>
+          </ActionSection>
+          <p>
+            Notes: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+            diam nonumy eirmod tempor invidunt ut labore et dolore magna
+            <Anchor href="#">View more</Anchor>
+          </p>
+          <p>
+            Payment:
+            {/* TODO: Add payment icons */}
+            <span>{` `}Something here...</span>
+          </p>
+        </Description>
+      </HeroContainer>
+    </>
   );
 };
 
