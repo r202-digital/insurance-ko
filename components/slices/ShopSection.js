@@ -1,9 +1,8 @@
+import Product from "components/product/item";
 import { Colors } from "components/shared/colors";
 import { DesktopContainer } from "components/shared/container";
 import ProductContext from "components/shared/context/product";
 import { Accordion, AccordionPanel, Box, Select } from "grommet";
-import theme from "lib/theme";
-import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
@@ -23,78 +22,6 @@ const ProductList = styled.ul`
     margin-top: 0;
     grid-template-columns: repeat(4, 1fr);
   `}
-`;
-
-const ProductListItem = styled.li`
-  position: relative;
-  padding: 0.5em;
-  background-color: white;
-`;
-
-const ProductListItemContainer = styled.div`
-  padding: 0.5em;
-  background-color: white;
-`;
-
-const ProductImage = styled.img`
-  width: 100%;
-`;
-
-const ProductLink = styled.a`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-
-  ${breakpoint("lg")`
-    display: none;
-  `}
-`;
-
-const Description = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 0.8125em;
-`;
-
-const TopTag = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-const PromoTag = styled.span`
-  display: block;
-  padding: 0.5em;
-  padding-left: 0.75em;
-  padding-right: 1em;
-  color: white;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: ${({ color }) => {
-    switch (color) {
-      case "yellow":
-        return Colors.tagYellow;
-      case "red":
-        return Colors.tagRed;
-      default:
-        return Colors.brand;
-    }
-  }};
-`;
-
-const BottomTag = styled.div`
-  margin-top: -2.75em;
-  margin-bottom: 1.25em;
-  margin-left: 0.5em;
-  font-size: 0.75em;
-
-  span {
-    background-color: #f4f4f4;
-    padding: 0.25em 1em;
-    border-radius: 20px;
-  }
 `;
 
 const DesktopGrid = styled.div`
@@ -121,11 +48,6 @@ const StyledAccordionPanel = styled(AccordionPanel)`
 
 const AccordionContent = styled.div`
   padding: 10px;
-`;
-
-const DescriptionLink = styled.a`
-  text-decoration: none;
-  color: inherit;
 `;
 
 const FilterSection = () => {
@@ -157,32 +79,6 @@ const FilterSection = () => {
   );
 };
 
-const Product = ({ image, name, price, promos, id }) => {
-  return (
-    <ProductListItem>
-      <ProductLink href={`/product/${id}`} />
-      <ProductListItemContainer>
-        <TopTag>
-          {promos.map((promo) => (
-            <PromoTag color={promo.color}>{promo.name}</PromoTag>
-          ))}
-        </TopTag>
-        {/* TODO: ADD IMAGE */}
-        <ProductImage src="https://via.placeholder.com/200" />
-        <BottomTag>
-          <span>₱3M coverage</span>
-        </BottomTag>
-        <Description>
-          <Link href={`/product/${id}`}>
-            <DescriptionLink href={`/product/${id}`}>{name}</DescriptionLink>
-          </Link>
-          <strong>₱{price}</strong>
-        </Description>
-      </ProductListItemContainer>
-    </ProductListItem>
-  );
-};
-
 const ShopSection = () => {
   const productContainer = ProductContext.useContainer();
   const { contextProduct } = productContainer;
@@ -191,12 +87,13 @@ const ShopSection = () => {
       <DesktopGrid>
         <FilterSection />
         <ProductList>
-          {contextProduct.map(({ uid, price, name, promos }, index) => (
+          {contextProduct.map(({ uid, price, name, promos, tag }, index) => (
             <Product
               id={uid}
               price={price}
               name={name}
               promos={promos}
+              tag={tag}
               key={`product-${index}-${name}`}
             />
           ))}

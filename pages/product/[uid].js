@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DefaultLayout from "layouts";
 import { Client } from "utils/prismicHelpers";
 import ErrorPage from "pages/404";
@@ -10,6 +10,7 @@ import MetadataContext from "components/shared/context/metadata";
 import ProductHero from "components/product/hero";
 import ProductTabs from "components/product/tabs";
 import VariantContext from "components/product/context";
+import Recommendations from "components/product/recommendations";
 
 const ProductPage = ({ productProps = {}, metadata = {} }) => {
   const metadataContext = MetadataContext.useContainer();
@@ -24,6 +25,7 @@ const ProductPage = ({ productProps = {}, metadata = {} }) => {
           <DesktopContainer>
             <ProductHero product={productProps} />
             <ProductTabs product={productProps} />
+            <Recommendations product={productProps} />
           </DesktopContainer>
         </VariantContext.Provider>
       </DefaultLayout>

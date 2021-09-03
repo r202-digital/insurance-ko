@@ -58,6 +58,17 @@ const customTheme = deepMerge(grommet, {
       extend: ({ theme }) => css`
         justify-content: flex-start;
         margin-bottom: 1em;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
 
         & > div {
           display: none;
