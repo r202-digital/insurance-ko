@@ -6,6 +6,7 @@ import DefaultLayout from "layouts";
 import fetcher from "lib/fetcher";
 import { Client } from "utils/prismicHelpers";
 import MetadataContext from "components/shared/context/metadata";
+import DashboardLayout from "components/profile";
 
 const Profile = ({ metadata }) => {
   const router = useRouter();
@@ -20,22 +21,32 @@ const Profile = ({ metadata }) => {
     if (error) router.push("/");
   }, [error, router]);
 
-  return (
-    <DefaultLayout>
-      {error ? (
+  if (error) {
+    return (
+      <DefaultLayout>
         <h1>An error has occurred: {error.message}</h1>
-      ) : user ? (
-        <h1>Your user id is {user.userId}</h1>
-      ) : (
-        <h1>Loading...</h1>
-      )}
-      <style jsx>{`
-        h1 {
-          margin-bottom: 0;
-        }
-      `}</style>
-    </DefaultLayout>
-  );
+      </DefaultLayout>
+    );
+
+    // return (
+    //   <DefaultLayout>
+    //     {error ? (
+    //       <h1>An error has occurred: {error.message}</h1>
+    //     ) : user ? (
+    //       <h1>Your user id is {user.userId}</h1>
+    //     ) : (
+    //       <h1>Loading...</h1>
+    //     )}
+    //     <style jsx>{`
+    //       h1 {
+    //         margin-bottom: 0;
+    //       }
+    //     `}</style>
+    //   </DefaultLayout>
+    // );
+  } else {
+    return <DashboardLayout user={user} />;
+  }
 };
 
 export async function getStaticProps({ preview = null, previewData = {} }) {
