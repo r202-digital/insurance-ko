@@ -159,6 +159,21 @@ const PlanSelection = styled.div`
       color: ${Colors.titleGray};
     }
   }
+
+  ${breakpoint("lg")`
+    display: flex;
+    align-items: center;
+    width: 70%;
+
+    label {
+      margin-right: 1em;
+      flex: 1 0 1;
+    }
+
+    button {
+      flex: 1;
+    }
+  `}
 `;
 
 const ButtonRow = styled.div`
