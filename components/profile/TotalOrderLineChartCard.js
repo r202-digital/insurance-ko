@@ -19,9 +19,11 @@ import ChartDataYear from "./chart-data/total-order-year-line-chart";
 // assets
 import LocalMallOutlinedIcon from "@material-ui/icons/LocalMallOutlined";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 // style constant
-const useStyles = makeStyles((theme) => ({
+
+const themeGenerator = (theme, isPositive) => ({
   card: {
     backgroundColor: theme.palette.yellow.main,
     color: "#fff",
@@ -92,17 +94,23 @@ const useStyles = makeStyles((theme) => ({
   avatarCircle: {
     ...theme.typography.smallAvatar,
     cursor: "pointer",
-    backgroundColor: theme.palette.primary[200],
-    color: theme.palette.primary.dark,
+    backgroundColor: isPositive
+      ? theme.palette.secondary[200]
+      : theme.palette.error.light,
+    color: isPositive ? theme.palette.secondary.dark : theme.palette.error.dark,
   },
   circleIcon: {
-    transform: "rotate3d(1, 1, 1, 45deg)",
+    transform: isPositive
+      ? "rotate3d(1, 1, 1, 45deg)"
+      : "rotate3d(1, 1, 1, -45deg)",
   },
-}));
+});
 
 //-----------------------|| DASHBOARD - TOTAL ORDER LINE CHART CARD ||-----------------------//
 
 const TotalOrderLineChartCard = ({ isLoading }) => {
+  const [isPositive, setIsPositive] = React.useState(true);
+  const useStyles = makeStyles((theme) => themeGenerator(theme, isPositive));
   const classes = useStyles();
 
   const [timeValue, setTimeValue] = React.useState(false);
@@ -164,11 +172,21 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                       )}
                     </Grid>
                     <Grid item>
-                      <Avatar className={classes.avatarCircle}>
-                        <ArrowDownwardIcon
-                          fontSize="inherit"
-                          className={classes.circleIcon}
-                        />
+                      <Avatar
+                        className={classes.avatarCircle}
+                        onClick={() => setIsPositive(!isPositive)}
+                      >
+                        {isPositive ? (
+                          <ArrowUpwardIcon
+                            fontSize="inherit"
+                            className={classes.circleIcon}
+                          />
+                        ) : (
+                          <ArrowDownwardIcon
+                            fontSize="inherit"
+                            className={classes.circleIcon}
+                          />
+                        )}
                       </Avatar>
                     </Grid>
                     <Grid item xs={12}>
