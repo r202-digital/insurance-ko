@@ -23,7 +23,7 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 // style constant
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.yellow.main,
     color: "#fff",
     overflow: "hidden",
     position: "relative",
@@ -34,13 +34,15 @@ const useStyles = makeStyles((theme) => ({
     "&:after": {
       content: '""',
       position: "absolute",
-      width: "210px",
-      height: "210px",
-      background: theme.palette.primary[800],
+      width: "900px",
+      height: "340px",
+      background: theme.palette.yellow.darker,
       borderRadius: "50%",
-      zIndex: 1,
-      top: "-85px",
-      right: "-95px",
+      zIndex: 0,
+      top: "-25px",
+      right: "-20px",
+      opacity: 0.45,
+      transform: "rotate(-2.5deg)",
       [theme.breakpoints.down("xs")]: {
         top: "-105px",
         right: "-140px",
@@ -50,13 +52,13 @@ const useStyles = makeStyles((theme) => ({
       content: '""',
       position: "absolute",
       zIndex: 1,
-      width: "210px",
-      height: "210px",
-      background: theme.palette.primary[800],
+      width: "600px",
+      height: "400px",
+      background: "linear-gradient(90deg, #ecc31f 0%, #f2e32d 100%)",
       borderRadius: "50%",
-      top: "-125px",
-      right: "-15px",
-      opacity: 0.5,
+      top: "10px",
+      right: "-70px",
+      opacity: 1,
       [theme.breakpoints.down("xs")]: {
         top: "-155px",
         right: "-70px",
@@ -65,11 +67,12 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     padding: "20px !important",
+    background: "rgba(0,0,0,0.025)",
   },
   avatar: {
     ...theme.typography.commonAvatar,
     ...theme.typography.largeAvatar,
-    backgroundColor: theme.palette.primary[800],
+    backgroundColor: theme.palette.yellow.darkest,
     color: "#fff",
     marginTop: "8px",
   },
@@ -79,11 +82,12 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "8px",
     marginTop: "14px",
     marginBottom: "6px",
+    color: theme.palette.brown.main,
   },
   subHeading: {
     fontSize: "1rem",
     fontWeight: 500,
-    color: theme.palette.primary[200],
+    color: theme.palette.yellow.light,
   },
   avatarCircle: {
     ...theme.typography.smallAvatar,

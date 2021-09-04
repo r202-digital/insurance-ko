@@ -22,35 +22,46 @@ import TableChartOutlinedIcon from "@material-ui/icons/TableChartOutlined";
 // style constant
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.yellow.main,
     color: theme.palette.primary.light,
     overflow: "hidden",
     position: "relative",
+    "&>div": {
+      position: "relative",
+      zIndex: 5,
+    },
     "&:after": {
       content: '""',
       position: "absolute",
-      width: "210px",
-      height: "210px",
-      background:
-        "linear-gradient(210.04deg, " +
-        theme.palette.primary[200] +
-        " -50.94%, rgba(144, 202, 249, 0) 83.49%)",
+      width: "900px",
+      height: "340px",
+      background: theme.palette.yellow.darker,
       borderRadius: "50%",
-      top: "-30px",
-      right: "-180px",
+      zIndex: 0,
+      top: "-25px",
+      right: "-20px",
+      opacity: 0.45,
+      transform: "rotate(-2.5deg)",
+      [theme.breakpoints.down("xs")]: {
+        top: "-105px",
+        right: "-140px",
+      },
     },
     "&:before": {
       content: '""',
       position: "absolute",
-      width: "210px",
-      height: "210px",
-      background:
-        "linear-gradient(140.9deg, " +
-        theme.palette.primary[200] +
-        " -14.02%, rgba(144, 202, 249, 0) 77.58%)",
+      zIndex: 1,
+      width: "600px",
+      height: "400px",
+      background: "linear-gradient(90deg, #ecc31f 0%, #f2e32d 100%)",
       borderRadius: "50%",
-      top: "-160px",
-      right: "-130px",
+      top: "10px",
+      right: "-70px",
+      opacity: 1,
+      [theme.breakpoints.down("xs")]: {
+        top: "-155px",
+        right: "-70px",
+      },
     },
   },
   content: {
@@ -59,14 +70,14 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     ...theme.typography.commonAvatar,
     ...theme.typography.largeAvatar,
-    backgroundColor: theme.palette.primary[800],
+    backgroundColor: theme.palette.yellow.darkest,
     color: "#fff",
   },
   primary: {
-    color: "#fff",
+    color: theme.palette.brown.main,
   },
   secondary: {
-    color: theme.palette.primary.light,
+    color: theme.palette.yellow.light,
     marginTop: "5px",
   },
   padding: {

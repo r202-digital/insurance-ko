@@ -2,18 +2,18 @@
 $paper: #ffffff;
 
 // primary
-$primaryLight: #e3f2fd;
-$primaryMain: #2196f3;
-$primaryDark: #1e88e5;
+$primaryLight: #F6F6F6;
+$primaryMain: #7EBA0B;
+$primaryDark: #5a8409;
 $primary200: #90caf9;
 $primary800: #1565c0;
 
 // secondary
-$secondaryLight: #ede7f6;
-$secondaryMain: #673ab7;
-$secondaryDark: #5e35b1;
-$secondary200: #b39ddb;
-$secondary800: #4527a0;
+$secondaryLight: #E2F1E3;
+$secondaryMain: #00790b;
+$secondaryDark: #006d0a;
+$secondary200: #66a466;
+$secondary800: #002900;
 
 // success Colors
 $successLight: #b9f6ca;
@@ -25,6 +25,20 @@ $successDark: #00c853;
 $errorLight: #ef9a9a;
 $errorMain: #f44336;
 $errorDark: #c62828;
+
+// yellow
+$yellowMain: #FFEB19;
+$yellowDark: #EFB500;
+$yellowDarker: #dc9800;
+$yellowDarkest: #d5a100;
+$yellowLight: #FFF8B2;
+
+//yellow green
+$yellowGreenUltra: #00ff00;
+$yellowGreenMain: #7EBA0B;
+
+//brown
+$brownMain: #8E542D;
 
 // orange
 $orangeLight: #fbe9e7;
@@ -76,6 +90,20 @@ $grey900: #212121;
     errorLight: $errorLight;
     errorMain: $errorMain;
     errorDark: $errorDark;
+
+    // yellow
+    yellowMain: $yellowMain;
+    yellowDark: $yellowDark;
+    yellowDarker: $yellowDarker;
+    yellowDarkest: $yellowDarkest;
+    yellowLight: $yellowLight;
+
+    // yellow green
+    yellowGreenUltra: $yellowGreenUltra;
+    yellowGreenMain: $yellowGreenMain;
+    
+    // brown
+    brownMain: $brownMain;
 
     // orange
     orangeLight: $orangeLight;

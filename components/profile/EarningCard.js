@@ -21,19 +21,20 @@ import ArchiveTwoToneIcon from "@material-ui/icons/ArchiveOutlined";
 // style constant
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: theme.palette.secondary.dark,
+    backgroundColor: theme.palette.yellow.main,
     color: "#fff",
     overflow: "hidden",
     position: "relative",
     "&:after": {
       content: '""',
       position: "absolute",
-      width: "210px",
-      height: "210px",
-      background: theme.palette.secondary[800],
+      width: "900px",
+      height: "460px",
+      background: theme.palette.yellowGreen.ultra,
       borderRadius: "50%",
-      top: "-85px",
-      right: "-95px",
+      top: "-265px",
+      right: "-335px",
+      opacity: "0.5",
       [theme.breakpoints.down("xs")]: {
         top: "-105px",
         right: "-140px",
@@ -42,13 +43,13 @@ const useStyles = makeStyles((theme) => ({
     "&:before": {
       content: '""',
       position: "absolute",
-      width: "210px",
-      height: "210px",
-      background: theme.palette.secondary[800],
+      width: "800px",
+      height: "400px",
+      background: "linear-gradient(90deg, rgb(255 188 38) 0%, rgb(1 6 0) 100%)",
       borderRadius: "50%",
-      top: "-125px",
-      right: "-15px",
-      opacity: 0.5,
+      top: "-225px",
+      right: "-120px",
+      opacity: 0.75,
       [theme.breakpoints.down("xs")]: {
         top: "-155px",
         right: "-70px",
@@ -57,18 +58,20 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     padding: "20px !important",
+    zIndex: 100,
+    position: "relative",
   },
   avatar: {
     ...theme.typography.commonAvatar,
     ...theme.typography.largeAvatar,
-    backgroundColor: theme.palette.secondary[800],
+    backgroundColor: theme.palette.secondary.main,
     marginTop: "8px",
   },
   avatarRight: {
     ...theme.typography.commonAvatar,
     ...theme.typography.mediumAvatar,
-    backgroundColor: theme.palette.secondary.dark,
-    color: theme.palette.secondary[200],
+    backgroundColor: theme.palette.yellowGreen.main,
+    color: theme.palette.yellow.main,
     zIndex: 1,
   },
   cardHeading: {
@@ -81,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   subHeading: {
     fontSize: "1rem",
     fontWeight: 500,
-    color: theme.palette.secondary[200],
+    color: theme.palette.yellow.main,
   },
   avatarCircle: {
     cursor: "pointer",

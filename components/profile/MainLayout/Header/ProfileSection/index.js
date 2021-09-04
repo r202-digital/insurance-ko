@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
   headerAvatar: {
     cursor: "pointer",
     ...theme.typography.mediumAvatar,
+    background: theme.palette.secondary.light,
     margin: "8px 0 8px 8px !important",
   },
   profileChip: {
@@ -63,8 +64,7 @@ const useStyles = makeStyles((theme) => ({
     '&[aria-controls="menu-list-grow"], &:hover': {
       borderColor: theme.palette.primary.main,
       background: theme.palette.primary.main + "!important",
-      color: theme.palette.primary.light,
-      "& svg": {
+      "& > span > svg": {
         stroke: theme.palette.primary.light,
       },
     },
