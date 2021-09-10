@@ -3,20 +3,122 @@ import Router from "next/router";
 import DefaultLayout from "layouts";
 import { Client } from "utils/prismicHelpers";
 import MetadataContext from "components/shared/context/metadata";
+import { useField, useForm } from "react-final-form-hooks";
+import styled, { css } from "styled-components";
+import {
+  Box,
+  Text,
+  Grommet,
+  FormField,
+  TextInput,
+  Button,
+  Tabs,
+  Tab,
+} from "grommet";
+import { grommet } from "grommet/themes";
+import { deepMerge } from "grommet/utils";
+import { Colors } from "components/shared/colors";
+import LoginForm from "components/forms/login";
+import SignupForm from "components/forms/signup";
+import { breakpoint } from "styled-components-breakpoint";
+import Container from "components/shared/container";
 
-const signin = async (email, password) => {
-  const response = await fetch("/api/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
+const customTheme = {
+  global: {
+    font: {
+      size: "16px",
+    },
+    input: {
+      weight: 400,
+    },
+    colors: Colors,
+  },
+  tab: {
+    active: {
+      background: Colors.lightgreen,
+      color: "accent-1",
+    },
+    // background: "dark-3",
+    border: undefined,
+    color: "white",
+    hover: {
+      background: "dark-1",
+    },
+    margin: undefined,
+    pad: {
+      bottom: undefined,
+      horizontal: "small",
+    },
+    extend: ({ theme }) => css`
+      border-radius: 20px;
+      transition: 0.3s;
 
-  if (response.status !== 200) {
-    throw new Error(await response.text());
-  }
-
-  Router.push("/profile");
+      &:hover {
+        background: ${Colors.brand};
+      }
+    `,
+  },
+  formField: {
+    label: {
+      color: "dark-3",
+      size: "small",
+      margin: "xsmall",
+      weight: 600,
+    },
+    disabled: {
+      background: {
+        color: "status-disabled",
+        opacity: true,
+      },
+    },
+    border: undefined,
+    content: {
+      pad: "small",
+    },
+    error: {
+      background: {
+        color: "status-critical",
+        opacity: "weak",
+      },
+    },
+    margin: "none",
+    extend: ({ theme }) => css`
+      input {
+        border-radius: 20px;
+        background-color: white;
+      }
+    `,
+  },
 };
+
+const RichTabTitle = ({ label }) => (
+  <Box direction="row" align="center" gap="xsmall" margin="xsmall">
+    <Text size="small">
+      <strong>{label}</strong>
+    </Text>
+  </Box>
+);
+
+const StyledGrommet = styled(Grommet)`
+  margin-top: 1em;
+  height: auto;
+  width: auto;
+  background-color: transparent;
+  ${breakpoint("lg")`
+    justify-content: flex-end;
+    display: flex;
+  `}
+`;
+
+const FormContainer = styled.div`
+  background-color: white;
+  padding: 1em;
+  max-width: initial;
+  ${breakpoint("lg")`
+      max-width: 400px;
+      flex: 1;
+  `}
+`;
 
 const Login = ({ metadata }) => {
   const metadataContext = MetadataContext.useContainer();
@@ -25,93 +127,22 @@ const Login = ({ metadata }) => {
     metadataContext.setContextMetadata(metadata.data);
   }, []);
 
-  const [userData, setUserData] = useState({
-    email: "",
-    password: "",
-    error: "",
-  });
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setUserData({ ...userData, error: "" });
-
-    const email = userData.email;
-    const password = userData.password;
-
-    try {
-      await signin(email, password);
-    } catch (error) {
-      console.error(error);
-      setUserData({ ...userData, error: error.message });
-    }
-  }
-
   return (
     <DefaultLayout>
-      <div className="login">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
-
-          <input
-            type="text"
-            id="email"
-            name="email"
-            value={userData.email}
-            onChange={(event) =>
-              setUserData(
-                Object.assign({}, userData, { email: event.target.value })
-              )
-            }
-          />
-
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={userData.password}
-            onChange={(event) =>
-              setUserData(
-                Object.assign({}, userData, { password: event.target.value })
-              )
-            }
-          />
-
-          <button type="submit">Login</button>
-
-          {userData.error && <p className="error">Error: {userData.error}</p>}
-        </form>
-      </div>
-      <style jsx>{`
-        .login {
-          max-width: 340px;
-          margin: 0 auto;
-          padding: 1rem;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-        }
-
-        form {
-          display: flex;
-          flex-flow: column;
-        }
-
-        label {
-          font-weight: 600;
-        }
-
-        input {
-          padding: 8px;
-          margin: 0.3rem 0 1rem;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-        }
-
-        .error {
-          margin: 0.5rem 0 0;
-          color: brown;
-        }
-      `}</style>
+      <Container>
+        <StyledGrommet full theme={deepMerge(grommet, customTheme)}>
+          <FormContainer>
+            <Tabs>
+              <Tab title={<RichTabTitle label="Sign in" />}>
+                <LoginForm />
+              </Tab>
+              <Tab title={<RichTabTitle label="Sign up" />}>
+                <SignupForm />
+              </Tab>
+            </Tabs>
+          </FormContainer>
+        </StyledGrommet>
+      </Container>
     </DefaultLayout>
   );
 };

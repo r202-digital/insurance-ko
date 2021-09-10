@@ -1,12 +1,13 @@
 import { query as q } from "faunadb";
 import { serverClient, serializeFaunaCookie } from "utils/fauna-auth";
+import { encryptSession } from "lib/iron";
 
 export default async function signup(req, res) {
-  const { email, password } = await req.body;
+  const { email, name, password } = await req.body;
 
   try {
-    if (!email || !password) {
-      throw new Error("Email and password must be provided.");
+    if (!email || !password || !name) {
+      throw new Error("All fields must be completed.");
     }
     console.log(`email: ${email} trying to create user.`);
 
@@ -16,7 +17,7 @@ export default async function signup(req, res) {
       user = await serverClient.query(
         q.Create(q.Collection("User"), {
           credentials: { password },
-          data: { email },
+          data: { email, name },
         })
       );
     } catch (error) {
@@ -38,7 +39,12 @@ export default async function signup(req, res) {
       throw new Error("No secret present in login query response.");
     }
 
-    const cookieSerialized = serializeFaunaCookie(loginRes.secret);
+    const token = await encryptSession({
+      email,
+      name,
+    });
+
+    const cookieSerialized = serializeFaunaCookie(token);
 
     res.setHeader("Set-Cookie", cookieSerialized);
     res.status(200).end();

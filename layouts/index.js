@@ -4,6 +4,7 @@ import Header from "components/header";
 import Footer from "components/footer";
 import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
+import { useUser } from "lib/hooks";
 
 const Container = styled.div`
   display: flex;
@@ -16,11 +17,11 @@ const Container = styled.div`
 `;
 
 const Layout = ({ children }) => {
-  const { data: user, error } = useSWR("/api/profile", fetcher);
-
+  const user = useUser();
+  // console.log(user);
   return (
     <>
-      <Header hasUser={!!user} />
+      <Header hasUser={user?.hasUser} />
 
       <main>
         <Container>{children}</Container>

@@ -19,33 +19,8 @@ import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
 import parse from "react-html-parser";
 
-const ShowcaseImage = styled.img`
-  height: 100%;
-`;
-
-const ShowcaseImageContainer = styled(Box)`
-  align-items: center;
-  height: 190px;
-  margin-bottom: 0.5em;
-`;
-
 const ShowcaseText = styled(HandwrittenText)`
   margin-bottom: 0.5em;
-`;
-
-const GridContainer = styled(Grid)`
-  margin: 0 6em;
-`;
-
-const ItemHeading = styled(Text)`
-  text-transform: uppercase;
-  color: yellow;
-  margin: 0.35em 0;
-  margin-bottom: 0.6em;
-`;
-
-const ItemParagraph = styled(Text)`
-  line-height: 1.75;
 `;
 
 const SplitSection = styled(Container)`

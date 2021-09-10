@@ -1,5 +1,6 @@
 import React from "react";
 import { default as RouterLink } from "next/link";
+import { logout } from "utils/auth";
 
 // material-ui
 import { makeStyles, useTheme } from "@material-ui/styles";
@@ -35,6 +36,8 @@ import UpgradePlanCard from "./UpgradePlanCard";
 import { IconLogout, IconSearch, IconSettings, IconUser } from "@tabler/icons";
 import User1 from "public/icons/user-round.svg";
 import { customization } from "components/profile/customization";
+import { useSWRConfig } from "swr";
+import Router from "next/router";
 
 // style const
 const useStyles = makeStyles((theme) => ({
@@ -118,17 +121,14 @@ const useStyles = makeStyles((theme) => ({
 const ProfileSection = () => {
   const classes = useStyles();
   const theme = useTheme();
+  const { mutate } = useSWRConfig();
 
   const [sdm, setSdm] = React.useState(true);
-  const [value, setValue] = React.useState("");
   const [notification, setNotification] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const handleLogout = async () => {
-    console.error("Logout");
-  };
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
     handleClose(event);
@@ -227,30 +227,8 @@ const ProfileSection = () => {
                         </Typography>
                       </Grid>
                     </Grid>
-                    <OutlinedInput
-                      className={classes.searchControl}
-                      id="input-search-profile"
-                      value={value}
-                      onChange={(e) => setValue(e.target.value)}
-                      placeholder="Search profile options"
-                      startAdornment={
-                        <InputAdornment position="start">
-                          <IconSearch
-                            stroke={1.5}
-                            size="1.3rem"
-                            className={classes.startAdornment}
-                          />
-                        </InputAdornment>
-                      }
-                      aria-describedby="search-helper-text"
-                      inputProps={{
-                        "aria-label": "weight",
-                      }}
-                    />
-                    <Divider />
                     <PerfectScrollbar className={classes.ScrollHeight}>
-                      <UpgradePlanCard />
-                      <Divider />
+                      {/* <Divider /> */}
                       <Card className={classes.card}>
                         <CardContent>
                           <Grid container spacing={3} direction="column">
@@ -313,12 +291,9 @@ const ProfileSection = () => {
                           }}
                           selected={selectedIndex === 0}
                           onClick={(event) => handleListItemClick(event, 0)}
-                          component={React.forwardRef((props, ref) => (
-                            <RouterLink
-                              {...props}
-                              href="/user/account-profile/profile1"
-                            />
-                          ))}
+                          // component={React.forwardRef((props, ref) => (
+                          //   <RouterLink {...props} href="/" />
+                          // ))}
                         >
                           <ListItemIcon>
                             <IconSettings stroke={1.5} size="1.3rem" />
@@ -338,12 +313,9 @@ const ProfileSection = () => {
                           }}
                           selected={selectedIndex === 1}
                           onClick={(event) => handleListItemClick(event, 1)}
-                          component={React.forwardRef((props, ref) => (
-                            <RouterLink
-                              {...props}
-                              href="/user/account-profile/profile1"
-                            />
-                          ))}
+                          // component={React.forwardRef((props, ref) => (
+                          //   <RouterLink {...props} href="/" />
+                          // ))}
                         >
                           <ListItemIcon>
                             <IconUser stroke={1.5} size="1.3rem" />
@@ -377,7 +349,10 @@ const ProfileSection = () => {
                             borderRadius: customization.borderRadius + "px",
                           }}
                           selected={selectedIndex === 4}
-                          onClick={handleLogout}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            logout();
+                          }}
                         >
                           <ListItemIcon>
                             <IconLogout stroke={1.5} size="1.3rem" />

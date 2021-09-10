@@ -1,38 +1,38 @@
-import { useEffect } from 'react'
-import Router from 'next/router'
+import { useEffect } from "react";
+import Router from "next/router";
 
 export const login = ({ email }) => {
-  Router.push('/profile')
-}
+  Router.push("/profile");
+};
 
 export const logout = async () => {
-  await fetch('/api/logout')
+  await fetch("/api/logout");
 
-  window.localStorage.setItem('logout', Date.now())
+  window.localStorage.setItem("logout", Date.now());
 
-  Router.push('/login')
-}
+  Router.push("/login");
+};
 
 export const withAuthSync = (Component) => {
   const Wrapper = (props) => {
     const syncLogout = (event) => {
-      if (event.key === 'logout') {
-        console.log('logged out from storage!')
-        Router.push('/login')
+      if (event.key === "logout") {
+        console.log("logged out from storage!");
+        Router.push("/login");
       }
-    }
+    };
 
     useEffect(() => {
-      window.addEventListener('storage', syncLogout)
+      window.addEventListener("storage", syncLogout);
 
       return () => {
-        window.removeEventListener('storage', syncLogout)
-        window.localStorage.removeItem('logout')
-      }
-    }, [])
+        window.removeEventListener("storage", syncLogout);
+        window.localStorage.removeItem("logout");
+      };
+    }, []);
 
-    return <Component {...props} />
-  }
+    return <Component {...props} />;
+  };
 
-  return Wrapper
-}
+  return Wrapper;
+};
