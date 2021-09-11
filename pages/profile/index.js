@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import useSWR from "swr";
 import { withAuthSync } from "utils/auth";
 import DefaultLayout from "layouts";
@@ -14,6 +14,7 @@ const Profile = ({ metadata }) => {
 
   // console.log(user);
   useEffect(() => {
+    Router.prefetch("/profile/admin");
     metadataContext.setContextMetadata(metadata.data);
   }, []);
 

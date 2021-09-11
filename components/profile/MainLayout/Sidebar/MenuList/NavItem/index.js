@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import Link from "next/link";
 
 // material-ui
 import { makeStyles } from "@material-ui/styles";
@@ -101,55 +102,57 @@ const NavItem = ({ item, level }) => {
   }, []);
 
   return (
-    <ListItemButton
-      {...listItemProps}
-      disabled={item.disabled}
-      className={level > 1 ? classes.listItemNoBack : classes.listItem}
-      sx={{ borderRadius: customization.borderRadius + "px" }}
-      selected={customization.isOpen.findIndex((id) => id === item.id) > -1}
-      onClick={() => {
-        console.log("SOMETHING LIST: ", item.id);
-      }}
-      target={itemTarget}
-      style={{ paddingLeft: level * 23 + "px" }}
-    >
-      <ListItemIcon className={itemIconClass}>{itemIcon}</ListItemIcon>
-      <ListItemText
-        primary={
-          <Typography
-            variant={
-              customization.isOpen.findIndex((id) => id === item.id) > -1
-                ? "h5"
-                : "body1"
-            }
-            color="inherit"
-          >
-            {item.title}
-          </Typography>
-        }
-        secondary={
-          item.caption && (
+    <Link href={item.url}>
+      <ListItemButton
+        {...listItemProps}
+        disabled={item.disabled}
+        className={level > 1 ? classes.listItemNoBack : classes.listItem}
+        sx={{ borderRadius: customization.borderRadius + "px" }}
+        selected={customization.isOpen.findIndex((id) => id === item.id) > -1}
+        onClick={() => {
+          console.log("SOMETHING LIST: ", item.id);
+        }}
+        target={itemTarget}
+        style={{ paddingLeft: level * 23 + "px" }}
+      >
+        <ListItemIcon className={itemIconClass}>{itemIcon}</ListItemIcon>
+        <ListItemText
+          primary={
             <Typography
-              variant="caption"
-              className={classes.subMenuCaption}
-              display="block"
-              gutterBottom
+              variant={
+                customization.isOpen.findIndex((id) => id === item.id) > -1
+                  ? "h5"
+                  : "body1"
+              }
+              color="inherit"
             >
-              {item.caption}
+              {item.title}
             </Typography>
-          )
-        }
-      />
-      {item.chip && (
-        <Chip
-          color={item.chip.color}
-          variant={item.chip.variant}
-          size={item.chip.size}
-          label={item.chip.label}
-          avatar={item.chip.avatar && <Avatar>{item.chip.avatar}</Avatar>}
+          }
+          secondary={
+            item.caption && (
+              <Typography
+                variant="caption"
+                className={classes.subMenuCaption}
+                display="block"
+                gutterBottom
+              >
+                {item.caption}
+              </Typography>
+            )
+          }
         />
-      )}
-    </ListItemButton>
+        {item.chip && (
+          <Chip
+            color={item.chip.color}
+            variant={item.chip.variant}
+            size={item.chip.size}
+            label={item.chip.label}
+            avatar={item.chip.avatar && <Avatar>{item.chip.avatar}</Avatar>}
+          />
+        )}
+      </ListItemButton>
+    </Link>
   );
 };
 

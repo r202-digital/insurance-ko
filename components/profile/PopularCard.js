@@ -28,7 +28,7 @@ import KeyboardArrowUpOutlinedIcon from "@material-ui/icons/KeyboardArrowUpOutli
 import KeyboardArrowDownOutlinedIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
 
 // style constant
-const useStyles = makeStyles((theme) => ({
+export const usePopularCardStyles = makeStyles((theme) => ({
   cardAction: {
     padding: "10px",
     paddingTop: 0,
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 //-----------------------|| DASHBOARD DEFAULT - POPULAR CARD ||-----------------------//
 
 const PopularCard = ({ isLoading }) => {
-  const classes = useStyles();
+  const classes = usePopularCardStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 

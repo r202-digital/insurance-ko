@@ -1,5 +1,3 @@
-import useSWR from "swr";
-import fetcher from "lib/fetcher";
 import Header from "components/header";
 import Footer from "components/footer";
 import styled from "styled-components";
@@ -18,7 +16,6 @@ const Container = styled.div`
 
 const Layout = ({ children }) => {
   const user = useUser();
-  // console.log(user);
   return (
     <>
       <Header hasUser={user?.hasUser} />

@@ -1,5 +1,5 @@
 // assets
-import { IconDashboard, IconDeviceAnalytics } from "@tabler/icons";
+import { IconDashboard, IconDeviceAnalytics, IconUser } from "@tabler/icons";
 
 // constant
 const icons = {
@@ -15,11 +15,17 @@ const dashboard = {
   type: "group",
   children: [
     {
-      id: "default",
       title: "Dashboard",
       type: "item",
-      url: "/",
+      url: "/profile",
       icon: icons["IconDashboard"],
+      breadcrumbs: false,
+    },
+    {
+      title: "Admin",
+      type: "item",
+      url: "/profile/admin",
+      icon: icons["IconDeviceAnalytics"],
       breadcrumbs: false,
     },
   ],

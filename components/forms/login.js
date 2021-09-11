@@ -20,7 +20,7 @@ const SubmitButton = styled(Button)`
 const signIn = async (email, password) => {
   try {
     await axios.post("/api/login", {
-      email,
+      username: email,
       password,
     });
   } catch (e) {

@@ -1,36 +1,38 @@
-import { query as q } from "faunadb";
-import { serverClient, serializeFaunaCookie } from "utils/fauna-auth";
+import passport from "passport";
+import nextConnect from "next-connect";
+import { localStrategy } from "lib/password-local";
 import { encryptSession } from "lib/iron";
+import { setTokenCookie } from "lib/auth-cookies";
 
-export default async function login(req, res) {
-  const { email, password } = await req.body;
+const authenticate = (method, req, res) =>
+  new Promise((resolve, reject) => {
+    passport.authenticate(method, { session: false }, (error, token) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(token);
+      }
+    })(req, res);
+  });
 
-  try {
-    if (!email || !password) {
-      throw new Error("Email and password must be provided.");
+passport.use(localStrategy);
+
+export default nextConnect()
+  .use(passport.initialize())
+  .post(async (req, res) => {
+    try {
+      const user = await authenticate("local", req, res);
+      const session = { ...user };
+      const token = await encryptSession(session);
+
+      setTokenCookie(res, token);
+      res.status(200).send({ done: true, user });
+    } catch (error) {
+      const { description } = error;
+      if (description && description.includes("password")) {
+        res.status(401).send("Incorrect email or password");
+        return;
+      }
+      res.status(401).send(error.message);
     }
-
-    const loginRes = await serverClient.query(
-      q.Login(q.Match(q.Index("users_by_email"), email), {
-        password,
-      })
-    );
-
-    if (!loginRes.secret) {
-      throw new Error("No secret present in login query response.");
-    }
-
-    const userInfo = await serverClient.query(
-      q.Get(q.Match(q.Index("users_by_email"), email))
-    );
-
-    const token = await encryptSession(userInfo.data);
-
-    const cookieSerialized = serializeFaunaCookie(token);
-
-    res.setHeader("Set-Cookie", cookieSerialized);
-    res.status(200).end();
-  } catch (error) {
-    res.status(400).send("Login failed. Please try again.");
-  }
-}
+  });

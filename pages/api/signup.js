@@ -1,54 +1,20 @@
-import { query as q } from "faunadb";
-import { serverClient, serializeFaunaCookie } from "utils/fauna-auth";
+import { createUser } from "lib/user";
+import { setTokenCookie } from "lib/auth-cookies";
 import { encryptSession } from "lib/iron";
 
 export default async function signup(req, res) {
-  const { email, name, password } = await req.body;
-
   try {
-    if (!email || !password || !name) {
-      throw new Error("All fields must be completed.");
-    }
-    console.log(`email: ${email} trying to create user.`);
+    await createUser(req.body);
+    const userInfo = req.body && {
+      email: req.body.email || "",
+      name: req.body.name || "",
+    };
+    const token = await encryptSession(userInfo);
+    setTokenCookie(res, token);
 
-    let user;
-
-    try {
-      user = await serverClient.query(
-        q.Create(q.Collection("User"), {
-          credentials: { password },
-          data: { email, name },
-        })
-      );
-    } catch (error) {
-      console.error("Fauna create user error:", error);
-      throw new Error("User already exists.");
-    }
-
-    if (!user.ref) {
-      throw new Error("No ref present in create query response.");
-    }
-
-    const loginRes = await serverClient.query(
-      q.Login(user.ref, {
-        password,
-      })
-    );
-
-    if (!loginRes.secret) {
-      throw new Error("No secret present in login query response.");
-    }
-
-    const token = await encryptSession({
-      email,
-      name,
-    });
-
-    const cookieSerialized = serializeFaunaCookie(token);
-
-    res.setHeader("Set-Cookie", cookieSerialized);
-    res.status(200).end();
+    res.status(200).send({ done: true, user: userInfo });
   } catch (error) {
-    res.status(400).send(error.message);
+    console.error(error);
+    res.status(500).end(error.message);
   }
 }
