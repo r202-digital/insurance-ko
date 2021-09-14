@@ -5,15 +5,17 @@ import { Typography } from "@material-ui/core";
 
 // project imports
 import ProfileLayout from "./ProfileLayout";
-import MainCard from "components/cards/MainCard";
 import AdminList from "./admin/AdminList";
+import ProductsContext from "./admin/product-context";
 
 //-----------------------|| DEFAULT DASHBOARD ||-----------------------//
 
 const AdminLayout = () => {
   return (
     <ProfileLayout>
-      <AdminList />
+      <ProductsContext.Provider>
+        <AdminList />
+      </ProductsContext.Provider>
     </ProfileLayout>
   );
 };

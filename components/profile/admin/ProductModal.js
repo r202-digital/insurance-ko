@@ -8,11 +8,13 @@ import styled from "styled-components";
 import { StyledFormField } from "components/shared/form/fields";
 import { useField, useForm } from "react-final-form-hooks";
 import PromoForm from "./PromoForm";
-import PromoContext from "./context";
+import PromoContext from "./promo-context";
 import OptionsContext from "./options-context";
 import OptionsForm from "./OptionsForm";
 import { breakpoint } from "styled-components-breakpoint";
 import axios from "axios";
+import ProductsContext from "./product-context";
+import { customAlphabet } from "nanoid";
 
 const FormContainer = styled.div`
   text-align: initial;
@@ -56,6 +58,8 @@ function getModalStyle() {
 export default function ProductModal() {
   const promoContainer = PromoContext.useContainer();
   const optionsContainer = OptionsContext.useContainer();
+  const productsContainer = ProductsContext.useContainer();
+
   const desktop = useMediaQuery("(min-width:768px)");
   const useStyles = makeStyles((theme) => ({
     paper: {
@@ -81,12 +85,19 @@ export default function ProductModal() {
 
   const onSubmit = async (val) => {
     try {
-      await axios.post("/api/create-product", {
+      const nanoid = customAlphabet("1234567890", 10);
+      const newArr = [...productsContainer.contextProducts];
+      const item = {
+        uid: nanoid(),
         ...val,
         promos: promoContainer.contextPromo,
         planOptions: optionsContainer.contextOptions,
-      });
+      };
+      await axios.post("/api/create-product", item);
+      newArr.push(item);
+      productsContainer.setContextProducts(newArr);
       setFormError("");
+      handleClose();
     } catch (e) {
       setFormError(e.message);
     }

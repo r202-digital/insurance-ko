@@ -19,8 +19,9 @@ import { gridSpacing } from "lib/constant";
 import styled from "styled-components";
 import axios from "axios";
 import ProductModal from "./ProductModal";
-import PromoContext from "./context";
+import PromoContext from "./promo-context";
 import OptionsContext from "./options-context";
+import ProductsContext from "./product-context";
 
 // assets
 // import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
@@ -82,24 +83,17 @@ const StyledAccordion = styled(Accordion)`
 
 const AdminList = ({ isLoading }) => {
   const classes = useAdminListStyles();
-  const [productData, setProductData] = useState([]);
+  const productsContainer = ProductsContext.useContainer();
 
   useEffect(() => {
     async function fetchProducts() {
       let {
         data: { products },
       } = await axios.get("/api/get-product");
-      setProductData(products);
+      productsContainer.setContextProducts(products);
     }
     fetchProducts();
   }, []);
-
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    setModalOpen(!modalOpen);
-  };
 
   return (
     <React.Fragment>
@@ -125,7 +119,7 @@ const AdminList = ({ isLoading }) => {
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              {productData.map((product, index) => (
+              {productsContainer.contextProducts.map((product, index) => (
                 <StyledAccordion key={`accordionItem-${index}`}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
