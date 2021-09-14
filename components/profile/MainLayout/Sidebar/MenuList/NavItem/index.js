@@ -96,7 +96,7 @@ const NavItem = ({ item, level }) => {
       .split("/")
       .findIndex((id) => id === item.id);
     if (currentIndex > -1) {
-      console.log("SOMETHING: ", item.id);
+      // console.log("SOMETHING: ", item.id);
     }
     // eslint-disable-next-line
   }, []);

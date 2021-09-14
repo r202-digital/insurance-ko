@@ -31,14 +31,14 @@ const NavGroup = ({ item }) => {
   const { router } = Router;
 
   // menu list collapse & items
-  const items = item.children.map((menu) => {
+  const items = item.children.map((menu, index) => {
     switch (menu.type) {
       case "collapse":
         return <NavCollapse key={menu.id} menu={menu} level={1} />;
       case "item":
         return (
           <NavItem
-            key={menu.id}
+            key={`${menu.id}-${index}`}
             item={{
               ...menu,
               id: router.pathname === menu.url ? "default" : "",

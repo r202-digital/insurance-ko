@@ -7,12 +7,14 @@ export const StyledFormField = styled(FormField)`
     color: ${Colors.brand};
     font-weight: bold;
     margin: 0.5em 0;
+    font-size: ${({ small }) => (small ? "0.875em" : "1.125em")};
   }
 
   input,
   div {
     background-color: ${Colors.lightGray};
     border-radius: 20px;
+    font-weight: ${({ small }) => (small ? "normal" : "bold")};
   }
 
   input {

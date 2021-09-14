@@ -4,14 +4,8 @@ import React, { useState, useEffect } from "react";
 // material-ui
 import { makeStyles } from "@material-ui/styles";
 import {
-  Avatar,
-  Button,
-  CardActions,
   CardContent,
-  Divider,
   Grid,
-  Menu,
-  MenuItem,
   Typography,
   Accordion,
   AccordionSummary,
@@ -23,12 +17,13 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MainCard from "components/cards/MainCard";
 import { gridSpacing } from "lib/constant";
 import styled from "styled-components";
-import { getProducts } from "lib/product";
 import axios from "axios";
+import ProductModal from "./ProductModal";
+import PromoContext from "./context";
+import OptionsContext from "./options-context";
 
 // assets
 // import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
-// import MoreHorizOutlinedIcon from "@material-ui/icons/MoreHorizOutlined";
 // import KeyboardArrowUpOutlinedIcon from "@material-ui/icons/KeyboardArrowUpOutlined";
 // import KeyboardArrowDownOutlinedIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
 
@@ -45,10 +40,6 @@ export const useAdminListStyles = makeStyles((theme) => ({
     padding: "10px",
     paddingTop: 0,
     justifyContent: "center",
-  },
-  primaryLight: {
-    color: theme.palette.primary[200],
-    cursor: "pointer",
   },
   divider: {
     marginTop: "12px",
@@ -92,6 +83,7 @@ const StyledAccordion = styled(Accordion)`
 const AdminList = ({ isLoading }) => {
   const classes = useAdminListStyles();
   const [productData, setProductData] = useState([]);
+
   useEffect(() => {
     async function fetchProducts() {
       let {
@@ -99,9 +91,15 @@ const AdminList = ({ isLoading }) => {
       } = await axios.get("/api/get-product");
       setProductData(products);
     }
-
     fetchProducts();
   }, []);
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    setModalOpen(!modalOpen);
+  };
 
   return (
     <React.Fragment>
@@ -117,11 +115,18 @@ const AdminList = ({ isLoading }) => {
                 <Grid item>
                   <Typography variant="h4">Products</Typography>
                 </Grid>
+                <Grid item>
+                  <OptionsContext.Provider>
+                    <PromoContext.Provider>
+                      <ProductModal />
+                    </PromoContext.Provider>
+                  </OptionsContext.Provider>
+                </Grid>
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              {productData.map((product) => (
-                <StyledAccordion>
+              {productData.map((product, index) => (
+                <StyledAccordion key={`accordionItem-${index}`}>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"

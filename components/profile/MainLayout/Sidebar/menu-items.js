@@ -22,7 +22,7 @@ const dashboard = {
       breadcrumbs: false,
     },
     {
-      title: "Admin",
+      title: "Products",
       type: "item",
       url: "/profile/admin",
       icon: icons["IconDeviceAnalytics"],

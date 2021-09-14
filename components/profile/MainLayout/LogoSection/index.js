@@ -18,16 +18,13 @@ const Logo = styled.img`
 
 const LogoSection = () => {
   return (
-    <ButtonBase disableRipple component={(props) => <a {...props} />} to={"/"}>
-      {/* <Logo /> */}
-      <Link href="/">
-        <Anchor>
-          <LogoContainer>
-            <Logo src="/logo/logo.svg" alt="InsuranceKo" />
-          </LogoContainer>
-        </Anchor>
-      </Link>
-    </ButtonBase>
+    <Link href="/">
+      <Anchor>
+        <LogoContainer>
+          <Logo src="/logo/logo.svg" alt="InsuranceKo" />
+        </LogoContainer>
+      </Anchor>
+    </Link>
   );
 };
 
