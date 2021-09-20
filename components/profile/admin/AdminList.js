@@ -22,6 +22,9 @@ import ProductModal from "./ProductModal";
 import PromoContext from "./promo-context";
 import OptionsContext from "./options-context";
 import ProductsContext from "./product-context";
+import { breakpoint } from "styled-components-breakpoint";
+import { Button } from "grommet";
+import { FaTrash } from "react-icons/fa";
 
 // assets
 // import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
@@ -70,16 +73,27 @@ export const useAdminListStyles = makeStyles((theme) => ({
   },
 }));
 
-const StyledAccordion = styled(Accordion)`
-  background-color: #f7f7f7;
-
-  &:first-of-type,
-  &:last-of-type {
-    border-radius: 0;
-  }
+const ProductList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
 `;
 
-//-----------------------|| DASHBOARD DEFAULT - POPULAR CARD ||-----------------------//
+const ProductListItem = styled.li`
+  border-bottom: 1px solid #efefef;
+  padding: 1em 0;
+
+  &:first-of-type {
+    border-top: 1px solid #efefef;
+  }
+
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  align-items: center;
+`;
 
 const AdminList = ({ isLoading }) => {
   const classes = useAdminListStyles();
@@ -119,26 +133,20 @@ const AdminList = ({ isLoading }) => {
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              {productsContainer.contextProducts.map((product, index) => (
-                <StyledAccordion key={`accordionItem-${index}`}>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography className={classes.heading}>
-                      {product.name}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Suspendisse malesuada lacus ex, sit amet blandit leo
-                      lobortis eget.
-                    </Typography>
-                  </AccordionDetails>
-                </StyledAccordion>
-              ))}
+              <ProductList>
+                {productsContainer.contextProducts.map((product, index) => {
+                  console.log(product);
+                  return (
+                    <ProductListItem key={`product-${index}`}>
+                      <input type="checkbox" />
+                      <Typography className={classes.heading}>
+                        {product.name}
+                      </Typography>
+                      <Button icon={<FaTrash />} />
+                    </ProductListItem>
+                  );
+                })}
+              </ProductList>
             </Grid>
           </Grid>
         </CardContent>
