@@ -139,9 +139,15 @@ const AdminList = ({ isLoading }) => {
                   return (
                     <ProductListItem key={`product-${index}`}>
                       <input type="checkbox" />
-                      <Typography className={classes.heading}>
-                        {product.name}
-                      </Typography>
+                      <div>
+                        <div>
+                          <Typography>{product.name}</Typography>
+                          <Typography>
+                            {product.planOptions?.length || ""} Plan Options
+                          </Typography>
+                        </div>
+                        <Typography>Code: {product.uid}</Typography>
+                      </div>
                       <Button icon={<FaTrash />} />
                     </ProductListItem>
                   );

@@ -11,6 +11,8 @@ import { SocialIcons } from "components/shared/icons";
 import MapComponent from "components/map";
 import ContactUsForm from "components/forms/contact-us";
 import { Colors } from "components/shared/colors";
+import MetadataContext from "components/shared/context/metadata";
+import { extractText } from "lib/utils";
 
 const ContactBg = styled(SectionContainer)`
   flex: 1;
@@ -46,6 +48,7 @@ const ContactBubble = styled.div`
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    padding: 5rem;
   `}
 `;
 
@@ -70,6 +73,7 @@ const ParagraphHeading = styled.h4`
   margin: 0;
   margin-bottom: 1rem;
   padding: 0;
+  text-transform: uppercase;
 `;
 
 const MapContainer = styled.div`
@@ -81,17 +85,45 @@ const MapContainer = styled.div`
   `}
 `;
 
+const FormSection = styled.div`
+  ${breakpoint("lg")`
+    max-width: 60%;
+  `}
+`;
+
+const MapBottom = styled.div`
+  ${breakpoint("lg")`
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  `}
+`;
+
+const ContactDetails = styled.div`
+  ${breakpoint("lg")`
+    max-width: 50%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  `}
+`;
+
 const ContactForm = () => {
+  const metadataContainer = MetadataContext.useContainer();
+  const { contextMetadata } = metadataContainer;
+  const { contact_number, email, address } = contextMetadata;
   return (
     <ContactGradient>
       <ContactBg>
         <ContactBubble>
-          <div>
+          <FormSection>
             <SectionHeading as="h3">A nice section heading</SectionHeading>
             <ShowcaseText>Goes here</ShowcaseText>
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed</p>
             <ContactUsForm />
-          </div>
+          </FormSection>
           <MapSection>
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed</p>
             <MapComponent
@@ -100,15 +132,22 @@ const ContactForm = () => {
               containerElement={<MapContainer />}
               mapElement={<div style={{ height: `100%` }} />}
             />
-            <ParagraphHeading>Contact Us</ParagraphHeading>
-            <List>
-              <li>+63 921 123 434</li>
-              <li>insuranceko@gmail.com</li>
-              <li>Something Street, Manila</li>
-              <li>Philippines 1000</li>
-            </List>
-            <ParagraphHeading>Follow our socials</ParagraphHeading>
-            <SocialIcons color={Colors.brandLight} />
+            <MapBottom>
+              <ContactDetails>
+                <ParagraphHeading>Contact Us</ParagraphHeading>
+                <List>
+                  <li>{extractText(contact_number)}</li>
+                  <li>{extractText(email)}</li>
+                  {address.map((item) => (
+                    <li>{item.text}</li>
+                  ))}
+                </List>
+              </ContactDetails>
+              <div>
+                <ParagraphHeading>Follow our socials</ParagraphHeading>
+                <SocialIcons color={Colors.brandLight} />
+              </div>
+            </MapBottom>
           </MapSection>
         </ContactBubble>
       </ContactBg>
