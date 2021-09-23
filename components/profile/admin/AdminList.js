@@ -135,7 +135,7 @@ const AdminList = ({ isLoading }) => {
             <Grid item xs={12}>
               <ProductList>
                 {productsContainer.contextProducts.map((product, index) => {
-                  console.log(product);
+                  // console.log(product);
                   return (
                     <ProductListItem key={`product-${index}`}>
                       <input type="checkbox" />
@@ -147,6 +147,9 @@ const AdminList = ({ isLoading }) => {
                           </Typography>
                         </div>
                         <Typography>Code: {product.uid}</Typography>
+                        <Typography>
+                          Type: {product.type.map((item) => `${item.value} `)}
+                        </Typography>
                       </div>
                       <Button icon={<FaTrash />} />
                     </ProductListItem>

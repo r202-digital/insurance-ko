@@ -38,6 +38,7 @@ import User1 from "public/icons/user-round.svg";
 import { customization } from "components/profile/customization";
 import { useSWRConfig } from "swr";
 import Router from "next/router";
+import { useUser } from "lib/hooks";
 
 // style const
 const useStyles = makeStyles((theme) => ({
@@ -121,7 +122,8 @@ const useStyles = makeStyles((theme) => ({
 const ProfileSection = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const { mutate } = useSWRConfig();
+  // const { mutate } = useSWRConfig();
+  const { user } = useUser();
 
   const [sdm, setSdm] = React.useState(true);
   const [notification, setNotification] = React.useState(false);
@@ -212,20 +214,20 @@ const ProfileSection = () => {
                   <CardContent className={classes.cardContent}>
                     <Grid container direction="column" spacing={0}>
                       <Grid item className={classes.flex}>
-                        <Typography variant="h4">Good Morning,</Typography>
+                        <Typography variant="h4">Hello,</Typography>
                         <Typography
                           component="span"
                           variant="h4"
                           className={classes.name}
                         >
-                          John
+                          {user?.name || ""}
                         </Typography>
                       </Grid>
-                      <Grid item>
+                      {/* <Grid item>
                         <Typography variant="subtitle2">
                           Project Admin
                         </Typography>
-                      </Grid>
+                      </Grid> */}
                     </Grid>
                     <PerfectScrollbar className={classes.ScrollHeight}>
                       {/* <Divider /> */}

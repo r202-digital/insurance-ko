@@ -15,6 +15,7 @@ import { breakpoint } from "styled-components-breakpoint";
 import axios from "axios";
 import ProductsContext from "./product-context";
 import { customAlphabet } from "nanoid";
+import CreateSelect from "components/shared/form/creatable-select";
 
 const FormContainer = styled.div`
   text-align: initial;
@@ -138,6 +139,7 @@ export default function ProductModal() {
   const name = useField("name", form);
   const price = useField("price", form);
   const tag = useField("tag", form);
+  const type = useField("type", form);
 
   return (
     <div>
@@ -181,6 +183,14 @@ export default function ProductModal() {
               <ErrorContainer>
                 {tag.meta.touched && tag.meta.error && (
                   <Error>{tag.meta.error}</Error>
+                )}
+              </ErrorContainer>
+              <FormField small label="Type" name="type">
+                <CreateSelect {...type.input} />
+              </FormField>
+              <ErrorContainer>
+                {type.meta.touched && type.meta.error && (
+                  <Error>{type.meta.error}</Error>
                 )}
               </ErrorContainer>
             </FormContainer>
