@@ -25,6 +25,7 @@ import ProductsContext from "./product-context";
 import { breakpoint } from "styled-components-breakpoint";
 import { Button } from "grommet";
 import { FaTrash } from "react-icons/fa";
+import Link from "next/link";
 
 // assets
 // import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
@@ -95,6 +96,22 @@ const ProductListItem = styled.li`
   align-items: center;
 `;
 
+const ProductContent = styled.div`
+  ${breakpoint("lg")`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    align-items: center;
+  `}
+`;
+
+const ProductLink = styled.a`
+  color: inherit;
+  text-decoration: inherit;
+`;
+
 const AdminList = ({ isLoading }) => {
   const classes = useAdminListStyles();
   const productsContainer = ProductsContext.useContainer();
@@ -139,18 +156,29 @@ const AdminList = ({ isLoading }) => {
                   return (
                     <ProductListItem key={`product-${index}`}>
                       <input type="checkbox" />
-                      <div>
+                      <ProductContent>
                         <div>
-                          <Typography>{product.name}</Typography>
+                          <Link href={`/profile/product/${product.uid}`}>
+                            <ProductLink
+                              href={`/profile/product/${product.uid}`}
+                            >
+                              <Typography>
+                                <strong>{product.name}</strong>
+                              </Typography>
+                            </ProductLink>
+                          </Link>
                           <Typography>
                             {product.planOptions?.length || ""} Plan Options
                           </Typography>
                         </div>
-                        <Typography>Code: {product.uid}</Typography>
                         <Typography>
-                          Type: {product.type.map((item) => `${item.value} `)}
+                          <strong>Code:</strong> {product.uid}
                         </Typography>
-                      </div>
+                        <Typography>
+                          <strong>Type:</strong>{" "}
+                          {product.type.map((item) => `${item.value} `)}
+                        </Typography>
+                      </ProductContent>
                       <Button icon={<FaTrash />} />
                     </ProductListItem>
                   );

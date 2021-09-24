@@ -5,7 +5,7 @@ import { withAuthSync } from "utils/auth";
 import DefaultLayout from "layouts";
 import { Client } from "utils/prismicHelpers";
 import MetadataContext from "components/shared/context/metadata";
-import AdminLayout from "components/profile/AdminLayout";
+import AdminLayout from "components/profile/admin/AdminLayout";
 import { useUser } from "lib/hooks";
 
 const AdminProfile = ({ metadata }) => {
@@ -14,7 +14,7 @@ const AdminProfile = ({ metadata }) => {
 
   // console.log(user);
   useEffect(() => {
-    Router.prefetch("/profile/admin");
+    Router.prefetch("/profile/products");
     metadataContext.setContextMetadata(metadata.data);
   }, []);
 
