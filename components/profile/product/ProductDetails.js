@@ -2,16 +2,7 @@ import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 
 // material-ui
-import { makeStyles } from "@material-ui/styles";
-import {
-  CardContent,
-  Grid,
-  Typography,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { CardContent, Grid, Typography } from "@material-ui/core";
 
 // project imports
 import MainCard from "components/cards/MainCard";
@@ -19,135 +10,155 @@ import { gridSpacing } from "lib/constant";
 import styled from "styled-components";
 import axios from "axios";
 import { breakpoint } from "styled-components-breakpoint";
-import { Button } from "grommet";
-import { FaTrash } from "react-icons/fa";
 import ProfileLayout from "../ProfileLayout";
+import PromoForm from "../admin/PromoForm";
+import OptionsForm from "../admin/OptionsForm";
+import CreateSelect from "components/shared/form/creatable-select";
+import { Button, Form, TextInput } from "grommet";
+import { StyledFormField } from "components/shared/form/fields";
+import { useField, useForm } from "react-final-form-hooks";
 
-// assets
-// import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
-// import KeyboardArrowUpOutlinedIcon from "@material-ui/icons/KeyboardArrowUpOutlined";
-// import KeyboardArrowDownOutlinedIcon from "@material-ui/icons/KeyboardArrowDownOutlined";
-
-// style constant
-export const useAdminListStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-  cardAction: {
-    padding: "10px",
-    paddingTop: 0,
-    justifyContent: "center",
-  },
-  divider: {
-    marginTop: "12px",
-    marginBottom: "12px",
-  },
-  avatarSuccess: {
-    width: "16px",
-    height: "16px",
-    borderRadius: "5px",
-    backgroundColor: theme.palette.success.light,
-    color: theme.palette.success.dark,
-    marginLeft: "15px",
-  },
-  successDark: {
-    color: theme.palette.success.dark,
-  },
-  avatarError: {
-    width: "16px",
-    height: "16px",
-    borderRadius: "5px",
-    backgroundColor: theme.palette.orange.light,
-    color: theme.palette.orange.dark,
-    marginLeft: "15px",
-  },
-  errorDark: {
-    color: theme.palette.orange.dark,
-  },
-}));
-
-const ProductList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
+const FormContainer = styled.div`
+  text-align: initial;
 `;
 
-const ProductListItem = styled.li`
-  border-bottom: 1px solid #efefef;
-  padding: 1em 0;
-
-  &:first-of-type {
-    border-top: 1px solid #efefef;
-  }
-
-  display: grid;
-  grid-template-columns: 40px 1fr 40px;
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  align-items: center;
+const FormField = styled(StyledFormField)`
+  margin-bottom: 0;
 `;
 
-const ProductContent = styled.div`
+const SubmitButton = styled(Button)`
+  margin-top: 2em;
+
+  width: 100%;
+
   ${breakpoint("lg")`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    align-items: center;
-  `}
+        width: auto;
+    `}
 `;
 
+const ErrorContainer = styled.div`
+  text-align: initial;
+  margin-bottom: 1em;
+`;
+
+const Error = styled.span`
+  color: red;
+  font-size: 0.75em;
+`;
 const ProductDetails = ({ data }) => {
-  const { name } = data;
+  // console.log(data);
+  const onSubmit = (val) => {
+    console.log(val);
+  };
+
+  const { form, handleSubmit, values, pristine, submitting } = useForm({
+    onSubmit,
+    initialValues: {
+      name: data.name,
+      price: data.price,
+      tag: data.tag,
+      type: data.type,
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!values.name) {
+        errors.name = "Required";
+      }
+
+      if (!values.price) {
+        errors.price = "Required";
+      }
+
+      if (!values.tag) {
+        errors.tag = "Required";
+      }
+
+      return errors;
+    },
+  });
+
+  const name = useField("name", form);
+  const price = useField("price", form);
+  const tag = useField("tag", form);
+  const type = useField("type", form);
+
   return (
     <ProfileLayout>
       <Grid item xs={12}>
         <Grid container spacing={gridSpacing}>
           <Grid item xs={12} md={8}>
-            <MainCard content={false}>
-              <CardContent>
-                <Grid container spacing={gridSpacing}>
-                  <Grid item xs={12}>
-                    <Grid
-                      container
-                      alignContent="center"
-                      justifyContent="space-between"
-                    >
-                      <Grid item>
-                        <Typography variant="h4">{name}</Typography>
+            <Grid container spacing={gridSpacing}>
+              <Grid item xs={12}>
+                <MainCard content={false}>
+                  <CardContent>
+                    <Grid container spacing={gridSpacing}>
+                      <Grid item xs={12}>
+                        <Form onSubmit={handleSubmit}>
+                          <FormContainer>
+                            <FormField small label="Name" name="name">
+                              <TextInput
+                                {...name.input}
+                                placeholder="Sample Product"
+                              />
+                            </FormField>
+                            <ErrorContainer>
+                              {name.meta.touched && name.meta.error && (
+                                <Error>{name.meta.error}</Error>
+                              )}
+                            </ErrorContainer>
+
+                            <FormField small label="Price" name="price">
+                              <TextInput
+                                {...price.input}
+                                placeholder="320.99"
+                              />
+                            </FormField>
+                            <ErrorContainer>
+                              {price.meta.touched && price.meta.error && (
+                                <Error>{price.meta.error}</Error>
+                              )}
+                            </ErrorContainer>
+                            <FormField small label="Tag" name="tag">
+                              <TextInput
+                                {...tag.input}
+                                placeholder="$3m coverage"
+                              />
+                            </FormField>
+                            <ErrorContainer>
+                              {tag.meta.touched && tag.meta.error && (
+                                <Error>{tag.meta.error}</Error>
+                              )}
+                            </ErrorContainer>
+                            <FormField small label="Type" name="type">
+                              <CreateSelect {...type.input} />
+                            </FormField>
+                            <ErrorContainer>
+                              {type.meta.touched && type.meta.error && (
+                                <Error>{type.meta.error}</Error>
+                              )}
+                            </ErrorContainer>
+                          </FormContainer>
+                        </Form>
                       </Grid>
                     </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    Sample
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </MainCard>
+                  </CardContent>
+                </MainCard>
+              </Grid>
+              <Grid item xs={12}>
+                <MainCard content={false}>
+                  <CardContent>
+                    <OptionsForm />
+                  </CardContent>
+                </MainCard>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12} md={4}>
             <MainCard content={false}>
               <CardContent>
                 <Grid container spacing={gridSpacing}>
                   <Grid item xs={12}>
-                    <Grid
-                      container
-                      alignContent="center"
-                      justifyContent="space-between"
-                    >
-                      <Grid item>
-                        <Typography variant="h4">Products</Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    Sample
+                    <PromoForm />
                   </Grid>
                 </Grid>
               </CardContent>

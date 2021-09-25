@@ -8,6 +8,8 @@ import MetadataContext from "components/shared/context/metadata";
 import { useUser } from "lib/hooks";
 import { getProduct, getProducts } from "lib/product";
 import ProductDetails from "components/profile/product/ProductDetails";
+import PromoContext from "components/profile/admin/promo-context";
+import OptionsContext from "components/profile/admin/options-context";
 
 const ProductDetailsPage = ({ metadata, data }) => {
   const metadataContext = MetadataContext.useContainer();
@@ -17,7 +19,13 @@ const ProductDetailsPage = ({ metadata, data }) => {
     metadataContext.setContextMetadata(metadata.data);
   }, []);
 
-  return <ProductDetails data={data} />;
+  return (
+    <PromoContext.Provider initialState={data.promos}>
+      <OptionsContext.Provider initialState={data.planOptions}>
+        <ProductDetails data={data} />;
+      </OptionsContext.Provider>
+    </PromoContext.Provider>
+  );
 };
 
 export async function getStaticProps({

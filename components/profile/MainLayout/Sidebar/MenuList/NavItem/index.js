@@ -109,9 +109,9 @@ const NavItem = ({ item, level }) => {
         className={level > 1 ? classes.listItemNoBack : classes.listItem}
         sx={{ borderRadius: customization.borderRadius + "px" }}
         selected={customization.isOpen.findIndex((id) => id === item.id) > -1}
-        onClick={() => {
-          console.log("SOMETHING LIST: ", item.id);
-        }}
+        // onClick={() => {
+        //   console.log("SOMETHING LIST: ", item.id);
+        // }}
         target={itemTarget}
         style={{ paddingLeft: level * 23 + "px" }}
       >

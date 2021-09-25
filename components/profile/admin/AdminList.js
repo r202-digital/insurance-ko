@@ -176,7 +176,7 @@ const AdminList = ({ isLoading }) => {
                         </Typography>
                         <Typography>
                           <strong>Type:</strong>{" "}
-                          {product.type.map((item) => `${item.value} `)}
+                          {product.type && product.type.value}
                         </Typography>
                       </ProductContent>
                       <Button icon={<FaTrash />} />

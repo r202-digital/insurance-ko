@@ -26,7 +26,6 @@ const CreateSelect = (props) => {
     <CreatableSelect
       {...props}
       isClearable
-      isMulti
       styles={colourStyles}
       options={[
         { value: "For Myself", label: "For Myself" },
