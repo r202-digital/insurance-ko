@@ -138,9 +138,9 @@ const ContactForm = () => {
                 <List>
                   <li>{extractText(contact_number)}</li>
                   <li>{extractText(email)}</li>
-                  {address.map((item) => (
-                    <li>{item.text}</li>
-                  ))}
+                  {address && address.length
+                    ? address.map((item) => <li>{item.text}</li>)
+                    : ""}
                 </List>
               </ContactDetails>
               <div>
