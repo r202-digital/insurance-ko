@@ -94,13 +94,17 @@ export default function ProductModal() {
         promos: promoContainer.contextPromo,
         planOptions: optionsContainer.contextOptions,
       };
+
+      if (!optionsContainer.contextOptions.length) {
+        throw "Please create plan options";
+      }
       await axios.post("/api/create-product", item);
       newArr.push(item);
       productsContainer.setContextProducts(newArr);
       setFormError("");
       handleClose();
     } catch (e) {
-      setFormError(e.message);
+      setFormError(e.message || e);
     }
   };
 
@@ -108,6 +112,7 @@ export default function ProductModal() {
     onSubmit,
     validate: (values) => {
       const errors = {};
+
       if (!values.name) {
         errors.name = "Required";
       }

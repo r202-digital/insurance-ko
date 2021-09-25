@@ -114,6 +114,10 @@ const OptionsForm = ({ small }) => {
         errors.name = "Required";
       }
 
+      if (!values.price) {
+        errors.price = "Required";
+      }
+
       if (!values.description) {
         errors.description = "Required";
       }
@@ -123,6 +127,7 @@ const OptionsForm = ({ small }) => {
   });
 
   const name = useField("name", form);
+  const price = useField("price", form);
   const description = useField("description", form);
 
   return (
@@ -151,6 +156,14 @@ const OptionsForm = ({ small }) => {
           <ErrorContainer>
             {name.meta.touched && name.meta.error && (
               <Error>{name.meta.error}</Error>
+            )}
+          </ErrorContainer>
+          <FormField small label="Plan Option Price" name="price">
+            <StyledTextArea {...price.input} placeholder="123.50" />
+          </FormField>
+          <ErrorContainer>
+            {price.meta.touched && price.meta.error && (
+              <Error>{price.meta.error}</Error>
             )}
           </ErrorContainer>
           <FormField small label="Plan Option Description" name="description">
