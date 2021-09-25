@@ -77,6 +77,21 @@ const RemoveButton = styled.button`
   }
 `;
 
+const Heading = styled.h3`
+  ${({ small }) =>
+    small
+      ? `
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #F0F0F0;
+    font-weight: normal;
+    font-size: 1em;
+  `
+      : ""}
+`;
+
 const dot = (color = "#ccc") => ({
   alignItems: "center",
   display: "flex",
@@ -123,7 +138,7 @@ const parseValue = (value) => {
   };
 };
 
-const PromoForm = () => {
+const PromoForm = ({ small }) => {
   const promoContainer = PromoContext.useContainer();
 
   const onSubmit = (vals) => {
@@ -160,7 +175,7 @@ const PromoForm = () => {
 
   return (
     <div>
-      <h3>Promos</h3>
+      <Heading small={small}>Promos</Heading>
       <PromoList>
         {promoContainer.contextPromo.map((item, index) => (
           <PromoPill color={item.color} key={`promo-${index}`}>

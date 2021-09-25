@@ -76,7 +76,21 @@ const StyledTextArea = styled(TextArea)`
   font-weight: normal;
 `;
 
-const OptionsForm = () => {
+const Heading = styled.h3`
+  ${({ small }) =>
+    small
+      ? `
+    margin-top: 0;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #F0F0F0;
+    font-weight: normal;
+    font-size: 1em;
+  `
+      : ""}
+`;
+
+const OptionsForm = ({ small }) => {
   const optionsContainer = OptionsContext.useContainer();
 
   const onSubmit = (vals) => {
@@ -113,7 +127,7 @@ const OptionsForm = () => {
 
   return (
     <div>
-      <h3>Plan Options</h3>
+      <Heading small={small}>Plan Options</Heading>
       <OptionsList>
         {optionsContainer.contextOptions.map((item, index) => (
           <OptionsPill key={`option-${index}`}>

@@ -17,6 +17,10 @@ import CreateSelect from "components/shared/form/creatable-select";
 import { Button, Form, TextInput } from "grommet";
 import { StyledFormField } from "components/shared/form/fields";
 import { useField, useForm } from "react-final-form-hooks";
+import ProductDetailContext from "./product-detail-context";
+import { Colors } from "components/shared/colors";
+import PromoContext from "../admin/promo-context";
+import OptionsContext from "../admin/options-context";
 
 const FormContainer = styled.div`
   text-align: initial;
@@ -27,13 +31,9 @@ const FormField = styled(StyledFormField)`
 `;
 
 const SubmitButton = styled(Button)`
-  margin-top: 2em;
-
-  width: 100%;
-
-  ${breakpoint("lg")`
-        width: auto;
-    `}
+  padding: 0.75em 2.5em;
+  border-radius: 2em;
+  background-color: ${Colors.yellowGreen};
 `;
 
 const ErrorContainer = styled.div`
@@ -45,19 +45,53 @@ const Error = styled.span`
   color: red;
   font-size: 0.75em;
 `;
-const ProductDetails = ({ data }) => {
-  // console.log(data);
-  const onSubmit = (val) => {
-    console.log(val);
+
+const ProductHeading = styled(CardContent)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 0.5em;
+  padding-right: 0.5em;
+
+  &:last-child {
+    padding-bottom: 0.5em;
+  }
+`;
+
+const ProductName = styled(Typography)`
+  span {
+    color: ${Colors.yellowGreen};
+  }
+`;
+
+const ProductDetails = () => {
+  const productDetailContainer = ProductDetailContext.useContainer();
+  const promoContainer = PromoContext.useContainer();
+  const optionContainer = OptionsContext.useContainer();
+  const { contextProductDetail, setContextProductDetail } =
+    productDetailContainer;
+  const { contextPromo } = promoContainer;
+  const { contextOptions } = optionContainer;
+  const onSubmit = async (val) => {
+    const obj = {
+      ...contextProductDetail,
+      ...val,
+      promos: contextPromo,
+      planOptions: contextOptions,
+    };
+    setContextProductDetail(obj);
+
+    const updateProd = await axios.post("/api/update-product", obj);
   };
 
   const { form, handleSubmit, values, pristine, submitting } = useForm({
     onSubmit,
     initialValues: {
-      name: data.name,
-      price: data.price,
-      tag: data.tag,
-      type: data.type,
+      name: contextProductDetail.name,
+      price: contextProductDetail.price,
+      tag: contextProductDetail.tag,
+      type: contextProductDetail.type,
     },
     validate: (values) => {
       const errors = {};
@@ -86,6 +120,27 @@ const ProductDetails = ({ data }) => {
     <ProfileLayout>
       <Grid item xs={12}>
         <Grid container spacing={gridSpacing}>
+          <Grid item xs={12}>
+            <MainCard content={false}>
+              <ProductHeading>
+                <ProductName>
+                  Products / <span>{contextProductDetail.name}</span>
+                </ProductName>
+                <div>
+                  <SubmitButton
+                    primary
+                    disabled={submitting}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      form.submit();
+                    }}
+                  >
+                    <Typography>Save Changes</Typography>
+                  </SubmitButton>
+                </div>
+              </ProductHeading>
+            </MainCard>
+          </Grid>
           <Grid item xs={12} md={8}>
             <Grid container spacing={gridSpacing}>
               <Grid item xs={12}>
@@ -129,14 +184,6 @@ const ProductDetails = ({ data }) => {
                                 <Error>{tag.meta.error}</Error>
                               )}
                             </ErrorContainer>
-                            <FormField small label="Type" name="type">
-                              <CreateSelect {...type.input} />
-                            </FormField>
-                            <ErrorContainer>
-                              {type.meta.touched && type.meta.error && (
-                                <Error>{type.meta.error}</Error>
-                              )}
-                            </ErrorContainer>
                           </FormContainer>
                         </Form>
                       </Grid>
@@ -147,7 +194,7 @@ const ProductDetails = ({ data }) => {
               <Grid item xs={12}>
                 <MainCard content={false}>
                   <CardContent>
-                    <OptionsForm />
+                    <OptionsForm small />
                   </CardContent>
                 </MainCard>
               </Grid>
@@ -158,7 +205,15 @@ const ProductDetails = ({ data }) => {
               <CardContent>
                 <Grid container spacing={gridSpacing}>
                   <Grid item xs={12}>
-                    <PromoForm />
+                    <FormField small label="Type" name="type">
+                      <CreateSelect {...type.input} />
+                    </FormField>
+                    <ErrorContainer>
+                      {type.meta.touched && type.meta.error && (
+                        <Error>{type.meta.error}</Error>
+                      )}
+                    </ErrorContainer>
+                    <PromoForm small />
                   </Grid>
                 </Grid>
               </CardContent>
