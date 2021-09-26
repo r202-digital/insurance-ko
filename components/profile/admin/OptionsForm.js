@@ -159,7 +159,7 @@ const OptionsForm = ({ small }) => {
             )}
           </ErrorContainer>
           <FormField small label="Plan Option Price" name="price">
-            <StyledTextArea {...price.input} placeholder="123.50" />
+            <TextInput {...price.input} placeholder="123.50" />
           </FormField>
           <ErrorContainer>
             {price.meta.touched && price.meta.error && (

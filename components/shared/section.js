@@ -3,6 +3,7 @@ import styled from "styled-components";
 import theme from "lib/theme";
 import { breakpoint } from "styled-components-breakpoint";
 import { Colors } from "./colors";
+import { Typography } from "@material-ui/core";
 
 export const CarouselContainer = styled(Box)`
   height: 13.6875em;
@@ -116,4 +117,9 @@ export const SecondaryYellowGreenButton = styled((props) => (
 ))`
   border-color: ${Colors.yellowGreen};
   color: ${Colors.yellowGreen};
+`;
+
+export const ModalHeading = styled(Typography)`
+  margin-top: ${({ hasMarginTop }) => (hasMarginTop ? "1em" : "")};
+  margin-bottom: 1em;
 `;

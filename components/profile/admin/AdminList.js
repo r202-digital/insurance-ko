@@ -26,6 +26,7 @@ import { breakpoint } from "styled-components-breakpoint";
 import { Button } from "grommet";
 import { FaTrash } from "react-icons/fa";
 import Link from "next/link";
+import DeleteModal from "./DeleteModal";
 
 // assets
 // import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
@@ -137,7 +138,7 @@ const AdminList = ({ isLoading }) => {
                 alignContent="center"
                 justifyContent="space-between"
               >
-                <Grid item>
+                <Grid display="flex" alignItems="center" item>
                   <Typography variant="h4">Products</Typography>
                 </Grid>
                 <Grid item>
@@ -168,7 +169,10 @@ const AdminList = ({ isLoading }) => {
                             </ProductLink>
                           </Link>
                           <Typography>
-                            {product.planOptions?.length || ""} Plan Options
+                            {product.planOptions?.length || ""} Plan Option
+                            {product.planOptions?.length &&
+                              product.planOptions?.length > 1 &&
+                              "s"}
                           </Typography>
                         </div>
                         <Typography>
@@ -179,7 +183,7 @@ const AdminList = ({ isLoading }) => {
                           {product.type && product.type.value}
                         </Typography>
                       </ProductContent>
-                      <Button icon={<FaTrash />} />
+                      <DeleteModal product={product} index={index} />
                     </ProductListItem>
                   );
                 })}

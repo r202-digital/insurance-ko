@@ -16,6 +16,7 @@ import axios from "axios";
 import ProductsContext from "./product-context";
 import { customAlphabet } from "nanoid";
 import CreateSelect from "components/shared/form/creatable-select";
+import { ModalHeading } from "components/shared/section";
 
 const FormContainer = styled.div`
   text-align: initial;
@@ -55,6 +56,16 @@ function getModalStyle() {
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
+
+const AddButton = styled(Button)`
+  transition: 0.3s;
+  border-radius: 50%;
+  padding: 0.5em;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+`;
 
 export default function ProductModal() {
   const promoContainer = PromoContext.useContainer();
@@ -148,12 +159,9 @@ export default function ProductModal() {
 
   return (
     <div>
-      <AddIcon
-        fontSize="small"
-        className={classes.primaryLight}
-        aria-controls="menu-popular-card"
-        aria-haspopup="true"
+      <AddButton
         onClick={handleOpen}
+        icon={<AddIcon fontSize="small" className={classes.primaryLight} />}
       />
       <Modal
         open={open}
@@ -162,7 +170,9 @@ export default function ProductModal() {
         aria-describedby="simple-modal-description"
       >
         <div style={modalStyle} className={classes.paper}>
-          <h2 id="simple-modal-title">Create product</h2>
+          <ModalHeading variant="h3" hasMarginTop>
+            Create Product
+          </ModalHeading>
           <Form onSubmit={handleSubmit}>
             <FormContainer>
               <FormField small label="Name" name="name">
