@@ -1,18 +1,20 @@
-import { logout } from "utils/auth";
+import React, { useEffect } from "react";
+import { Container } from "components/shared/container";
 import {
   Anchor,
   Box,
+  Button,
   Header as GrommetHeader,
-  Nav,
   Menu,
+  Nav,
   ResponsiveContext,
 } from "grommet";
-import { GrMenu } from "react-icons/gr";
 import Link from "next/link";
-import styled from "styled-components";
-import { Container } from "components/shared/container";
-import { useSWRConfig } from "swr";
 import Router from "next/router";
+import { FiSearch, FiShoppingCart, FiUser } from "react-icons/fi";
+import { GrMenu } from "react-icons/gr";
+import styled from "styled-components";
+import { Colors } from "./shared/colors";
 
 const LogoContainer = styled(Box)`
   height: 56px;
@@ -38,18 +40,77 @@ const HeaderContainer = styled(Container)`
   align-items: center;
 `;
 
-const Header = ({ hasUser }) => {
-  const { mutate } = useSWRConfig();
+const Flex = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const NavLink = styled(Anchor)`
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 0.875rem;
+`;
+
+const StyledNav = styled(Nav)`
+  margin-left: 2rem;
+`;
+
+const RightNav = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 0.5em;
+  grid-row-gap: 0px;
+`;
+
+const NavCta = styled(Button)`
+  padding: 0.5rem 1.5rem;
+  color: ${Colors.lightYellow};
+  border-radius: 1.5rem;
+  font-size: 0.875rem;
+`;
+
+const Header = ({ hasUser, user }) => {
+  useEffect(() => {
+    Router.prefetch("/admin");
+    Router.prefetch("/profile");
+    Router.prefetch("/login");
+  }, []);
+
   return (
     <StyledGrommetHeader pad="small">
       <HeaderContainer>
-        <Link href="/">
-          <Anchor>
-            <LogoContainer>
-              <Logo src="/logo/logo.svg" alt="InsuranceKo" />
-            </LogoContainer>
-          </Anchor>
-        </Link>
+        <Flex>
+          <Link href="/">
+            <Anchor>
+              <LogoContainer>
+                <Logo src="/logo/logo.svg" alt="InsuranceKo" />
+              </LogoContainer>
+            </Anchor>
+          </Link>
+          <ResponsiveContext.Consumer>
+            {(responsive) =>
+              responsive !== "small" && (
+                <StyledNav direction="row">
+                  <Link href="/about">
+                    <NavLink label="About" />
+                  </Link>
+                  <Link href="/blog">
+                    <NavLink label="Blog" />
+                  </Link>
+                  <Link href="/claims">
+                    <NavLink label="Claims" />
+                  </Link>
+                  <Link href="/partners">
+                    <NavLink label="Partners" />
+                  </Link>
+                  <Link href="/contact">
+                    <NavLink label="Contact" />
+                  </Link>
+                </StyledNav>
+              )
+            }
+          </ResponsiveContext.Consumer>
+        </Flex>
         <ResponsiveContext.Consumer>
           {(responsive) =>
             responsive === "small" ? (
@@ -65,12 +126,36 @@ const Header = ({ hasUser }) => {
                 ]}
               />
             ) : (
-              <Nav direction="row">
-                <Link href="/about">
+              <RightNav>
+                <Button
+                  icon={<FiSearch size="16px" color={Colors.brand} />}
+                  onClick={() => {}}
+                />
+                <Button
+                  icon={<FiShoppingCart size="16px" color={Colors.brand} />}
+                  onClick={() => {}}
+                />
+                <Button
+                  icon={<FiUser size="16px" color={Colors.brand} />}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (hasUser) {
+                      if (hasUser && user.role === "admin") {
+                        Router.push("/admin");
+                      } else {
+                        Router.push("/profile");
+                      }
+                    } else {
+                      Router.push("/login");
+                    }
+                  }}
+                />
+                <NavCta primary>Get Insured Now!</NavCta>
+                {/* <Link href="/about">
                   <Anchor label="About" />
-                </Link>
+                </Link> */}
 
-                {!hasUser && (
+                {/* {!hasUser && (
                   <Link href="/login">
                     <Anchor label="Login" />
                   </Link>
@@ -89,8 +174,8 @@ const Header = ({ hasUser }) => {
                     }}
                     label="Logout"
                   />
-                )}
-              </Nav>
+                )} */}
+              </RightNav>
             )
           }
         </ResponsiveContext.Consumer>

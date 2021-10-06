@@ -1,20 +1,20 @@
 import React, { useState } from "react";
+import { Button, Form, TextInput } from "grommet";
+import axios from "axios";
+import styled from "styled-components";
+import { customAlphabet } from "nanoid";
 import { makeStyles } from "@material-ui/styles";
 import Modal from "@material-ui/core/Modal";
 import AddIcon from "@material-ui/icons/Add";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { Button, Form, TextInput } from "grommet";
-import styled from "styled-components";
 import { StyledFormField } from "components/shared/form/fields";
 import { useField, useForm } from "react-final-form-hooks";
 import PromoForm from "./PromoForm";
-import PromoContext from "./promo-context";
-import OptionsContext from "./options-context";
 import OptionsForm from "./OptionsForm";
 import { breakpoint } from "styled-components-breakpoint";
-import axios from "axios";
-import ProductsContext from "./product-context";
-import { customAlphabet } from "nanoid";
+import PromoContext from "./context/promo-context";
+import OptionsContext from "./context/options-context";
+import ProductsContext from "./context/product-context";
 import CreateSelect from "components/shared/form/creatable-select";
 import { ModalHeading } from "components/shared/section";
 

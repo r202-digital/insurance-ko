@@ -123,3 +123,8 @@ export const ModalHeading = styled(Typography)`
   margin-top: ${({ hasMarginTop }) => (hasMarginTop ? "1em" : "")};
   margin-bottom: 1em;
 `;
+
+export const Flex = styled.div`
+  display: flex;
+  align-items: center;
+`;

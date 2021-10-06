@@ -19,9 +19,9 @@ import { gridSpacing } from "lib/constant";
 import styled from "styled-components";
 import axios from "axios";
 import ProductModal from "./ProductModal";
-import PromoContext from "./promo-context";
-import OptionsContext from "./options-context";
-import ProductsContext from "./product-context";
+import PromoContext from "./context/promo-context";
+import OptionsContext from "./context/options-context";
+import ProductsContext from "./context/product-context";
 import { breakpoint } from "styled-components-breakpoint";
 import { Button } from "grommet";
 import { FaTrash } from "react-icons/fa";
@@ -90,7 +90,7 @@ const ProductListItem = styled.li`
   }
 
   display: grid;
-  grid-template-columns: 40px 1fr 40px;
+  grid-template-columns: 40px 1fr 90px;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -159,15 +159,9 @@ const AdminList = ({ isLoading }) => {
                       <input type="checkbox" />
                       <ProductContent>
                         <div>
-                          <Link href={`/profile/product/${product.uid}`}>
-                            <ProductLink
-                              href={`/profile/product/${product.uid}`}
-                            >
-                              <Typography>
-                                <strong>{product.name}</strong>
-                              </Typography>
-                            </ProductLink>
-                          </Link>
+                          <Typography>
+                            <strong>{product.name}</strong>
+                          </Typography>
                           <Typography>
                             {product.planOptions?.length || ""} Plan Option
                             {product.planOptions?.length &&

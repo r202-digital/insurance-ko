@@ -7,16 +7,16 @@ import { Client } from "utils/prismicHelpers";
 import MetadataContext from "components/shared/context/metadata";
 import { useUser } from "lib/hooks";
 import { getProduct, getProducts } from "lib/product";
-import ProductDetails from "components/profile/product/ProductDetails";
-import PromoContext from "components/profile/admin/promo-context";
-import OptionsContext from "components/profile/admin/options-context";
-import ProductDetailContext from "components/profile/product/product-detail-context";
+import ProductDetails from "components/admin/product/ProductDetails";
+import PromoContext from "components/admin/context/promo-context";
+import OptionsContext from "components/admin/context/options-context";
+import ProductDetailContext from "components/admin/context/product-detail-context";
 
 const ProductDetailsPage = ({ metadata, data }) => {
   const metadataContext = MetadataContext.useContainer();
 
   useEffect(() => {
-    Router.prefetch("/profile/products");
+    Router.prefetch("/admin/products");
     metadataContext.setContextMetadata(metadata.data);
   }, []);
 
@@ -58,7 +58,7 @@ export async function getStaticPaths() {
   const data = await getProducts();
 
   return {
-    paths: data.map((item) => `/profile/product/${item.uid}`),
+    paths: data.map((item) => `/admin/product/${item.uid}`),
     fallback: false,
   };
 }

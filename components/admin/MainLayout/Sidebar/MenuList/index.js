@@ -6,6 +6,8 @@ import { Typography } from "@material-ui/core";
 // project imports
 import NavGroup from "./NavGroup";
 import menuItem from "../menu-items";
+import { customAlphabet } from "nanoid";
+const nanoid = customAlphabet("1234567890", 10);
 
 //-----------------------|| SIDEBAR MENU LIST ||-----------------------//
 
@@ -13,11 +15,11 @@ const MenuList = () => {
   const navItems = menuItem.items.map((item) => {
     switch (item.type) {
       case "group":
-        return <NavGroup key={`profile-${item.id}`} item={item} />;
+        return <NavGroup key={`admin-${item.id}`} item={item} />;
       default:
         return (
           <Typography
-            key={`profile-${item.id}`}
+            key={`admin-${item.id}`}
             variant="h6"
             color="error"
             align="center"

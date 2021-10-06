@@ -7,8 +7,8 @@ import { makeStyles } from "@material-ui/styles";
 import { Divider, List, Typography } from "@material-ui/core";
 
 // project imports
-import NavItem from "./../NavItem";
-import NavCollapse from "./../NavCollapse";
+import NavItem from "../NavItem";
+import NavCollapse from "../NavCollapse";
 
 // style constant
 const useStyles = makeStyles((theme) => ({

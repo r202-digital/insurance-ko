@@ -3,7 +3,7 @@ import { Button, Form, TextArea, TextInput } from "grommet";
 import styled from "styled-components";
 import { StyledFormField } from "components/shared/form/fields";
 import { useField, useForm } from "react-final-form-hooks";
-import OptionsContext from "./options-context";
+import OptionsContext from "./context/options-context";
 import { breakpoint } from "styled-components-breakpoint";
 import { Close } from "grommet-icons";
 

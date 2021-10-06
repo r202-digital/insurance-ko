@@ -5,20 +5,21 @@ import { withAuthSync } from "utils/auth";
 import DefaultLayout from "layouts";
 import { Client } from "utils/prismicHelpers";
 import MetadataContext from "components/shared/context/metadata";
-import DashboardLayout from "components/profile";
 import { useUser } from "lib/hooks";
+import AdminAnalyticsLayout from "components/admin/analytics";
 
-const Profile = ({ metadata }) => {
+const Analytics = ({ metadata }) => {
   const user = useUser();
   const metadataContext = MetadataContext.useContainer();
 
-  console.log(user);
+  // console.log(user);
   useEffect(() => {
     Router.prefetch("/admin/products");
+    Router.prefetch("/admin");
     metadataContext.setContextMetadata(metadata.data);
   }, []);
 
-  return <DashboardLayout />;
+  return <AdminAnalyticsLayout />;
 };
 
 export async function getStaticProps({ preview = null, previewData = {} }) {
@@ -37,4 +38,4 @@ export async function getStaticProps({ preview = null, previewData = {} }) {
   };
 }
 
-export default withAuthSync(Profile);
+export default withAuthSync(Analytics);

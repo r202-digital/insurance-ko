@@ -5,7 +5,7 @@ import { StyledFormField } from "components/shared/form/fields";
 import { useField, useForm } from "react-final-form-hooks";
 import Select from "react-select";
 import chroma from "chroma-js";
-import PromoContext from "./promo-context";
+import PromoContext from "./context/promo-context";
 import { breakpoint } from "styled-components-breakpoint";
 import { Close } from "grommet-icons";
 

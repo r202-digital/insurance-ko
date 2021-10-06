@@ -28,12 +28,16 @@ const SubmitButton = styled(Button)`
 
 const signUp = async (value) => {
   try {
-    await axios.post("/api/signup", value);
+    const signUpUser = await axios.post("/api/signup", value);
+    const userData = signUpUser.data && signUpUser.data.user;
+    if (userData.role && userData.role === "admin") {
+      Router.push("/admin");
+    } else {
+      Router.push("/profile");
+    }
   } catch (e) {
     throw new Error(e.response.data);
   }
-
-  Router.push("/profile");
 };
 
 const SignupForm = () => {

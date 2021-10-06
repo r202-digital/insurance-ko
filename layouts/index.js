@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
   const user = useUser();
   return (
     <>
-      <Header hasUser={user?.hasUser} />
+      <Header hasUser={user?.hasUser} user={user && user.user} />
 
       <main>
         <Container>{children}</Container>

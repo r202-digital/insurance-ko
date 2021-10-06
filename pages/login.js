@@ -125,6 +125,8 @@ const Login = ({ metadata }) => {
 
   useEffect(() => {
     metadataContext.setContextMetadata(metadata.data);
+    Router.prefetch("/admin");
+    Router.prefetch("/profile");
   }, []);
 
   return (

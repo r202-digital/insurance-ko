@@ -1,26 +1,24 @@
-import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
-
 // material-ui
 import { CardContent, Grid, Typography } from "@material-ui/core";
-
+import axios from "axios";
 // project imports
 import MainCard from "components/cards/MainCard";
-import { gridSpacing } from "lib/constant";
-import styled from "styled-components";
-import axios from "axios";
-import { breakpoint } from "styled-components-breakpoint";
-import ProfileLayout from "../ProfileLayout";
-import PromoForm from "../admin/PromoForm";
-import OptionsForm from "../admin/OptionsForm";
-import CreateSelect from "components/shared/form/creatable-select";
-import { Button, Form, TextInput } from "grommet";
-import { StyledFormField } from "components/shared/form/fields";
-import { useField, useForm } from "react-final-form-hooks";
-import ProductDetailContext from "./product-detail-context";
 import { Colors } from "components/shared/colors";
-import PromoContext from "../admin/promo-context";
+import CreateSelect from "components/shared/form/creatable-select";
+import { StyledFormField } from "components/shared/form/fields";
+import { Flex } from "components/shared/section";
+import { Button, Form, TextInput } from "grommet";
+import { gridSpacing } from "lib/constant";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { useField, useForm } from "react-final-form-hooks";
+import styled from "styled-components";
 import OptionsContext from "../admin/options-context";
+import OptionsForm from "../admin/OptionsForm";
+import PromoContext from "../admin/promo-context";
+import PromoForm from "../admin/PromoForm";
+import ProductDetailContext from "../context/product-detail-context";
+import ProfileLayout from "../ProfileLayout";
 
 const FormContainer = styled.div`
   text-align: initial;
@@ -65,6 +63,12 @@ const ProductName = styled(Typography)`
   }
 `;
 
+const SuccessMessage = styled(Typography)`
+  color: ${Colors.lightgreen};
+  margin-right: 1rem;
+  font-weight: 600;
+`;
+
 const ProductDetails = () => {
   const productDetailContainer = ProductDetailContext.useContainer();
   const promoContainer = PromoContext.useContainer();
@@ -73,6 +77,7 @@ const ProductDetails = () => {
     productDetailContainer;
   const { contextPromo } = promoContainer;
   const { contextOptions } = optionContainer;
+  const [success, setSuccess] = useState(false);
   const onSubmit = async (val) => {
     const obj = {
       ...contextProductDetail,
@@ -82,7 +87,12 @@ const ProductDetails = () => {
     };
     setContextProductDetail(obj);
 
-    const updateProd = await axios.post("/api/update-product", obj);
+    await axios.post("/api/update-product", obj);
+
+    setSuccess(true);
+    setTimeout(() => {
+      setSuccess(false);
+    }, 3000);
   };
 
   const { form, handleSubmit, values, pristine, submitting } = useForm({
@@ -126,18 +136,21 @@ const ProductDetails = () => {
                 <ProductName>
                   Products / <span>{contextProductDetail.name}</span>
                 </ProductName>
-                <div>
-                  <SubmitButton
-                    primary
-                    disabled={submitting}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      form.submit();
-                    }}
-                  >
-                    <Typography>Save Changes</Typography>
-                  </SubmitButton>
-                </div>
+                <Flex>
+                  {success && <SuccessMessage>Success!</SuccessMessage>}
+                  <div>
+                    <SubmitButton
+                      primary
+                      disabled={submitting}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        form.submit();
+                      }}
+                    >
+                      <Typography>Save Changes</Typography>
+                    </SubmitButton>
+                  </div>
+                </Flex>
               </ProductHeading>
             </MainCard>
           </Grid>

@@ -8,17 +8,10 @@ import { StyledFormField } from "components/shared/form/fields";
 import { breakpoint } from "styled-components-breakpoint";
 import axios from "axios";
 import { Typography } from "@material-ui/core";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaPen } from "react-icons/fa";
 import { ModalHeading } from "components/shared/section";
-import ProductsContext from "./product-context";
-
-const FormContainer = styled.div`
-  text-align: initial;
-`;
-
-const FormField = styled(StyledFormField)`
-  margin-bottom: 0;
-`;
+import ProductsContext from "./context/product-context";
+import Router from "next/router";
 
 const SubmitButton = styled(Button)`
   margin-top: 2em;
@@ -51,7 +44,7 @@ function getModalStyle() {
   };
 }
 
-const DeleteButton = styled(Button)`
+const ActionButton = styled(Button)`
   transition: 0.3s;
   border-radius: 5px;
   &:hover {
@@ -66,6 +59,11 @@ const ButtonContainer = styled.div`
   ${SubmitButton}:first-of-type {
     margin-right: 0.5em;
   }
+`;
+
+const Flex = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export default function DeleteModal({ product, index }) {
@@ -122,7 +120,16 @@ export default function DeleteModal({ product, index }) {
 
   return (
     <div>
-      <DeleteButton onClick={handleOpen} icon={<FaTrash />} />
+      <Flex>
+        <ActionButton
+          onClick={(e) => {
+            e.preventDefault();
+            Router.push(`/admin/product/${product.uid}`);
+          }}
+          icon={<FaPen />}
+        />
+        <ActionButton onClick={handleOpen} icon={<FaTrash />} />
+      </Flex>
       <Modal
         open={open}
         onClose={handleClose}

@@ -2,23 +2,23 @@ import { useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import useSWR from "swr";
 import { withAuthSync } from "utils/auth";
-import DefaultLayout from "layouts";
 import { Client } from "utils/prismicHelpers";
 import MetadataContext from "components/shared/context/metadata";
-import DashboardLayout from "components/profile";
 import { useUser } from "lib/hooks";
+import AdminDashboardLayout from "components/admin";
 
-const Profile = ({ metadata }) => {
+const AdminProfile = ({ metadata }) => {
   const user = useUser();
   const metadataContext = MetadataContext.useContainer();
 
   console.log(user);
   useEffect(() => {
     Router.prefetch("/admin/products");
+    Router.prefetch("/admin/analytics");
     metadataContext.setContextMetadata(metadata.data);
   }, []);
 
-  return <DashboardLayout />;
+  return <AdminDashboardLayout />;
 };
 
 export async function getStaticProps({ preview = null, previewData = {} }) {
@@ -37,4 +37,4 @@ export async function getStaticProps({ preview = null, previewData = {} }) {
   };
 }
 
-export default withAuthSync(Profile);
+export default withAuthSync(AdminProfile);

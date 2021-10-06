@@ -19,15 +19,20 @@ const SubmitButton = styled(Button)`
 
 const signIn = async (email, password) => {
   try {
-    await axios.post("/api/login", {
+    const loginUser = await axios.post("/api/login", {
       username: email,
       password,
     });
+
+    const userData = loginUser.data && loginUser.data.user;
+    if (userData.role && userData.role === "admin") {
+      Router.push("/admin");
+    } else {
+      Router.push("/profile");
+    }
   } catch (e) {
     throw new Error(e.response.data);
   }
-
-  Router.push("/profile");
 };
 
 const LoginForm = ({ metadata }) => {

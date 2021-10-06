@@ -11,22 +11,37 @@ const dashboard = {
     {
       title: "Overview",
       type: "item",
-      url: "/profile",
+      url: "/admin",
       icon: IconDashboard,
       breadcrumbs: false,
     },
     {
       title: "Analytics",
       type: "item",
-      url: "/profile/analytics",
+      url: "/admin/analytics",
       icon: IconDeviceAnalytics,
       breadcrumbs: false,
     },
   ],
 };
 
+const management = {
+  id: "dashboard",
+  title: "Management",
+  type: "group",
+  children: [
+    {
+      title: "Products",
+      type: "item",
+      url: "/admin/products",
+      icon: IconBasket,
+      breadcrumbs: false,
+    },
+  ],
+};
+
 const menuItems = {
-  items: [dashboard],
+  items: [dashboard, management],
 };
 
 export default menuItems;

@@ -1,21 +1,23 @@
 import React from "react";
-import TextSection from "./TextSection";
-import Quote from "./Quote";
-import FullWidthImage from "./FullWidthImage";
-import ImageGallery from "./ImageGallery";
-import ImageHighlight from "./ImageHighlight";
-import CarouselImageGrid from "./CarouselImageGrid";
-import SectionParagraph from "./SectionParagraph";
-import ShowcaseGrid from "./ShowcaseGrid";
-import VideoSection from "./VideoSection";
-import ImageSection from "./ImageSection";
-import MultitabSection from "./MultitabSection";
-import HighlightCarousel from "./HighlightCarousel";
-import BlogSection from "./BlogSection";
-import Testimonials from "./Testimonials";
-import HighlightSection from "./HighlightSection";
-import ContactForm from "./ContactForm";
-import ShopSection from "./ShopSection";
+import dynamic from "next/dynamic";
+
+const TextSection = dynamic(() => import("./TextSection"));
+const Quote = dynamic(() => import("./Quote"));
+const FullWidthImage = dynamic(() => import("./FullWidthImage"));
+const ImageGallery = dynamic(() => import("./ImageGallery"));
+const ImageHighlight = dynamic(() => import("./ImageHighlight"));
+const CarouselImageGrid = dynamic(() => import("./CarouselImageGrid"));
+const SectionParagraph = dynamic(() => import("./SectionParagraph"));
+const ShowcaseGrid = dynamic(() => import("./ShowcaseGrid"));
+const VideoSection = dynamic(() => import("./VideoSection"));
+const ImageSection = dynamic(() => import("./ImageSection"));
+const MultitabSection = dynamic(() => import("./MultitabSection"));
+const HighlightCarousel = dynamic(() => import("./HighlightCarousel"));
+const BlogSection = dynamic(() => import("./BlogSection"));
+const Testimonials = dynamic(() => import("./Testimonials"));
+const HighlightSection = dynamic(() => import("./HighlightSection"));
+const ContactForm = dynamic(() => import("./ContactForm"));
+const ShopSection = dynamic(() => import("./ShopSection"));
 
 const SliceZone = ({ sliceZone }) => (
   <div className="container">
