@@ -5,14 +5,14 @@ import dynamic from "next/dynamic";
 import { Grid } from "@material-ui/core";
 
 // project imports
-const EarningCard = dynamic(() => import("./EarningCard"));
-const PopularCard = dynamic(() => import("./PopularCard"));
+const EarningCard = dynamic(() => import("../EarningCard"));
+const PopularCard = dynamic(() => import("../PopularCard"));
 const TotalOrderLineChartCard = dynamic(() =>
-  import("./TotalOrderLineChartCard")
+  import("../TotalOrderLineChartCard")
 );
-const TotalIncomeDarkCard = dynamic(() => import("./TotalIncomeDarkCard"));
-const TotalIncomeLightCard = dynamic(() => import("./TotalIncomeLightCard"));
-const TotalGrowthBarChart = dynamic(() => import("./TotalGrowthBarChart"));
+const TotalIncomeDarkCard = dynamic(() => import("../TotalIncomeDarkCard"));
+const TotalIncomeLightCard = dynamic(() => import("../TotalIncomeLightCard"));
+const TotalGrowthBarChart = dynamic(() => import("../TotalGrowthBarChart"));
 import { gridSpacing } from "lib/constant";
 import ProfileLayout from "../ProfileLayout";
 

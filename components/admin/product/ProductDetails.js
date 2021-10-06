@@ -13,11 +13,11 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useField, useForm } from "react-final-form-hooks";
 import styled from "styled-components";
-import OptionsContext from "../admin/options-context";
-import OptionsForm from "../admin/OptionsForm";
-import PromoContext from "../admin/promo-context";
-import PromoForm from "../admin/PromoForm";
+import OptionsForm from "../OptionsForm";
+import PromoForm from "../PromoForm";
+import OptionsContext from "../context/options-context";
 import ProductDetailContext from "../context/product-detail-context";
+import PromoContext from "../context/promo-context";
 import ProfileLayout from "../ProfileLayout";
 
 const FormContainer = styled.div`
