@@ -15,26 +15,44 @@ const HamburgerContainer = styled.div`
       .hamburger-inner:before {
         background-color: ${Colors.brandDark};
       }
+
+      .hamburger-inner {
+        &:before {
+          top: 10px;
+        }
+
+        &:after {
+          top: 20px;
+        }
+      }
     }
   }
 
   .hamburger--slider .hamburger-inner {
-    top: 6px;
-    left: 5px;
+    top: 8px;
+    left: 7px;
+
+    &:before {
+      top: 9px;
+    }
+
+    &:after {
+      top: 18px;
+    }
   }
 
   .hamburger-inner,
   .hamburger-inner:after,
   .hamburger-inner:before {
-    width: 28px;
+    width: 25px;
     height: 3px;
     background-color: ${Colors.brandDark};
   }
 `;
 
 const NavLink = styled(Anchor)`
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
   font-weight: 600;
   font-size: 1.15rem;
   text-align: center;
