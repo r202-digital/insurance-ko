@@ -15,6 +15,7 @@ import { FiSearch, FiShoppingCart, FiUser } from "react-icons/fi";
 import { GrMenu } from "react-icons/gr";
 import styled from "styled-components";
 import { Colors } from "./shared/colors";
+import MobileMenu from "./menu";
 
 const LogoContainer = styled(Box)`
   height: 56px;
@@ -114,17 +115,20 @@ const Header = ({ hasUser, user }) => {
         <ResponsiveContext.Consumer>
           {(responsive) =>
             responsive === "small" ? (
-              <Menu
-                a11yTitle="Navigation Menu"
-                dropProps={{ align: { top: "bottom", right: "right" } }}
-                icon={<GrMenu />}
-                items={[
-                  { label: "About", href: "/about" },
-                  { label: "Login", href: "/login" },
-                  { label: "Signup", href: "/signup" },
-                  { label: "Profile", href: "/profile" },
-                ]}
-              />
+              <>
+                {/* <Menu
+                  a11yTitle="Navigation Menu"
+                  dropProps={{ align: { top: "bottom", right: "right" } }}
+                  icon={<GrMenu />}
+                  items={[
+                    { label: "About", href: "/about" },
+                    { label: "Login", href: "/login" },
+                    { label: "Signup", href: "/signup" },
+                    { label: "Profile", href: "/profile" },
+                  ]}
+                /> */}
+                <MobileMenu />
+              </>
             ) : (
               <RightNav>
                 <Button
