@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Box, Nav, Layer, Anchor } from "grommet";
+import { Box, Nav, Layer, Anchor, Button } from "grommet";
 import { Colors } from "components/shared/colors";
 import Hamburger from "react-hamburgers";
 import styled from "styled-components";
 import Link from "next/link";
+import { FiShoppingCart, FiUser } from "react-icons/fi";
+import Router from "next/router";
 
 const HamburgerContainer = styled.div`
   .hamburger {
@@ -50,6 +52,11 @@ const HamburgerContainer = styled.div`
   }
 `;
 
+const StyledNav = styled(Nav)`
+  height: calc(100% - 138px);
+  justify-content: space-around;
+`;
+
 const NavLink = styled(Anchor)`
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
@@ -58,7 +65,44 @@ const NavLink = styled(Anchor)`
   text-align: center;
 `;
 
-const MobileMenu = () => {
+const BoxContainer = styled(Box)`
+  justify-content: space-between;
+  height: calc(100% - 66px);
+  font-family: Montserrat;
+`;
+
+const BottomBox = styled.div`
+  width: 100%;
+  background-color: ${Colors.brandDark};
+  display: flex;
+`;
+
+const BottomButton = styled(Button)`
+  flex: 1;
+  border-radius: 0;
+  border: initial;
+  padding: 1.5rem 0;
+  color: white;
+`;
+
+const Divider = styled.div`
+  width: 1px;
+  height: calc(100% - 1.75em);
+  margin-top: auto;
+  margin-bottom: auto;
+  background-color: ${Colors.yellowGreen};
+`;
+
+const NavCta = styled(Button)`
+  padding: 1.25rem 3rem;
+  color: ${Colors.lightYellow};
+  border-radius: 3rem;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0 auto;
+`;
+
+const MobileMenu = ({ hasUser, isAdmin }) => {
   const [open, setOpen] = useState(false);
 
   const onClose = () => setOpen(false);
@@ -76,15 +120,14 @@ const MobileMenu = () => {
       </HamburgerContainer>
 
       {open && (
-        <Layer full margin={{ top: "68px" }} position="right" onEsc={onClose}>
-          <Box
-            pad="large"
+        <Layer full margin={{ top: "66px" }} position="right" onEsc={onClose}>
+          <BoxContainer
             gap="small"
             width={{ min: "medium" }}
             height={{ min: "small" }}
             fill
           >
-            <Nav direction="column">
+            <StyledNav direction="column">
               <Link href="/about">
                 <NavLink label="About" />
               </Link>
@@ -100,8 +143,33 @@ const MobileMenu = () => {
               <Link href="/contact">
                 <NavLink label="Contact" />
               </Link>
-            </Nav>
-          </Box>
+              <NavCta primary>Get Insured Now!</NavCta>
+            </StyledNav>
+            <BottomBox>
+              <BottomButton
+                icon={<FiShoppingCart size="24px" color={Colors.lightYellow} />}
+                label="My Cart"
+                onClick={() => {}}
+              />
+              <Divider />
+              <BottomButton
+                icon={<FiUser size="24px" color={Colors.lightYellow} />}
+                label="My Account"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (hasUser) {
+                    if (isAdmin) {
+                      Router.push("/admin");
+                    } else {
+                      Router.push("/profile");
+                    }
+                  } else {
+                    Router.push("/login");
+                  }
+                }}
+              />
+            </BottomBox>
+          </BoxContainer>
         </Layer>
       )}
     </>

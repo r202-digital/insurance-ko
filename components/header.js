@@ -77,6 +77,8 @@ const Header = ({ hasUser, user }) => {
     Router.prefetch("/login");
   }, []);
 
+  const isAdmin = hasUser && user.role === "admin";
+
   return (
     <StyledGrommetHeader pad="small">
       <HeaderContainer>
@@ -127,7 +129,7 @@ const Header = ({ hasUser, user }) => {
                     { label: "Profile", href: "/profile" },
                   ]}
                 /> */}
-                <MobileMenu />
+                <MobileMenu hasUser={hasUser} isAdmin={isAdmin} />
               </>
             ) : (
               <RightNav>
@@ -144,7 +146,7 @@ const Header = ({ hasUser, user }) => {
                   onClick={(e) => {
                     e.preventDefault();
                     if (hasUser) {
-                      if (hasUser && user.role === "admin") {
+                      if (isAdmin) {
                         Router.push("/admin");
                       } else {
                         Router.push("/profile");
