@@ -12,10 +12,11 @@ import {
 import Link from "next/link";
 import Router from "next/router";
 import { FiSearch, FiShoppingCart, FiUser } from "react-icons/fi";
-import { GrMenu } from "react-icons/gr";
+// import { GrMenu } from "react-icons/gr";
 import styled from "styled-components";
 import { Colors } from "./shared/colors";
 import MobileMenu from "./menu";
+import { useMediaQuery } from "react-responsive";
 
 const LogoContainer = styled(Box)`
   height: 56px;
@@ -77,6 +78,10 @@ const Header = ({ hasUser, user }) => {
     Router.prefetch("/login");
   }, []);
 
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 768px)",
+  });
+
   const isAdmin = hasUser && user.role === "admin";
 
   return (
@@ -90,78 +95,59 @@ const Header = ({ hasUser, user }) => {
               </LogoContainer>
             </Anchor>
           </Link>
-          <ResponsiveContext.Consumer>
-            {(responsive) =>
-              responsive !== "small" && (
-                <StyledNav direction="row">
-                  <Link href="/about">
-                    <NavLink label="About" />
-                  </Link>
-                  <Link href="/blog">
-                    <NavLink label="Blog" />
-                  </Link>
-                  <Link href="/claims">
-                    <NavLink label="Claims" />
-                  </Link>
-                  <Link href="/partners">
-                    <NavLink label="Partners" />
-                  </Link>
-                  <Link href="/contact">
-                    <NavLink label="Contact" />
-                  </Link>
-                </StyledNav>
-              )
-            }
-          </ResponsiveContext.Consumer>
+          {isDesktopOrLaptop && (
+            <StyledNav direction="row">
+              <Link href="/about">
+                <NavLink label="About" />
+              </Link>
+              <Link href="/blog">
+                <NavLink label="Blog" />
+              </Link>
+              <Link href="/claims">
+                <NavLink label="Claims" />
+              </Link>
+              <Link href="/partners">
+                <NavLink label="Partners" />
+              </Link>
+              <Link href="/contact">
+                <NavLink label="Contact" />
+              </Link>
+            </StyledNav>
+          )}
         </Flex>
-        <ResponsiveContext.Consumer>
-          {(responsive) =>
-            responsive === "small" ? (
-              <>
-                {/* <Menu
-                  a11yTitle="Navigation Menu"
-                  dropProps={{ align: { top: "bottom", right: "right" } }}
-                  icon={<GrMenu />}
-                  items={[
-                    { label: "About", href: "/about" },
-                    { label: "Login", href: "/login" },
-                    { label: "Signup", href: "/signup" },
-                    { label: "Profile", href: "/profile" },
-                  ]}
-                /> */}
-                <MobileMenu hasUser={hasUser} isAdmin={isAdmin} />
-              </>
-            ) : (
-              <RightNav>
-                <Button
-                  icon={<FiSearch size="16px" color={Colors.brand} />}
-                  onClick={() => {}}
-                />
-                <Button
-                  icon={<FiShoppingCart size="16px" color={Colors.brand} />}
-                  onClick={() => {}}
-                />
-                <Button
-                  icon={<FiUser size="16px" color={Colors.brand} />}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (hasUser) {
-                      if (isAdmin) {
-                        Router.push("/admin");
-                      } else {
-                        Router.push("/profile");
-                      }
-                    } else {
-                      Router.push("/login");
-                    }
-                  }}
-                />
-                <NavCta primary>Get Insured Now!</NavCta>
-                {/* <Link href="/about">
+        {!isDesktopOrLaptop ? (
+          <MobileMenu hasUser={hasUser} isAdmin={isAdmin} />
+        ) : (
+          <RightNav>
+            <Button
+              icon={<FiSearch size="16px" color={Colors.brand} />}
+              onClick={() => {}}
+            />
+            <Button
+              icon={<FiShoppingCart size="16px" color={Colors.brand} />}
+              onClick={() => {}}
+            />
+            <Button
+              icon={<FiUser size="16px" color={Colors.brand} />}
+              onClick={(e) => {
+                e.preventDefault();
+                if (hasUser) {
+                  if (isAdmin) {
+                    Router.push("/admin");
+                  } else {
+                    Router.push("/profile");
+                  }
+                } else {
+                  Router.push("/login");
+                }
+              }}
+            />
+            <NavCta primary>Get Insured Now!</NavCta>
+            {/* <Link href="/about">
                   <Anchor label="About" />
                 </Link> */}
 
-                {/* {!hasUser && (
+            {/* {!hasUser && (
                   <Link href="/login">
                     <Anchor label="Login" />
                   </Link>
@@ -181,10 +167,8 @@ const Header = ({ hasUser, user }) => {
                     label="Logout"
                   />
                 )} */}
-              </RightNav>
-            )
-          }
-        </ResponsiveContext.Consumer>
+          </RightNav>
+        )}
       </HeaderContainer>
     </StyledGrommetHeader>
   );
