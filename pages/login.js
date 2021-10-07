@@ -101,8 +101,8 @@ const RichTabTitle = ({ label }) => (
 
 const StyledGrommet = styled(Grommet)`
   margin-top: 1em;
-  height: auto;
-  width: auto;
+  height: auto !important;
+  width: auto !important;
   background-color: transparent;
   ${breakpoint("lg")`
     justify-content: flex-end;
@@ -132,7 +132,7 @@ const Login = ({ metadata }) => {
   return (
     <DefaultLayout>
       <Container>
-        <StyledGrommet full theme={deepMerge(grommet, customTheme)}>
+        <StyledGrommet theme={deepMerge(grommet, customTheme)}>
           <FormContainer>
             <Tabs>
               <Tab title={<RichTabTitle label="Sign in" />}>
