@@ -16,7 +16,6 @@ import { FiSearch, FiShoppingCart, FiUser } from "react-icons/fi";
 import styled from "styled-components";
 import { Colors } from "./shared/colors";
 import MobileMenu from "./menu";
-import { useMediaQuery } from "react-responsive";
 
 const LogoContainer = styled(Box)`
   height: 56px;
@@ -71,16 +70,26 @@ const NavCta = styled(Button)`
   font-size: 0.875rem;
 `;
 
+const ResponsiveDesktop = styled.div`
+  display: none;
+
+  @media (min-width: 768px) {
+    display: initial;
+  }
+`;
+
+const ResponsiveMobile = styled.div`
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
 const Header = ({ hasUser, user }) => {
   useEffect(() => {
     Router.prefetch("/admin");
     Router.prefetch("/profile");
     Router.prefetch("/login");
   }, []);
-
-  const isDesktopOrLaptop = useMediaQuery({
-    query: "(min-width: 768px)",
-  });
 
   const isAdmin = hasUser && user.role === "admin";
 
@@ -95,7 +104,7 @@ const Header = ({ hasUser, user }) => {
               </LogoContainer>
             </Anchor>
           </Link>
-          {isDesktopOrLaptop && (
+          <ResponsiveDesktop>
             <StyledNav direction="row">
               <Link href="/about">
                 <NavLink label="About" />
@@ -113,11 +122,12 @@ const Header = ({ hasUser, user }) => {
                 <NavLink label="Contact" />
               </Link>
             </StyledNav>
-          )}
+          </ResponsiveDesktop>
         </Flex>
-        {!isDesktopOrLaptop ? (
+        <ResponsiveMobile>
           <MobileMenu hasUser={hasUser} isAdmin={isAdmin} />
-        ) : (
+        </ResponsiveMobile>
+        <ResponsiveDesktop>
           <RightNav>
             <Button
               icon={<FiSearch size="16px" color={Colors.brand} />}
@@ -168,7 +178,7 @@ const Header = ({ hasUser, user }) => {
                   />
                 )} */}
           </RightNav>
-        )}
+        </ResponsiveDesktop>
       </HeaderContainer>
     </StyledGrommetHeader>
   );
