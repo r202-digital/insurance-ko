@@ -10,6 +10,8 @@ import "@fontsource/lato/300.css";
 import "@fontsource/lato/700.css";
 import "@fontsource/lato/900.css";
 import "hamburgers/dist/hamburgers.min.css";
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
 import MetadataContext from "components/shared/context/metadata";
 import ProductContext from "components/shared/context/product";
 

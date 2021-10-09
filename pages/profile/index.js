@@ -6,13 +6,10 @@ import DefaultLayout from "layouts";
 import { Client } from "utils/prismicHelpers";
 import MetadataContext from "components/shared/context/metadata";
 import DashboardLayout from "components/profile";
-import { useUser } from "lib/hooks";
 
 const Profile = ({ metadata }) => {
-  const user = useUser();
   const metadataContext = MetadataContext.useContainer();
 
-  console.log(user);
   useEffect(() => {
     Router.prefetch("/admin/products");
     metadataContext.setContextMetadata(metadata.data);

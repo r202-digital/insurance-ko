@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import NextImage from "next/image";
-import Link from "next/link";
-import styled from "styled-components";
-import { breakpoint } from "styled-components-breakpoint";
-import { useKeenSlider } from "keen-slider/react";
-import { Anchor, Button, Select } from "grommet";
-import { RiHeart3Line } from "react-icons/ri";
-import { IoIosArrowDropleft } from "react-icons/io";
+import { Breakpoint } from "components/shared/breakpoints";
 import { Colors } from "components/shared/colors";
 import { Flex } from "components/shared/container";
-import "keen-slider/keen-slider.min.css";
 import {
   PrimaryYellowGreenButton,
   SecondaryYellowGreenButton,
 } from "components/shared/section";
+import { Anchor, Button, Select } from "grommet";
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
+import NextImage from "next/image";
+import Link from "next/link";
+import React from "react";
+import { IoIosArrowDropleft } from "react-icons/io";
+import { RiHeart3Line } from "react-icons/ri";
+import styled from "styled-components";
 import VariantContext from "./context";
 
 const HeroContainer = styled.div`
   background-color: white;
   display: block;
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     padding: 10px;
     margin-top: 1em;
     display: grid;
@@ -27,7 +27,7 @@ const HeroContainer = styled.div`
     grid-template-rows: 1fr;
     grid-column-gap: 10px;
     grid-row-gap: 0px;
-  `}
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -35,13 +35,13 @@ const ImageContainer = styled.div`
   width: 100%;
   position: relative;
 
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     height: calc(87.5vw * 0.4);
 
     img {
       object-fit: cover;
     }
-  `}
+  }
 `;
 
 const SelectionSlide = styled.div`
@@ -70,9 +70,9 @@ const LikeButton = styled.span`
   border-radius: 50%;
   border: 1px solid ${Colors.borderGray};
 
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     display: none;
-  `}
+  }
 `;
 
 const SlideTag = styled.span`
@@ -84,26 +84,26 @@ const SlideTag = styled.span`
   border-radius: 10px;
   font-size: 0.75em;
 
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     display: none;
-  `}
+  }
 `;
 
 const Selection = styled.div`
   display: none;
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(auto-fill, 1fr);
     grid-column-gap: 0;
     grid-row-gap: 10px;
-  `}
+  }
 `;
 
 const ShopLink = styled.a`
   display: none;
 
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     display: flex;
     align-items: center;
     color: ${Colors.brand};
@@ -117,8 +117,8 @@ const ShopLink = styled.a`
 
     span {
       margin-left: 0.5em;
-    }s
-  `}
+    }
+  }
 `;
 
 const Description = styled.div`
@@ -137,9 +137,9 @@ const Price = styled.h3`
   margin: 1em 0;
   margin-bottom: 0.5em;
 
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     margin: 0;
-  `}
+  }
 `;
 
 const StatusTag = styled.p`
@@ -160,7 +160,7 @@ const PlanSelection = styled.div`
     }
   }
 
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     display: flex;
     align-items: center;
     width: 70%;
@@ -173,7 +173,7 @@ const PlanSelection = styled.div`
     button {
       flex: 1;
     }
-  `}
+  }
 `;
 
 const ButtonRow = styled.div`
@@ -186,7 +186,7 @@ const ButtonRow = styled.div`
 
 const ActionSection = styled.div`
   display: block;
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -194,7 +194,7 @@ const ActionSection = styled.div`
     padding: 2em 1.5em;
     border: 1px solid ${Colors.borderGray};
     border-radius: 20px;
-  `}
+  }
 `;
 
 const ProductHero = ({ product }) => {

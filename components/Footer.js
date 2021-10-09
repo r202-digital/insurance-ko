@@ -9,6 +9,7 @@ import MetadataContext from "./shared/context/metadata";
 import { extractText } from "lib/utils";
 import { RichText } from "prismic-reactjs";
 import { Colors } from "./shared/colors";
+import { Breakpoint } from "./shared/breakpoints";
 
 const Logo = styled.img`
   height: 100%;
@@ -18,9 +19,9 @@ const LogoContainer = styled.div`
   height: 80px;
   margin-bottom: 2rem;
 
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     height: 56px;
-  `}
+  }
 `;
 
 const FooterContainer = styled.footer`
@@ -28,24 +29,24 @@ const FooterContainer = styled.footer`
   padding: 1.5rem 3rem;
   color: white;
 
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 0px;
-  `}
+  }
 `;
 
 const HalfDivider = styled.div`
   display: initial;
-  ${breakpoint("lg")`
+  @media (min-width: ${Breakpoint.lg}px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-  `}
+  }
 `;
 
 const List = styled.ul`
@@ -57,9 +58,9 @@ const List = styled.ul`
 
 const DesktopOnly = styled.div`
   display: none;
-  ${breakpoint("lg")`
-        display: initial;
-    `}
+  @media (min-width: ${Breakpoint.lg}px) {
+    display: initial;
+  }
 `;
 
 const AddressContainer = styled.li`

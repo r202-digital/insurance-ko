@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { FormField, TextInput, Button } from "grommet";
 import Router from "next/router";
 import axios from "axios";
+import { useSWRConfig } from "swr";
 
 const StyledError = styled.span`
   font-size: 0.75em;
@@ -17,7 +18,7 @@ const SubmitButton = styled(Button)`
   margin-bottom: 1em;
 `;
 
-const signIn = async (email, password) => {
+const signIn = async (email, password, mutate) => {
   try {
     const loginUser = await axios.post("/api/login", {
       username: email,
@@ -25,6 +26,13 @@ const signIn = async (email, password) => {
     });
 
     const userData = loginUser.data && loginUser.data.user;
+    if (userData) {
+      mutate("/api/profile", () => ({
+        hasUser: true,
+        user: userData,
+        done: true,
+      }));
+    }
     if (userData.role && userData.role === "admin") {
       Router.push("/admin");
     } else {
@@ -37,12 +45,14 @@ const signIn = async (email, password) => {
 
 const LoginForm = ({ metadata }) => {
   const [error, setError] = useState("");
+  const { mutate } = useSWRConfig();
+
   async function onSubmit(value) {
     setError("");
     const { email, password } = value;
 
     try {
-      await signIn(email, password);
+      await signIn(email, password, mutate);
     } catch (e) {
       setError(e.message);
     }

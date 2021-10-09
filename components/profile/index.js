@@ -1,66 +1,40 @@
-import React, { useEffect, useState } from "react";
-
-// material-ui
-import { ThemeProvider } from "@material-ui/core/styles";
-import { Grid, CssBaseline, StyledEngineProvider } from "@material-ui/core";
-
-// project imports
-import EarningCard from "./EarningCard";
-import PopularCard from "./PopularCard";
-import TotalOrderLineChartCard from "./TotalOrderLineChartCard";
-import TotalIncomeDarkCard from "./TotalIncomeDarkCard";
-import TotalIncomeLightCard from "./TotalIncomeLightCard";
-import TotalGrowthBarChart from "./TotalGrowthBarChart";
+import { Grid } from "@material-ui/core";
+import LoadingScreen from "components/shared/loading";
 import { gridSpacing } from "lib/constant";
-import { theme } from "lib/material-themes";
-import MainLayout from "./MainLayout";
-import { customization } from "./customization";
+import { useUser } from "lib/hooks";
+import dynamic from "next/dynamic";
+import Router from "next/router";
+import React from "react";
 import ProfileLayout from "./ProfileLayout";
 
-//-----------------------|| DEFAULT DASHBOARD ||-----------------------//
+const ProfileDetailsCard = dynamic(() => import("./ProfileDetailsCard"));
+const ProfilePhotoCard = dynamic(() => import("./ProfilePhotoCard"));
 
 const DashboardLayout = () => {
-  const [isLoading, setLoading] = useState(true);
-  useEffect(() => {
-    setLoading(false);
-  }, []);
+  const user = useUser();
+  console.log(user);
 
-  return (
-    <ProfileLayout>
-      <Grid container spacing={gridSpacing}>
-        <Grid item xs={12}>
+  if (user.done) {
+    if (user.hasUser) {
+      return (
+        <ProfileLayout>
           <Grid container spacing={gridSpacing}>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
-              <EarningCard isLoading={isLoading} />
+            <Grid item xs={12} lg={4}>
+              <ProfilePhotoCard />
             </Grid>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
-              <TotalOrderLineChartCard isLoading={isLoading} />
-            </Grid>
-            <Grid item lg={4} md={12} sm={12} xs={12}>
-              <Grid container spacing={gridSpacing}>
-                <Grid item sm={6} xs={12} md={6} lg={12}>
-                  <TotalIncomeDarkCard isLoading={isLoading} />
-                </Grid>
-                <Grid item sm={6} xs={12} md={6} lg={12}>
-                  <TotalIncomeLightCard isLoading={isLoading} />
-                </Grid>
-              </Grid>
+            <Grid item xs={12} lg={8}>
+              <ProfileDetailsCard />
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container spacing={gridSpacing}>
-            <Grid item xs={12} md={8}>
-              <TotalGrowthBarChart isLoading={isLoading} />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <PopularCard isLoading={isLoading} />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </ProfileLayout>
-  );
+        </ProfileLayout>
+      );
+    } else {
+      Router.push("/login");
+      return <LoadingScreen />;
+    }
+  } else {
+    return <LoadingScreen />;
+  }
 };
 
 export default DashboardLayout;

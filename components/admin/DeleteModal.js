@@ -12,15 +12,16 @@ import { FaTrash, FaPen } from "react-icons/fa";
 import { ModalHeading } from "components/shared/section";
 import ProductsContext from "./context/product-context";
 import Router from "next/router";
+import { Breakpoint } from "components/shared/breakpoints";
 
 const SubmitButton = styled(Button)`
   margin-top: 2em;
 
   width: 100%;
 
-  ${breakpoint("lg")`
-        width: auto;
-    `}
+  @media (min-width: ${Breakpoint.lg}px) {
+    width: auto;
+  }
 `;
 
 const ErrorContainer = styled.div`
