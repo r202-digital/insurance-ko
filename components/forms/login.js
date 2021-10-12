@@ -18,6 +18,10 @@ const SubmitButton = styled(Button)`
   margin-bottom: 1em;
 `;
 
+const Form = styled.form`
+  padding-top: 0.5em;
+`;
+
 const signIn = async (email, password, mutate) => {
   try {
     const loginUser = await axios.post("/api/login", {
@@ -82,7 +86,7 @@ const LoginForm = ({ metadata }) => {
   const passwordField = useField("password", form);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <FormField label="Email" name="email">
         <TextInput {...emailField.input} />
         {emailField.meta.touched && emailField.meta.error && (
@@ -104,7 +108,7 @@ const LoginForm = ({ metadata }) => {
       />
 
       {error && <StyledError>{error}</StyledError>}
-    </form>
+    </Form>
   );
 };
 

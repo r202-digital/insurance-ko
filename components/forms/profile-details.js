@@ -1,4 +1,4 @@
-import { Breakpoint } from "components/shared/breakpoints";
+import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
 import { DateField, RoundFormField } from "components/shared/form/fields";
 import { Button, TextInput } from "grommet";
 import React, { useState } from "react";
@@ -10,10 +10,10 @@ const FormGrid = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 
-  @media (min-width: ${Breakpoint.sm}px) {
+  ${BreakpointQuery("sm")`
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 1.5rem;
-  }
+  `}
 `;
 
 const CountryGrid = styled.div`

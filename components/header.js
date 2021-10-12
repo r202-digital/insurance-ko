@@ -16,6 +16,7 @@ import { FiSearch, FiShoppingCart, FiUser } from "react-icons/fi";
 import styled from "styled-components";
 import { Colors } from "./shared/colors";
 import MobileMenu from "./menu";
+import { BreakpointQuery } from "./shared/breakpoints";
 
 const LogoContainer = styled(Box)`
   height: 56px;
@@ -73,15 +74,15 @@ const NavCta = styled(Button)`
 const ResponsiveDesktop = styled.div`
   display: none;
 
-  @media (min-width: 768px) {
+  ${BreakpointQuery("md")`
     display: initial;
-  }
+  `}
 `;
 
 const ResponsiveMobile = styled.div`
-  @media (min-width: 768px) {
+  ${BreakpointQuery("md")`
     display: none;
-  }
+  `}
 `;
 
 const Header = ({ hasUser, user }) => {

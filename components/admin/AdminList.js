@@ -27,7 +27,7 @@ import { Button } from "grommet";
 import { FaTrash } from "react-icons/fa";
 import Link from "next/link";
 import DeleteModal from "./DeleteModal";
-import { Breakpoint } from "components/shared/breakpoints";
+import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
 
 // assets
 // import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
@@ -99,14 +99,14 @@ const ProductListItem = styled.li`
 `;
 
 const ProductContent = styled.div`
-  @media (min-width: ${Breakpoint.lg}px) {
+  ${BreakpointQuery("lg")`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     align-items: center;
-  }
+  `}
 `;
 
 const ProductLink = styled.a`

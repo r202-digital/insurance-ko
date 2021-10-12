@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { object, string, number } from "superstruct";
 import { breakpoint } from "styled-components-breakpoint";
 import { StyledFormField } from "components/shared/form/fields";
-import { Breakpoint } from "components/shared/breakpoints";
+import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
 
 const FormData = object({
   name: string(),
@@ -18,9 +18,9 @@ const FormContainer = styled.div`
 const SubmitButton = styled(Button)`
   width: 100%;
 
-  @media (min-width: ${Breakpoint.lg}px) {
+  ${BreakpointQuery("lg")`
     width: auto;
-  }
+  `}
 `;
 
 const ContactUsForm = () => {

@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import Router from "next/router";
 import { useSWRConfig } from "swr";
+import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
 
 const StyledError = styled.span`
   font-size: 0.75em;
@@ -25,6 +26,18 @@ const SubmitButton = styled(Button)`
   width: 100%;
   margin: 2em 0;
   margin-bottom: 1em;
+`;
+const NameContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin-top: 0.5em;
+
+  ${BreakpointQuery("lg")`
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0.5em;
+  `}
 `;
 
 const signUp = async (value, mutate) => {
@@ -81,8 +94,12 @@ const SignupForm = () => {
         errors.password = "Required";
       }
 
-      if (!values.name) {
-        errors.name = "Required";
+      if (!values.firstName) {
+        errors.firstName = "Required";
+      }
+
+      if (!values.lastName) {
+        errors.lastName = "Required";
       }
 
       return errors;
@@ -91,16 +108,25 @@ const SignupForm = () => {
 
   const emailField = useField("email", form);
   const passwordField = useField("password", form);
-  const nameField = useField("name", form);
+  const firstNameField = useField("firstName", form);
+  const lastNameField = useField("lastName", form);
 
   return (
     <form onSubmit={handleSubmit}>
-      <FormField label="Name" name="name">
-        <TextInput {...nameField.input} />
-        {nameField.meta.touched && nameField.meta.error && (
-          <StyledError>{nameField.meta.error}</StyledError>
-        )}
-      </FormField>
+      <NameContainer>
+        <FormField label="First Name" name="firstName">
+          <TextInput {...firstNameField.input} />
+          {firstNameField.meta.touched && firstNameField.meta.error && (
+            <StyledError>{firstNameField.meta.error}</StyledError>
+          )}
+        </FormField>
+        <FormField label="Last Name" name="lastName">
+          <TextInput {...lastNameField.input} />
+          {lastNameField.meta.touched && lastNameField.meta.error && (
+            <StyledError>{lastNameField.meta.error}</StyledError>
+          )}
+        </FormField>
+      </NameContainer>
       <FormField label="Email" name="email">
         <TextInput {...emailField.input} />
         {emailField.meta.touched && emailField.meta.error && (

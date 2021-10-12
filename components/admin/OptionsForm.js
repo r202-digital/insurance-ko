@@ -6,7 +6,7 @@ import { useField, useForm } from "react-final-form-hooks";
 import OptionsContext from "./context/options-context";
 import { breakpoint } from "styled-components-breakpoint";
 import { Close } from "grommet-icons";
-import { Breakpoint } from "components/shared/breakpoints";
+import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
 
 const FormField = styled(StyledFormField)`
   margin-bottom: 0;
@@ -53,9 +53,9 @@ const SubmitButton = styled(Button)`
   line-height: 1.25em;
   width: 100%;
 
-  @media (min-width: ${Breakpoint.lg}px) {
+  ${BreakpointQuery("lg")`
     width: auto;
-  }
+  `}
 `;
 
 const RemoveButton = styled.button`

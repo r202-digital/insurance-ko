@@ -220,7 +220,7 @@ const ProfileSection = () => {
                           variant="h4"
                           className={classes.name}
                         >
-                          {user?.name || ""}
+                          {user?.firstName || ""} {user?.lastName || ""}
                         </Typography>
                       </Grid>
                       {/* <Grid item>

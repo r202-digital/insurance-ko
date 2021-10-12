@@ -17,7 +17,7 @@ import OptionsContext from "./context/options-context";
 import ProductsContext from "./context/product-context";
 import CreateSelect from "components/shared/form/creatable-select";
 import { ModalHeading } from "components/shared/section";
-import { Breakpoint } from "components/shared/breakpoints";
+import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
 
 const FormContainer = styled.div`
   text-align: initial;
@@ -32,9 +32,9 @@ const SubmitButton = styled(Button)`
 
   width: 100%;
 
-  @media (min-width: ${Breakpoint.lg}px) {
+  ${BreakpointQuery("lg")`
     width: auto;
-  }
+  `}
 `;
 
 const ErrorContainer = styled.div`
