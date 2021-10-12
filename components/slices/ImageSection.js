@@ -13,6 +13,7 @@ import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
 import { breakpoint } from "styled-components-breakpoint";
 import { Colors } from "components/shared/colors";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 const ImageSectionBg = styled(SectionBg)`
   padding: ${({ isBig }) => (isBig ? "10em" : "4em")} 0;
@@ -25,7 +26,7 @@ const ShowcaseText = styled(HandwrittenText)`
 
 const SplitSection = styled(Container)`
   display: initial;
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
@@ -37,7 +38,7 @@ const SplitSection = styled(Container)`
 const ImageContainer = styled.div`
   height: 100px;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     height: auto;
   `}
 `;

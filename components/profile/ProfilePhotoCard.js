@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 const ProductList = styled.ul`
   margin: 0;
@@ -29,7 +30,7 @@ const ProductListItem = styled.li`
 `;
 
 const ProductContent = styled.div`
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;

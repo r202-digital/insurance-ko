@@ -3,13 +3,14 @@ import Footer from "components/footer";
 import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
 import { useUser } from "lib/hooks";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 460px);
   background-color: #fafafa;
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     min-height: calc(100vh - 320px);
   `}
 `;

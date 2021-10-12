@@ -22,6 +22,7 @@ import LoginForm from "components/forms/login";
 import SignupForm from "components/forms/signup";
 import { breakpoint } from "styled-components-breakpoint";
 import Container from "components/shared/container";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 const customTheme = {
   global: {
@@ -104,7 +105,7 @@ const StyledGrommet = styled(Grommet)`
   height: auto !important;
   width: auto !important;
   background-color: transparent;
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     justify-content: flex-end;
     display: flex;
   `}
@@ -114,7 +115,7 @@ const FormContainer = styled.div`
   background-color: white;
   padding: 1em;
   max-width: initial;
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
       max-width: 400px;
       flex: 1;
   `}

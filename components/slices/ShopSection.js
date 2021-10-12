@@ -6,6 +6,7 @@ import { Accordion, AccordionPanel, Box, Select } from "grommet";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 const ProductList = styled.ul`
   margin: 0;
@@ -18,7 +19,7 @@ const ProductList = styled.ul`
   grid-column-gap: 10px;
   grid-row-gap: 10px;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     margin-top: 0;
     grid-template-columns: repeat(4, 1fr);
   `}
@@ -28,7 +29,7 @@ const DesktopGrid = styled.div`
   margin-top: 1em;
   display: block;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     display: grid;
     grid-template-columns: 20% 80%;
     grid-template-rows: repeat(auto-fill, 1fr);

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 export const Container = styled.div`
   max-width: 87.5%;
@@ -17,7 +18,7 @@ export const DesktopContainer = styled.div`
     word-break: break-all;
   }
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     max-width: 87.5%;
   `}
 `;

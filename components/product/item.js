@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
 import { FluidSkeleton } from "components/shared/skeleton";
 import Skeleton from "react-loading-skeleton";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 const ProductListItem = styled.li`
   position: relative;
@@ -37,7 +38,7 @@ const ProductLink = styled.a`
   top: 0;
   left: 0;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     display: none;
   `}
 `;

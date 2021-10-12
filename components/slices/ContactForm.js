@@ -13,6 +13,7 @@ import ContactUsForm from "components/forms/contact-us";
 import { Colors } from "components/shared/colors";
 import MetadataContext from "components/shared/context/metadata";
 import { extractText } from "lib/utils";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 const ContactBg = styled(SectionContainer)`
   flex: 1;
@@ -42,7 +43,7 @@ const ContactBubble = styled.div`
   padding: 1.5rem;
   border-radius: 1rem;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
@@ -80,19 +81,19 @@ const MapContainer = styled.div`
   height: 300px;
   margin-bottom: 2rem;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     height: 425px;
   `}
 `;
 
 const FormSection = styled.div`
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     max-width: 60%;
   `}
 `;
 
 const MapBottom = styled.div`
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -100,7 +101,7 @@ const MapBottom = styled.div`
 `;
 
 const ContactDetails = styled.div`
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     max-width: 50%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);

@@ -4,13 +4,14 @@ import { Colors } from "components/shared/colors";
 import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
 import Product from "./item";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 const RecommendationHeading = styled.h2`
   font-size: 1em;
   color: ${Colors.titleGray};
   padding: 0 1em;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     font-size: 1.5em;
     padding: 0;
   `}
@@ -27,7 +28,7 @@ const ProductList = styled.ul`
   grid-column-gap: 10px;
   grid-row-gap: 10px;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     grid-template-columns: repeat(6, 1fr);
   `}
 `;

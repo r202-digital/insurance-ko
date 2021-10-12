@@ -15,11 +15,12 @@ import { extractText } from "lib/utils";
 import { breakpoint } from "styled-components-breakpoint";
 import theme from "lib/theme";
 import { Colors } from "components/shared/colors";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 const HighlightSectionBg = styled(SectionContainer)`
   padding: 0;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     background-image: url(${({ image }) => image});
     background-size: 100% 100%;
     margin: 0;
@@ -35,7 +36,7 @@ const ShowcaseText = styled(HandwrittenText)`
 
 const SplitSection = styled(Container)`
   display: initial;
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     display: flex;
     justify-content: flex-end;
   `}
@@ -48,7 +49,7 @@ const Image = styled.img`
   object-fit: cover;
   object-position: left top;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     display: none;
   `}
 `;
@@ -70,7 +71,7 @@ const ContentSection = styled.div`
   justify-content: center;
   text-align: left;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     width: 40%;
   `}
 `;

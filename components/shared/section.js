@@ -4,12 +4,13 @@ import theme from "lib/theme";
 import { breakpoint } from "styled-components-breakpoint";
 import { Colors } from "./colors";
 import { Typography } from "@material-ui/core";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 export const CarouselContainer = styled(Box)`
   height: 13.6875em;
   width: 100%;
 
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     height: 100%;
     overflow: hidden;
     grid-area: 1 / 1 / 3 / 3;
@@ -18,7 +19,7 @@ export const CarouselContainer = styled(Box)`
 
 export const CarouselGrid = styled.div`
   margin-top: 0;
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     margin-top: 1em;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -30,7 +31,7 @@ export const CarouselGrid = styled.div`
 
 export const TopRightImage = styled.div`
   display: none;
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
     display: initial;
     grid-area: 1 / 3 / 2 / 4;
   `}
@@ -38,7 +39,7 @@ export const TopRightImage = styled.div`
 
 export const BottomRightImage = styled.div`
   display: none;
-  ${breakpoint("lg")`
+  ${BreakpointQuery("lg")`
   display: initial;
   grid-area: 2 / 3 / 3 / 4;
 `}
