@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
 
 //-----------------------|| MAIN LAYOUT ||-----------------------//
 
-const MainLayout = ({ children }) => {
+const MainAdminLayout = ({ children }) => {
   const [drawerOpen, setDrawerOpen] = useState(true);
   const classes = useStyles();
   const theme = useTheme();
@@ -118,8 +118,8 @@ const MainLayout = ({ children }) => {
   );
 };
 
-MainLayout.propTypes = {
+MainAdminLayout.propTypes = {
   children: PropTypes.node,
 };
 
-export default MainLayout;
+export default MainAdminLayout;

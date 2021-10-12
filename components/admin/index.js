@@ -31,18 +31,18 @@ const AdminDashboardLayout = () => {
             <Grid item xs={12}>
               <Grid container spacing={gridSpacing}>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
-                  <EarningCard isLoading={isLoading} />
+                  <EarningCard />
                 </Grid>
                 <Grid item lg={4} md={6} sm={6} xs={12}>
-                  <TotalOrderLineChartCard isLoading={isLoading} />
+                  <TotalOrderLineChartCard />
                 </Grid>
                 <Grid item lg={4} md={12} sm={12} xs={12}>
                   <Grid container spacing={gridSpacing}>
                     <Grid item sm={6} xs={12} md={6} lg={12}>
-                      <TotalIncomeDarkCard isLoading={isLoading} />
+                      <TotalIncomeDarkCard />
                     </Grid>
                     <Grid item sm={6} xs={12} md={6} lg={12}>
-                      <TotalIncomeLightCard isLoading={isLoading} />
+                      <TotalIncomeLightCard />
                     </Grid>
                   </Grid>
                 </Grid>
@@ -51,10 +51,10 @@ const AdminDashboardLayout = () => {
             <Grid item xs={12}>
               <Grid container spacing={gridSpacing}>
                 <Grid item xs={12} md={8}>
-                  <TotalGrowthBarChart isLoading={isLoading} />
+                  <TotalGrowthBarChart />
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <PopularCard isLoading={isLoading} />
+                  <PopularCard />
                 </Grid>
               </Grid>
             </Grid>

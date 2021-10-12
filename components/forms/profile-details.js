@@ -1,3 +1,4 @@
+import ProfileDetailsContext from "components/profile/context/profile-details-context";
 import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
 import { DateField, RoundFormField } from "components/shared/form/fields";
 import { Button, TextInput } from "grommet";
@@ -38,6 +39,8 @@ const SubmitButton = styled(Button)`
 const ProfileDetailsForm = () => {
   const [error, setError] = useState("");
   const [birthDate, setBirthdate] = useState(null);
+  const profileDetailsContainer = ProfileDetailsContext.useContainer();
+  const contextUser = profileDetailsContainer.contextProfileDetails;
 
   const onSubmit = (val) => {
     console.log(val);
@@ -46,6 +49,10 @@ const ProfileDetailsForm = () => {
 
   const { form, handleSubmit, values, pristine, submitting } = useForm({
     onSubmit,
+    initialValues: {
+      firstName: contextUser.firstName,
+      lastName: contextUser.lastName,
+    },
     validate: (values) => {
       const errors = {};
       if (!values.firstName) {

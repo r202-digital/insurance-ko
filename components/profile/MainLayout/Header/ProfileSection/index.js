@@ -38,7 +38,7 @@ import User1 from "public/icons/user-round.svg";
 import { customization } from "components/profile/customization";
 import { useSWRConfig } from "swr";
 import Router from "next/router";
-import { useUser } from "lib/hooks";
+import ProfileDetailsContext from "components/profile/context/profile-details-context";
 
 // style const
 const useStyles = makeStyles((theme) => ({
@@ -123,12 +123,12 @@ const ProfileSection = () => {
   const classes = useStyles();
   const theme = useTheme();
   // const { mutate } = useSWRConfig();
-  const { user } = useUser();
 
   const [sdm, setSdm] = React.useState(true);
   const [notification, setNotification] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
-
+  const profileDetailsContainer = ProfileDetailsContext.useContainer();
+  const contextUser = profileDetailsContainer.contextProfileDetails;
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const handleListItemClick = (event, index) => {
@@ -220,7 +220,8 @@ const ProfileSection = () => {
                           variant="h4"
                           className={classes.name}
                         >
-                          {user?.firstName || ""} {user?.lastName || ""}
+                          {contextUser?.firstName || ""}{" "}
+                          {contextUser?.lastName || ""}
                         </Typography>
                       </Grid>
                       {/* <Grid item>

@@ -11,7 +11,9 @@ import clsx from "clsx";
 // project imports
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import { drawerWidth } from "lib/constant";
+import { drawerWidth, initialProfileDetails } from "lib/constant";
+import { useUser } from "lib/hooks";
+import ProfileDetailsContext from "../context/profile-details-context";
 
 // style constant
 const useStyles = makeStyles((theme) => ({
@@ -73,6 +75,7 @@ const MainLayout = ({ children }) => {
   const classes = useStyles();
   const theme = useTheme();
   const matchDownMd = useMediaQuery(theme.breakpoints.down("md"));
+  const { user } = useUser();
 
   // Handle left drawer
   const handleLeftDrawerToggle = () => {
@@ -85,36 +88,43 @@ const MainLayout = ({ children }) => {
   }, [matchDownMd]);
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      {/* header */}
-      <AppBar
-        enableColorOnDark
-        position="fixed"
-        color="inherit"
-        elevation={0}
-        className={drawerOpen ? classes.appBarWidth : classes.appBar}
-      >
-        <Toolbar>
-          <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
-        </Toolbar>
-      </AppBar>
+    <ProfileDetailsContext.Provider
+      initialState={user || initialProfileDetails}
+    >
+      <div className={classes.root}>
+        <CssBaseline />
+        {/* header */}
+        <AppBar
+          enableColorOnDark
+          position="fixed"
+          color="inherit"
+          elevation={0}
+          className={drawerOpen ? classes.appBarWidth : classes.appBar}
+        >
+          <Toolbar>
+            <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
+          </Toolbar>
+        </AppBar>
 
-      {/* drawer */}
-      <Sidebar drawerOpen={drawerOpen} drawerToggle={handleLeftDrawerToggle} />
+        {/* drawer */}
+        <Sidebar
+          drawerOpen={drawerOpen}
+          drawerToggle={handleLeftDrawerToggle}
+        />
 
-      {/* main content */}
-      <main
-        className={clsx([
-          classes.content,
-          {
-            [classes.contentShift]: drawerOpen,
-          },
-        ])}
-      >
-        <div>{children}</div>
-      </main>
-    </div>
+        {/* main content */}
+        <main
+          className={clsx([
+            classes.content,
+            {
+              [classes.contentShift]: drawerOpen,
+            },
+          ])}
+        >
+          <div>{children}</div>
+        </main>
+      </div>
+    </ProfileDetailsContext.Provider>
   );
 };
 
