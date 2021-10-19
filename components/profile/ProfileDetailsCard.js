@@ -98,7 +98,7 @@ const ProfileDetailsCard = ({ isLoading }) => {
               </Tab>
               <Tab title="Dependents">
                 <Box fill pad="large" align="center">
-                  Sample 2
+                  Sample
                 </Box>
               </Tab>
             </Tabs>
