@@ -1,18 +1,13 @@
-import { CardContent, Typography, Divider } from "@material-ui/core";
+import { CardContent } from "@material-ui/core";
 // project imports
 import MainCard from "components/cards/MainCard";
-import { Flex } from "components/shared/container";
-import { Grommet, grommet, Tab, Tabs, Box, Grid } from "grommet";
+import ProfileDetailsForm from "components/forms/profile-details";
+import { Colors } from "components/shared/colors";
+import { Box, Grommet, grommet, Tab, Tabs } from "grommet";
+import { deepMerge } from "grommet/utils";
 import PropTypes from "prop-types";
 import React from "react";
 import styled, { css } from "styled-components";
-import { breakpoint } from "styled-components-breakpoint";
-import { deepMerge } from "grommet/utils";
-import { Colors } from "components/shared/colors";
-import { gridSpacing } from "lib/constant";
-import theme from "lib/theme";
-import { Breakpoint } from "components/shared/breakpoints";
-import ProfileDetailsForm from "components/forms/profile-details";
 
 const tabTheme = deepMerge(grommet, {
   global: {
