@@ -1,12 +1,15 @@
 import ProfileDetailsContext from "components/profile/context/profile-details-context";
-import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
+import { BreakpointQuery } from "components/shared/breakpoints";
 import { Colors } from "components/shared/colors";
 import { DateField, RoundFormField } from "components/shared/form/fields";
+import dayjs from "dayjs";
 import { Button, TextInput } from "grommet";
 import React, { useState } from "react";
 import { useField, useForm } from "react-final-form-hooks";
 import styled from "styled-components";
-import dayjs from "dayjs";
+import axios from "axios";
+import { useUser } from "lib/hooks";
+import { useSWRConfig } from "swr";
 
 const FormGrid = styled.div`
   display: grid;
@@ -27,9 +30,19 @@ const CountryGrid = styled.div`
 `;
 
 const StyledError = styled.span`
-  font-size: 0.75em;
+  display: block;
+  font-size: 1em;
   color: red;
-  padding: 0 0.5em;
+  padding: 0.5em 0;
+  font-weight: 700;
+`;
+
+const StyledSuccess = styled.span`
+  display: block;
+  font-size: 1em;
+  color: green;
+  padding: 0.5em 0;
+  font-weight: 700;
 `;
 
 const SubmitButton = styled(Button)`
@@ -94,26 +107,57 @@ const GenderField = styled(RoundFormField)`
 `;
 
 const ProfileDetailsForm = () => {
+  const { mutate } = useSWRConfig();
+  const user = useUser();
+  const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-  const [birthDate, setBirthdate] = useState(null);
-  const [gender, setGender] = useState("");
   const profileDetailsContainer = ProfileDetailsContext.useContainer();
+  const { setContextProfileDetails } = profileDetailsContainer;
   const contextUser = profileDetailsContainer.contextProfileDetails;
+  const [birthDate, setBirthdate] = useState(dayjs(contextUser.birthDate));
+  const [gender, setGender] = useState(contextUser.gender);
 
-  const onSubmit = (val) => {
+  const onSubmit = async (val) => {
     const parsedVal = {
       ...val,
-      birthDate: dayjs(birthDate).format("DD/MM/YYYY"),
+      email: contextUser.email,
+      birthDate: birthDate ? dayjs(birthDate).format("MM/DD/YYYY") : "",
       gender: gender,
     };
-    console.log(parsedVal);
+    try {
+      await axios.post("/api/update-user", parsedVal);
+      setContextProfileDetails(parsedVal);
+      mutate("/api/profile", () => ({
+        ...user,
+        user: parsedVal,
+      }));
+
+      setSuccess("Success!");
+
+      setTimeout(() => {
+        setSuccess("");
+      }, 4000);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const { form, handleSubmit, values, pristine, submitting } = useForm({
     onSubmit,
     initialValues: {
-      firstName: contextUser.firstName,
-      lastName: contextUser.lastName,
+      email: contextUser.email,
+      firstName: contextUser.firstName || "",
+      lastName: contextUser.lastName || "",
+      postalCode: contextUser.postalCode || "",
+      middleName: contextUser.middleName || "",
+      suffix: contextUser.suffix || "",
+      maritalStatus: contextUser.maritalStatus || "",
+      firstAddress: contextUser.firstAddress || "",
+      secondAddress: contextUser.secondAddress || "",
+      city: contextUser.city || "",
+      province: contextUser.province || "",
+      country: contextUser.country || "",
+      phone: contextUser.phone || "",
     },
     validate: (values) => {
       const errors = {};
@@ -125,6 +169,7 @@ const ProfileDetailsForm = () => {
     },
   });
 
+  const emailField = useField("email", form);
   const firstNameField = useField("firstName", form);
   const lastNameField = useField("lastName", form);
   const middleNameField = useField("middleName", form);
@@ -141,8 +186,16 @@ const ProfileDetailsForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       {error && <StyledError>{error}</StyledError>}
+      {success && <StyledSuccess>{success}</StyledSuccess>}
+
       <FormGrid>
         <div>
+          <RoundFormField label="Email" name="email">
+            <TextInput {...emailField.input} disabled />
+            {emailField.meta.touched && emailField.meta.error && (
+              <StyledError>{emailField.meta.error}</StyledError>
+            )}
+          </RoundFormField>
           <RoundFormField label="First Name" name="firstName">
             <TextInput {...firstNameField.input} />
             {firstNameField.meta.touched && firstNameField.meta.error && (
