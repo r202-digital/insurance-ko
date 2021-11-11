@@ -11,7 +11,7 @@ const AdminProfile = ({ metadata }) => {
   const user = useUser();
   const metadataContext = MetadataContext.useContainer();
 
-  console.log(user);
+  // console.log(user);
   useEffect(() => {
     Router.prefetch("/admin/products");
     Router.prefetch("/admin/analytics");

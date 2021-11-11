@@ -14,6 +14,13 @@ import {
 } from "components/shared/section";
 import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
+import { CgChevronDownO } from "react-icons/cg";
+import styled from "styled-components";
+import { Colors } from "components/shared/colors";
+
+const DownIcon = styled(CgChevronDownO)`
+  margin-top: 20px;
+`;
 
 const SectionParagraph = ({ slice }) => {
   const { primary } = slice;
@@ -28,6 +35,7 @@ const SectionParagraph = ({ slice }) => {
         <ParagraphText>
           <RichText render={paragraph} />
         </ParagraphText>
+        <DownIcon size={30} color={Colors.brand} />
       </SectionContainer>
     </Container>
   );

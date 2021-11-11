@@ -80,6 +80,7 @@ export const ParagraphText = styled(Text)`
   font-size: 0.875em;
   line-height: 1;
   margin: 0;
+
   p {
     font-family: Montserrat;
     font-size: 1em;
@@ -89,11 +90,23 @@ export const ParagraphText = styled(Text)`
 `;
 
 export const SectionBg = styled(SectionContainer)`
-  background-image: url(${({ image }) => image});
-  background-size: 100% 100%;
   margin: 0;
   padding: 5.5em 0;
   max-width: initial;
+  ${({ mobileBg, image }) =>
+    mobileBg
+      ? `
+      background: ${mobileBg};
+
+      ${BreakpointQuery("lg")`
+      background-image: url(${image});
+      background-size: 100% 100%;
+      `}
+  `
+      : `
+    background-image: url(${image});
+    background-size: 100% 100%;
+  `}
 `;
 
 export const YellowTextButton = styled(Button)`

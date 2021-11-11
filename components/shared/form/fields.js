@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SingleDatePicker } from "react-dates";
 import styled from "styled-components";
 import { Colors } from "../colors";
+import dayjs from "dayjs";
 
 export const StyledFormField = styled(FormField)`
   label {
@@ -64,15 +65,18 @@ const DateFieldContainer = styled.div`
       & > div {
         width: 100%;
 
-        border-radius: 1rem;
+        border-radius: 3rem;
         border: 1px solid ${Colors.borderGray};
 
         & > div:first-of-type {
-          border-radius: 1rem;
+          border-radius: 3rem;
           width: 100%;
 
           input {
-            border-radius: 1rem;
+            border-radius: 3rem;
+            font-size: 1rem;
+            padding-left: 1rem;
+
             &.DateInput_input__focused {
               border-bottom: initial;
             }
@@ -86,7 +90,10 @@ const DateFieldContainer = styled.div`
 export const DateField = ({ id, label, value, setValue, ...props }) => {
   const [date, setDate] = useState("");
   const [focused, setFocused] = useState(false);
-
+  const falseFunc = (e) => {
+    const date = dayjs(e);
+    return date.isAfter(dayjs());
+  };
   return (
     <DateFieldContainer>
       <DateFieldLabel>{label || "Date Field"}</DateFieldLabel>
@@ -97,6 +104,7 @@ export const DateField = ({ id, label, value, setValue, ...props }) => {
         onFocusChange={({ focused }) => setFocused(focused)}
         id={id || "date-picker"}
         placeholder=""
+        isOutsideRange={falseFunc}
       />
     </DateFieldContainer>
   );

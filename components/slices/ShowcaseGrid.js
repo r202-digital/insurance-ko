@@ -1,21 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import { Carousel, Image, Grid, Box, Text } from "grommet";
+import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
 import { Container } from "components/shared/container";
 import {
-  CarouselContainer,
-  CarouselGrid,
-  TopRightImage,
-  BottomRightImage,
-  GridImage,
-  SectionContainer,
-  SectionHeading,
   HandwrittenText,
-  ParagraphText,
   SectionBg,
+  SectionHeading,
 } from "components/shared/section";
-import { RichText } from "prismic-reactjs";
+import { Box, Grid, Text } from "grommet";
 import { extractText } from "lib/utils";
+import React from "react";
+import styled from "styled-components";
 
 const ShowcaseImage = styled.img`
   height: 100%;
@@ -31,8 +24,19 @@ const ShowcaseText = styled(HandwrittenText)`
   margin-bottom: 0.5em;
 `;
 
-const GridContainer = styled(Grid)`
-  margin: 0 6em;
+const GridContainer = styled(Box)`
+  & > div {
+    margin-bottom: 3em;
+  }
+
+  ${BreakpointQuery("md")`
+    margin: 0 6em;
+    margin-bottom: 0;
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: repeat(3, minmax(auto, 1fr));
+    grid-gap: 48px 48px;
+  `}
 `;
 
 const ItemHeading = styled(Text)`
@@ -60,13 +64,7 @@ const ShowcaseGrid = ({ slice }) => {
         <ShowcaseText as="h3" color="yellow">
           {subheading}
         </ShowcaseText>
-        <GridContainer
-          columns={{
-            count: 3,
-            size: "auto",
-          }}
-          gap="large"
-        >
+        <GridContainer>
           {items.map((item, index) => {
             const { image } = item;
             const itemHeading = extractText(item.item_heading);

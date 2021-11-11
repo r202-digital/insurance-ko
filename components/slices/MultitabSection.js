@@ -10,6 +10,7 @@ import {
 } from "components/shared/section";
 import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
 const MultitabSectionBg = styled(SectionBg)`
   padding: 4em 0;
@@ -21,12 +22,16 @@ const ShowcaseText = styled(Text)`
 `;
 
 const SplitSection = styled(Container)`
-  display: grid;
-  grid-template-columns: 60% 1fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 60px;
-  grid-row-gap: 0px;
+  display: flex;
+  flex-direction: column-reverse;
   margin-top: 1rem;
+  ${BreakpointQuery("lg")`
+    display: grid;
+    grid-template-columns: 60% 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 60px;
+    grid-row-gap: 0px;
+  `}
 `;
 
 const ImageContainer = styled.div`
@@ -52,7 +57,12 @@ const SectionButton = styled(YellowTextButton)`
 const ContentSection = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+
+  ${BreakpointQuery("lg")`
+    align-items: flex-start;
+  `}
 `;
 
 const ItemContent = styled.div`
@@ -77,6 +87,30 @@ const ItemContent = styled.div`
   }
 `;
 
+const StyledTabs = styled(Tabs)`
+  & > div {
+    &:first-of-type {
+      display: flex;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      justify-content: flex-start;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      ${BreakpointQuery("lg")`
+        justify-content: center;
+      `}
+    }
+  }
+`;
+
 const myCustomLink = (type, element, content, children, index) => (
   <a href={element.data.url}>
     <SectionButton primary label={content} />
@@ -97,7 +131,7 @@ const MultitabSection = ({ slice }) => {
       </SectionHeading>
       <ShowcaseText>{subheading}</ShowcaseText>
 
-      <Tabs activeIndex={index} onActive={onActive}>
+      <StyledTabs activeIndex={index} onActive={onActive}>
         {items.map((item, index) => (
           <Tab
             key={`${JSON.stringify(item)}-${index}`}
@@ -123,7 +157,7 @@ const MultitabSection = ({ slice }) => {
             </SplitSection>
           </Tab>
         ))}
-      </Tabs>
+      </StyledTabs>
     </MultitabSectionBg>
   );
 };

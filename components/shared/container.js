@@ -26,4 +26,19 @@ export const DesktopContainer = styled.div`
 export const Flex = styled.div`
   display: flex;
 `;
+
+export const MobileOnly = styled.div`
+  ${BreakpointQuery("lg")`
+    display: none;
+  `}
+`;
+
+export const DesktopOnly = styled.div`
+  display: none;
+
+  ${BreakpointQuery("lg")`
+    display: initial;
+  `}
+`;
+
 export default Container;
