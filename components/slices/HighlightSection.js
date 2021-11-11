@@ -1,32 +1,29 @@
-import React from "react";
-import styled from "styled-components";
-import { Grid, Box, Text } from "grommet";
+import { BreakpointQuery } from "components/shared/breakpoints";
+import { Colors } from "components/shared/colors";
 import { Container } from "components/shared/container";
 import {
-  SectionHeading,
   HandwrittenText,
   ParagraphText,
-  SectionBg,
-  YellowTextButton,
   SectionContainer,
+  YellowTextButton,
 } from "components/shared/section";
-import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
-import { breakpoint } from "styled-components-breakpoint";
-import theme from "lib/theme";
-import { Colors } from "components/shared/colors";
-import { BreakpointQuery } from "components/shared/breakpoints";
+import { RichText } from "prismic-reactjs";
+import React from "react";
+import styled from "styled-components";
 
 const HighlightSectionBg = styled(SectionContainer)`
   padding: 0;
 
-  ${BreakpointQuery("lg")`
-    background-image: url(${({ image }) => image});
-    background-size: 100% 100%;
-    margin: 0;
-    max-width: initial;
-    padding: 10em 0;
-  `};
+  ${({ image }) =>
+    BreakpointQuery("lg")(`
+      background-image: url(${image});
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      max-width: initial;
+      padding: 10em 0;
+  `)};
 `;
 
 const ShowcaseText = styled(HandwrittenText)`

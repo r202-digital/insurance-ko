@@ -28,11 +28,15 @@ const ShowcaseText = styled(HandwrittenText)`
   color: ${Colors.lightYellow};
   font-size: 2.5em;
 
-  ${BreakpointQuery("lg")`
+  ${({ isBig }) => {
+    const color = isBig ? Colors.brand : Colors.lightgreen;
+
+    return BreakpointQuery("lg")(`
     margin-top: 0;
     font-size: 4em;
-    color: ${({ isBig }) => (isBig ? Colors.brand : Colors.green)};
-  `}
+    color: ${color};
+  `);
+  }}
 `;
 
 const StyledHeading = styled(SectionHeading)`
