@@ -10,10 +10,14 @@ import MetadataContext from "components/shared/context/metadata";
 import ProductHero from "components/product/hero";
 import ProductTabs from "components/product/tabs";
 import VariantContext from "components/product/context";
+import ProfileDetailsContext from "components/profile/context/profile-details-context";
 import Recommendations from "components/product/recommendations";
+import { useUser } from "lib/hooks";
+import { initialProfileDetails } from "lib/constant";
 
 const ProductPage = ({ productProps = {}, metadata = {} }) => {
   const metadataContext = MetadataContext.useContainer();
+  const user = useUser();
   useEffect(() => {
     metadataContext.setContextMetadata(metadata.data);
   }, []);
@@ -22,11 +26,15 @@ const ProductPage = ({ productProps = {}, metadata = {} }) => {
     return (
       <DefaultLayout>
         <VariantContext.Provider>
-          <DesktopContainer>
-            <ProductHero product={productProps} />
-            <ProductTabs product={productProps} />
-            <Recommendations product={productProps} />
-          </DesktopContainer>
+          <ProfileDetailsContext.Provider
+            initialState={user || initialProfileDetails}
+          >
+            <DesktopContainer>
+              <ProductHero product={productProps} />
+              <ProductTabs product={productProps} />
+              <Recommendations product={productProps} />
+            </DesktopContainer>
+          </ProfileDetailsContext.Provider>
         </VariantContext.Provider>
       </DefaultLayout>
     );

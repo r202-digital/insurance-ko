@@ -1,22 +1,14 @@
-import React, { useEffect } from "react";
 import { Container } from "components/shared/container";
-import {
-  Anchor,
-  Box,
-  Button,
-  Header as GrommetHeader,
-  Menu,
-  Nav,
-  ResponsiveContext,
-} from "grommet";
+import { Anchor, Box, Button, Header as GrommetHeader, Nav } from "grommet";
 import Link from "next/link";
 import Router from "next/router";
+import React, { useEffect } from "react";
 import { FiSearch, FiShoppingCart, FiUser } from "react-icons/fi";
 // import { GrMenu } from "react-icons/gr";
 import styled from "styled-components";
-import { Colors } from "./shared/colors";
 import MobileMenu from "./menu";
 import { BreakpointQuery } from "./shared/breakpoints";
+import { Colors } from "./shared/colors";
 
 const LogoContainer = styled(Box)`
   height: 56px;
@@ -119,6 +111,9 @@ const Header = ({ hasUser, user }) => {
               <Link href="/partners">
                 <NavLink label="Partners" />
               </Link>
+              <Link href="/shop">
+                <NavLink label="Shop" />
+              </Link>
               <Link href="/contact">
                 <NavLink label="Contact" />
               </Link>
@@ -136,8 +131,11 @@ const Header = ({ hasUser, user }) => {
             />
             <Button
               icon={<FiShoppingCart size="16px" color={Colors.brand} />}
-              onClick={() => {}}
+              onClick={() => {
+                Router.push("/cart");
+              }}
             />
+
             <Button
               icon={<FiUser size="16px" color={Colors.brand} />}
               onClick={(e) => {

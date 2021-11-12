@@ -1,3 +1,5 @@
+import { Alert } from "@material-ui/core";
+import ProfileDetailsContext from "components/profile/context/profile-details-context";
 import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
 import { Colors } from "components/shared/colors";
 import { Flex } from "components/shared/container";
@@ -144,7 +146,7 @@ const Price = styled.h3`
 
 const StatusTag = styled.p`
   color: ${Colors.brand};
-  margin: 0;
+  margin: 0.5em 0;
 `;
 
 const PlanSelection = styled.div`
@@ -199,12 +201,12 @@ const ActionSection = styled.div`
 
 const ProductHero = ({ product }) => {
   const variantContext = VariantContext.useContainer();
-
-  // console.log(variantContext.contextVariant);
   const { price, planOptions } = product;
   const mapOptions = planOptions.map((option) => option.name);
-
+  const profileDetailsContainer = ProfileDetailsContext.useContainer();
+  const { contextProfileDetails } = profileDetailsContainer;
   const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [success, setSuccess] = React.useState("");
   const [sliderRef] = useKeenSlider({
     initial: 0,
     slideChanged: (s) => {
@@ -270,6 +272,8 @@ const ProductHero = ({ product }) => {
         <Description>
           <ProductName>{product.name}</ProductName>
           <StatusTag>Available</StatusTag>
+          {success && <Alert severity="success">{success}</Alert>}
+
           <PlanSelection>
             <label>Plan options:</label>
             <Select
@@ -287,7 +291,13 @@ const ProductHero = ({ product }) => {
             <ButtonRow>
               <SecondaryYellowGreenButton
                 label="Add to Cart"
-                onClick={() => {}}
+                onClick={() => {
+                  setSuccess("Added to cart!");
+                  console.log(contextProfileDetails.user);
+                  setTimeout(() => {
+                    setSuccess("");
+                  }, 3000);
+                }}
               />
               <PrimaryYellowGreenButton label="Buy Now" onClick={() => {}} />
             </ButtonRow>
