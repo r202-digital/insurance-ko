@@ -16,7 +16,8 @@ const CartListContainer = styled.ul`
 const CartItem = styled.li``;
 
 function CartList() {
-  const { user } = useUser();
+  const { user = {} } = useUser();
+  console.log(user);
   const { cart = [] } = user;
   return (
     <CartContainer>

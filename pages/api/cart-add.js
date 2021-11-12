@@ -4,6 +4,7 @@ import { setTokenCookie } from "lib/auth-cookies";
 export default async function cartAdd(req, res) {
   try {
     const data = req.body;
+    console.log(data);
     const token = await encryptSession(data);
     setTokenCookie(res, token);
     res.status(200).json({ cartAdd: data });

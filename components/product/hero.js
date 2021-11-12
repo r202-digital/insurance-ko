@@ -1,6 +1,6 @@
 import { Alert } from "@material-ui/core";
-import ProfileDetailsContext from "components/profile/context/profile-details-context";
-import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
+import axios from "axios";
+import { BreakpointQuery } from "components/shared/breakpoints";
 import { Colors } from "components/shared/colors";
 import { Flex } from "components/shared/container";
 import {
@@ -10,15 +10,15 @@ import {
 import { Anchor, Button, Select } from "grommet";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
+import { useUser } from "lib/hooks";
 import NextImage from "next/image";
 import Link from "next/link";
 import React from "react";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { RiHeart3Line } from "react-icons/ri";
 import styled from "styled-components";
+import { useSWRConfig } from "swr";
 import VariantContext from "./context";
-import { useUser } from "lib/hooks";
-import axios from "axios";
 
 const HeroContainer = styled.div`
   background-color: white;
@@ -202,6 +202,7 @@ const ActionSection = styled.div`
 `;
 
 const ProductHero = ({ product }) => {
+  const { mutate } = useSWRConfig();
   const userHook = useUser();
   const variantContext = VariantContext.useContainer();
   const { price, planOptions } = product;
@@ -305,6 +306,11 @@ const ProductHero = ({ product }) => {
                         },
                       ],
                     };
+                    mutate("/api/profile", () => ({
+                      hasUser: true,
+                      user: obj,
+                      done: true,
+                    }));
                     await axios.post("/api/cart-add", obj);
 
                     setTimeout(() => {
