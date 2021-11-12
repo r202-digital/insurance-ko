@@ -1,6 +1,7 @@
 import React from "react";
 import { SectionHeading } from "components/shared/section";
 import styled from "styled-components";
+import { useUser } from "lib/hooks";
 
 const CartContainer = styled.div`
   padding: 1em;
@@ -14,14 +15,19 @@ const CartListContainer = styled.ul`
 
 const CartItem = styled.li``;
 
-function CartList(props) {
+function CartList() {
+  const { user } = useUser();
+  const { cart = [] } = user;
   return (
     <CartContainer>
       <SectionHeading>My Orders</SectionHeading>
       <CartListContainer>
-        <CartItem>
-          <p>Sample</p>
-        </CartItem>
+        {user &&
+          cart.map(() => (
+            <CartItem>
+              <p>Sample</p>
+            </CartItem>
+          ))}
       </CartListContainer>
     </CartContainer>
   );

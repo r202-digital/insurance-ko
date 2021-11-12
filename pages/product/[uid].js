@@ -17,7 +17,6 @@ import { initialProfileDetails } from "lib/constant";
 
 const ProductPage = ({ productProps = {}, metadata = {} }) => {
   const metadataContext = MetadataContext.useContainer();
-  const user = useUser();
   useEffect(() => {
     metadataContext.setContextMetadata(metadata.data);
   }, []);
@@ -26,15 +25,11 @@ const ProductPage = ({ productProps = {}, metadata = {} }) => {
     return (
       <DefaultLayout>
         <VariantContext.Provider>
-          <ProfileDetailsContext.Provider
-            initialState={user || initialProfileDetails}
-          >
-            <DesktopContainer>
-              <ProductHero product={productProps} />
-              <ProductTabs product={productProps} />
-              <Recommendations product={productProps} />
-            </DesktopContainer>
-          </ProfileDetailsContext.Provider>
+          <DesktopContainer>
+            <ProductHero product={productProps} />
+            <ProductTabs product={productProps} />
+            <Recommendations product={productProps} />
+          </DesktopContainer>
         </VariantContext.Provider>
       </DefaultLayout>
     );

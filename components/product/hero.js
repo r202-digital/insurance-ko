@@ -17,6 +17,8 @@ import { IoIosArrowDropleft } from "react-icons/io";
 import { RiHeart3Line } from "react-icons/ri";
 import styled from "styled-components";
 import VariantContext from "./context";
+import { useUser } from "lib/hooks";
+import axios from "axios";
 
 const HeroContainer = styled.div`
   background-color: white;
@@ -200,11 +202,10 @@ const ActionSection = styled.div`
 `;
 
 const ProductHero = ({ product }) => {
+  const userHook = useUser();
   const variantContext = VariantContext.useContainer();
   const { price, planOptions } = product;
   const mapOptions = planOptions.map((option) => option.name);
-  const profileDetailsContainer = ProfileDetailsContext.useContainer();
-  const { contextProfileDetails } = profileDetailsContainer;
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [success, setSuccess] = React.useState("");
   const [sliderRef] = useKeenSlider({
@@ -291,12 +292,25 @@ const ProductHero = ({ product }) => {
             <ButtonRow>
               <SecondaryYellowGreenButton
                 label="Add to Cart"
-                onClick={() => {
-                  setSuccess("Added to cart!");
-                  console.log(contextProfileDetails.user);
-                  setTimeout(() => {
-                    setSuccess("");
-                  }, 3000);
+                onClick={async () => {
+                  const { user } = userHook;
+                  if (user) {
+                    setSuccess("Added to cart!");
+                    const obj = {
+                      ...user,
+                      cart: [
+                        ...(user.cart || []),
+                        {
+                          product: product,
+                        },
+                      ],
+                    };
+                    await axios.post("/api/cart-add", obj);
+
+                    setTimeout(() => {
+                      setSuccess("");
+                    }, 3000);
+                  }
                 }}
               />
               <PrimaryYellowGreenButton label="Buy Now" onClick={() => {}} />
