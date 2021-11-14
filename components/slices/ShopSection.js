@@ -82,7 +82,7 @@ const FilterSection = () => {
 
 const ShopSection = () => {
   const productContainer = ProductContext.useContainer();
-  const { contextProduct } = productContainer;
+  const { contextProduct = [] } = productContainer;
   return (
     <DesktopContainer>
       <DesktopGrid>

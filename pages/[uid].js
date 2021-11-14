@@ -10,14 +10,22 @@ import ErrorPage from "pages/404";
 import MetadataContext from "components/shared/context/metadata";
 import { getProducts } from "lib/product";
 import ProductContext from "components/shared/context/product";
+import axios from "axios";
 
-const Page = ({ doc, menu, metadata, products }) => {
+const Page = ({ doc, menu, metadata, products, uid }) => {
   const metadataContext = MetadataContext.useContainer();
   const productContext = ProductContext.useContainer();
 
   useEffect(() => {
     metadataContext.setContextMetadata(metadata.data);
-    productContext.setContextProduct(products);
+    if (uid === "shop") {
+      axios.get(`/api/get-product`).then((res) => {
+        const {
+          data: { products },
+        } = res;
+        productContext.setContextProduct(products);
+      });
+    }
   }, []);
 
   if (doc && doc.data) {
@@ -44,25 +52,21 @@ export async function getStaticProps({
   previewData = {},
 }) {
   const { ref } = previewData;
+  const { uid } = params;
 
   const client = Client();
 
   const promiseArray = [
-    client.getByUID("page", params.uid, ref ? { ref } : null),
+    client.getByUID("page", uid, ref ? { ref } : null),
     client.getSingle("menu", ref ? { ref } : null),
     client.getSingle("metadata", ref ? { ref } : null),
   ];
-
-  if (params.uid === "shop") {
-    promiseArray.push(getProducts());
-  }
 
   const promises = await Promise.all(promiseArray);
 
   const doc = promises[0] || {};
   const menu = promises[1] || {};
   const metadata = promises[2] || {};
-  const products = promises[3] || [];
 
   return {
     props: {
@@ -70,7 +74,7 @@ export async function getStaticProps({
       menu,
       metadata,
       doc,
-      products,
+      uid,
     },
   };
 }
