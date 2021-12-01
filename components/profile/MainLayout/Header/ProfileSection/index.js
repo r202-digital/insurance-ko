@@ -235,7 +235,7 @@ const ProfileSection = () => {
                       <Card className={classes.card}>
                         <CardContent>
                           <Grid container spacing={3} direction="column">
-                            <Grid item>
+                            {/* <Grid item>
                               <Grid
                                 item
                                 container
@@ -257,7 +257,7 @@ const ProfileSection = () => {
                                   />
                                 </Grid>
                               </Grid>
-                            </Grid>
+                            </Grid> */}
                             <Grid item>
                               <Grid
                                 item
