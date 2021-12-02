@@ -184,8 +184,8 @@ const Footer = () => {
         <li>Questions? Comments?</li>
         <li>
           Email us at{" "}
-          <FooterLink href="mailto:info@insuranceko.com">
-            <u>info@insuranceko.com</u>
+          <FooterLink href={`mailto:${emailContext}`}>
+            <u>{emailContext}</u>
           </FooterLink>
         </li>
         <li>

@@ -1,32 +1,23 @@
-import { useEffect, useState } from "react";
-import Router from "next/router";
-import DefaultLayout from "layouts";
-import { Client } from "utils/prismicHelpers";
-import MetadataContext from "components/shared/context/metadata";
-import { useField, useForm } from "react-final-form-hooks";
-import styled, { css } from "styled-components";
-import {
-  Box,
-  Text,
-  Grommet,
-  FormField,
-  TextInput,
-  Button,
-  Tabs,
-  Tab,
-} from "grommet";
-import { grommet } from "grommet/themes";
-import { deepMerge } from "grommet/utils";
-import { Colors } from "components/shared/colors";
 import LoginForm from "components/forms/login";
 import SignupForm from "components/forms/signup";
-import { breakpoint } from "styled-components-breakpoint";
-import Container from "components/shared/container";
 import { BreakpointQuery } from "components/shared/breakpoints";
+import { Colors } from "components/shared/colors";
+import MetadataContext from "components/shared/context/metadata";
+import { CarouselContainer, SectionHeading } from "components/shared/section";
+import { Box, Carousel, Grommet, Tab, Tabs, Text } from "grommet";
+import { grommet } from "grommet/themes";
+import { deepMerge } from "grommet/utils";
+import DefaultLayout from "layouts";
+import NextImage from "next/image";
+import Router from "next/router";
+import { useEffect } from "react";
+import styled, { css } from "styled-components";
+import { Client } from "utils/prismicHelpers";
 
 const customTheme = {
   global: {
     font: {
+      family: "Open Sans",
       size: "16px",
     },
     input: {
@@ -34,12 +25,22 @@ const customTheme = {
     },
     colors: Colors,
   },
+  tabs: {
+    header: {
+      extend: ({ theme }) => css`
+        justify-content: flex-start;
+        border-radius: 20px;
+        padding: 2px;
+        border: 1px solid ${Colors.borderGray};
+        color: ${Colors.titleGray};
+      `,
+    },
+  },
   tab: {
     active: {
       background: Colors.lightgreen,
       color: "accent-1",
     },
-    // background: "dark-3",
     border: undefined,
     color: "white",
     hover: {
@@ -50,7 +51,7 @@ const customTheme = {
       bottom: undefined,
       horizontal: "small",
     },
-    extend: ({ theme }) => css`
+    extend: () => css`
       border-radius: 20px;
       transition: 0.3s;
 
@@ -101,24 +102,46 @@ const RichTabTitle = ({ label }) => (
 );
 
 const StyledGrommet = styled(Grommet)`
-  margin-top: 1em;
   height: auto !important;
   width: auto !important;
-  background-color: transparent;
-  ${BreakpointQuery("lg")`
-    justify-content: flex-end;
-    display: flex;
-  `}
+  background-color: ${Colors.brandDark};
+  display: flex;
 `;
 
 const FormContainer = styled.div`
+  border-radius: 20px;
   background-color: white;
-  padding: 1em;
-  max-width: initial;
+  padding: 3em;
+
+  & > div {
+    align-items: flex-start;
+  }
   ${BreakpointQuery("lg")`
-      max-width: 400px;
+      margin: 2.5em 4em;
       flex: 1;
   `}
+`;
+
+const SplitContainer = styled.div`
+  background-color: ${Colors.brandDarkTwo};
+  flex: 1;
+  ${BreakpointQuery("lg")`
+    display: grid;
+    grid-template-columns: 55% 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  `}
+`;
+
+const DarkHeading = styled(SectionHeading)`
+  color: ${Colors.brandDark};
+  font-size: 1.75em;
+  margin-top: 1.5em;
+`;
+
+const StyledImage = styled(NextImage)`
+  object-fit: cover;
 `;
 
 const Login = ({ metadata }) => {
@@ -132,11 +155,25 @@ const Login = ({ metadata }) => {
 
   return (
     <DefaultLayout>
-      <Container>
+      <SplitContainer>
+        <div>
+          <CarouselContainer>
+            <Carousel fill play={4000}>
+              <StyledImage src="/img/carousel-4.png" layout="fill" />
+              <StyledImage src="/img/carousel-4.png" layout="fill" />
+              <StyledImage src="/img/carousel-4.png" layout="fill" />
+            </Carousel>
+          </CarouselContainer>
+        </div>
         <StyledGrommet theme={deepMerge(grommet, customTheme)}>
           <FormContainer>
             <Tabs>
               <Tab title={<RichTabTitle label="Sign in" />}>
+                <DarkHeading as="h2">Lorem Ipsum Dolor!</DarkHeading>
+                <Text size="small">
+                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                  diam nonumy eirmod.
+                </Text>
                 <LoginForm />
               </Tab>
               <Tab title={<RichTabTitle label="Sign up" />}>
@@ -145,7 +182,7 @@ const Login = ({ metadata }) => {
             </Tabs>
           </FormContainer>
         </StyledGrommet>
-      </Container>
+      </SplitContainer>
     </DefaultLayout>
   );
 };

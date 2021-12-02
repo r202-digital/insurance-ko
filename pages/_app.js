@@ -14,10 +14,18 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import MetadataContext from "components/shared/context/metadata";
 import ProductContext from "components/shared/context/product";
+import styled from "styled-components";
+import { BreakpointQuery } from "components/shared/breakpoints";
 
+const StyledGrommet = styled(Grommet)`
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  min-height: 100%;
+`;
 function MyApp({ Component, pageProps }) {
   return (
-    <Grommet theme={theme}>
+    <StyledGrommet theme={theme}>
       <Head>
         <title>InsuranceKo</title>
       </Head>
@@ -46,13 +54,28 @@ function MyApp({ Component, pageProps }) {
           box-sizing: border-box;
           width: inherit;
         }
+
+        main {
+          min-height: calc(100vh - 460px);
+          display: flex;
+          flex-direction: column;
+        }
+        @media (min-width: 1024px) {
+          main {
+            min-height: calc(100vh - 300px);
+          }
+        }
+
+        #__next {
+          height: 100%;
+        }
       `}</style>
       <ProductContext.Provider>
         <MetadataContext.Provider>
           <Component {...pageProps} />
         </MetadataContext.Provider>
       </ProductContext.Provider>
-    </Grommet>
+    </StyledGrommet>
   );
 }
 

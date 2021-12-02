@@ -8,11 +8,9 @@ import { BreakpointQuery } from "components/shared/breakpoints";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 460px);
+  height: 100%;
   background-color: #fafafa;
-  ${BreakpointQuery("lg")`
-    min-height: calc(100vh - 320px);
-  `}
+  flex: 1;
 `;
 
 const Layout = ({ children }) => {
