@@ -1,18 +1,11 @@
 import LoginForm from "components/forms/login";
 import SignupForm from "components/forms/signup";
-import { BreakpointQuery } from "components/shared/breakpoints";
 import { Colors } from "components/shared/colors";
-import MetadataContext from "components/shared/context/metadata";
-import { CarouselContainer, SectionHeading } from "components/shared/section";
-import { Box, Carousel, Grommet, Tab, Tabs, Text } from "grommet";
+import { SectionHeading } from "components/shared/section";
+import { Box, Grommet, Tab, Tabs, Text } from "grommet";
 import { grommet } from "grommet/themes";
 import { deepMerge } from "grommet/utils";
-import DefaultLayout from "layouts";
-import NextImage from "next/image";
-import Router from "next/router";
-import { useEffect } from "react";
-import styled, { css } from "styled-components";
-import { Client } from "utils/prismicHelpers";
+import { styled, css } from "stitches.config";
 
 const customTheme = {
   global: {
@@ -27,13 +20,14 @@ const customTheme = {
   },
   tabs: {
     header: {
-      extend: ({ theme }) => css`
-        justify-content: flex-start;
-        border-radius: 20px;
-        padding: 2px;
-        border: 1px solid ${Colors.borderGray};
-        color: ${Colors.titleGray};
-      `,
+      extend: () =>
+        css({
+          justifyContent: "flex-start",
+          borderRadius: "20px",
+          padding: "2px",
+          border: `1px solid ${Colors.borderGray}`,
+          color: Colors.titleGray,
+        }),
     },
   },
   tab: {
@@ -51,14 +45,14 @@ const customTheme = {
       bottom: undefined,
       horizontal: "small",
     },
-    extend: () => css`
-      border-radius: 20px;
-      transition: 0.3s;
-
-      &:hover {
-        background: ${Colors.brand};
-      }
-    `,
+    extend: () =>
+      css({
+        borderRadius: "20px",
+        transition: "0.3s",
+        "&:hover": {
+          background: Colors.brand,
+        },
+      }),
   },
   formField: {
     label: {
@@ -84,12 +78,13 @@ const customTheme = {
       },
     },
     margin: "none",
-    extend: ({ theme }) => css`
-      input {
-        border-radius: 20px;
-        background-color: white;
-      }
-    `,
+    extend: () =>
+      css({
+        input: {
+          borderRadius: "20px",
+          backgroundColor: "white",
+        },
+      }),
   },
 };
 
@@ -101,32 +96,32 @@ const RichTabTitle = ({ label }) => (
   </Box>
 );
 
-const DarkHeading = styled(SectionHeading)`
-  color: ${Colors.brandDark};
-  font-size: 1.75em;
-  margin-top: 1.5em;
-`;
+const DarkHeading = styled(SectionHeading, {
+  color: Colors.brandDark,
+  fontSize: "1.75em",
+  marginTop: "1.5em",
+});
 
-const StyledGrommet = styled(Grommet)`
-  height: auto !important;
-  width: auto !important;
-  background-color: ${Colors.brandDark};
-  display: flex;
-`;
+const StyledGrommet = styled(Grommet, {
+  height: "auto !important",
+  width: "auto !important",
+  backgroundColor: Colors.brandDark,
+  display: "flex",
+});
 
-const FormContainer = styled.div`
-  border-radius: 20px;
-  background-color: white;
-  padding: 3em;
+const FormContainer = styled("div", {
+  borderRadius: "20px",
+  backgroundColor: "white",
+  padding: "3em",
+  "& > div": {
+    alignItems: "flex-start",
+  },
+  "@lg": {
+    margin: "2.5em 4em",
+    flex: "1",
+  },
+});
 
-  & > div {
-    align-items: flex-start;
-  }
-  ${BreakpointQuery("lg")`
-        margin: 2.5em 4em;
-        flex: 1;
-    `}
-`;
 const LoginContainer = () => {
   return (
     <StyledGrommet theme={deepMerge(grommet, customTheme)}>

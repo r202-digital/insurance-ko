@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import PrismicScript from "components/PrismicScript";
 import { ServerStyleSheet } from "styled-components";
+// import { getCssText } from "stitches.config";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -41,6 +42,10 @@ class MyDocument extends Document {
             as="font"
             crossOrigin=""
           />
+          {/* <style
+            id="stitches"
+            dangerouslySetInnerHTML={{ __html: getCssText() }}
+          /> */}
         </Head>
         <body>
           <Main />

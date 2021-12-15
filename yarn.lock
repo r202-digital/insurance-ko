@@ -1056,6 +1056,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stitches/react@npm:^1.2.6":
+  version: 1.2.6
+  resolution: "@stitches/react@npm:1.2.6"
+  peerDependencies:
+    react: ">= 16.3.0"
+  checksum: 416088cdde17a22d6cdb04cf1cf756c6e5fc291dd7e41f82ce422bb95432ad32b6d990e7264d996d367c40bbc674d61be087e4e1f7b23eea7f81ef6266373a9c
+  languageName: node
+  linkType: hard
+
 "@tabler/icons@npm:^1.41.2":
   version: 1.41.2
   resolution: "@tabler/icons@npm:1.41.2"
@@ -2608,9 +2617,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"faunadb@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "faunadb@npm:4.4.0"
+"faunadb@npm:^4.4.1":
+  version: 4.4.1
+  resolution: "faunadb@npm:4.4.1"
   dependencies:
     abort-controller: ^3.0.0
     base64-js: ^1.2.0
@@ -2622,7 +2631,7 @@ __metadata:
     fn-annotate: ^1.1.3
     object-assign: ^4.1.0
     util-deprecate: ^1.0.2
-  checksum: 5758cd919dd4e0820f7b0a64ba2bb096a940441d5d8420f3f6f875e01aadbfacb97140daf65a7669f53e8266c3adccaddb36a472ce22e6bdd2c853929bd918d5
+  checksum: d74d0a93321a207f5278e8e19630cfbe2ebb18a2a0ff6c729a339ccfa312dd53a2021c384e17b443bfee56dc8c7a27c577ce817a6d79e96b3fcab40789e281ff
   languageName: node
   linkType: hard
 
@@ -3278,6 +3287,7 @@ __metadata:
     "@material-ui/styles": ^5.0.0-beta.0
     "@material-ui/utils": ^5.0.0-beta.0
     "@prismicio/client": ^5.1.0
+    "@stitches/react": ^1.2.6
     "@tabler/icons": ^1.41.2
     apexcharts: ^3.28.1
     axios: ^0.21.1
@@ -3287,7 +3297,7 @@ __metadata:
     clsx: ^1.1.1
     cookie: ^0.4.1
     dayjs: ^1.10.6
-    faunadb: ^4.4.0
+    faunadb: ^4.4.1
     final-form: ^4.20.2
     formik: ^2.2.9
     framer-motion: ^4.1.17

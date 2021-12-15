@@ -1,3 +1,4 @@
+import LoginContainer from "components/forms/login-container";
 import { BreakpointQuery } from "components/shared/breakpoints";
 import { Colors } from "components/shared/colors";
 import MetadataContext from "components/shared/context/metadata";
@@ -9,10 +10,6 @@ import Router from "next/router";
 import { useEffect } from "react";
 import styled from "styled-components";
 import { Client } from "utils/prismicHelpers";
-import dynamic from "next/dynamic";
-const LoginContainer = dynamic(() =>
-  import("components/forms/login-container")
-);
 
 const SplitContainer = styled.div`
   background-color: ${Colors.brandDarkTwo};
