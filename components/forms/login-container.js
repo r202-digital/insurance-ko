@@ -20,14 +20,13 @@ const customTheme = {
   },
   tabs: {
     header: {
-      extend: () =>
-        css({
-          justifyContent: "flex-start",
-          borderRadius: "20px",
-          padding: "2px",
-          border: `1px solid ${Colors.borderGray}`,
-          color: Colors.titleGray,
-        }),
+      extend: () => `
+        justify-content: flex-start;
+        border-radius: 20px;
+        padding: 2px;
+        border: 1px solid ${Colors.borderGray};
+        color: ${Colors.titleGray};
+      `,
     },
   },
   tab: {
@@ -45,14 +44,14 @@ const customTheme = {
       bottom: undefined,
       horizontal: "small",
     },
-    extend: () =>
-      css({
-        borderRadius: "20px",
-        transition: "0.3s",
-        "&:hover": {
-          background: Colors.brand,
-        },
-      }),
+    extend: () => `
+      border-radius: 20px;
+      transition: 0.3s;
+
+      &:hover {
+        background: ${Colors.brand};
+      }
+    `,
   },
   formField: {
     label: {
@@ -78,13 +77,12 @@ const customTheme = {
       },
     },
     margin: "none",
-    extend: () =>
-      css({
-        input: {
-          borderRadius: "20px",
-          backgroundColor: "white",
-        },
-      }),
+    extend: () => `
+      input {
+        border-radius: 20px;
+        background-color: white;
+      }
+    `,
   },
 };
 
@@ -121,7 +119,6 @@ const FormContainer = styled("div", {
     flex: "1",
   },
 });
-
 const LoginContainer = () => {
   return (
     <StyledGrommet theme={deepMerge(grommet, customTheme)}>
