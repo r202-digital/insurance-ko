@@ -35,7 +35,7 @@
     "material-ui-popup-state": "^1.9.3",
     "moment": "^2.18.1",
     "nanoid": "^3.1.25",
-    "next": "^11.0.1",
+    "next": "12",
     "next-connect": "0.6.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
