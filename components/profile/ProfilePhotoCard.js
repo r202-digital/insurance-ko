@@ -1,61 +1,78 @@
 import { CardContent, Divider, Typography } from "@material-ui/core";
 // project imports
 import MainCard from "components/cards/MainCard";
+import { Colors } from "components/shared/colors";
+import { Flex, SubmitButton } from "components/shared/container";
 import PropTypes from "prop-types";
 import React from "react";
-import styled from "styled-components";
-import { breakpoint } from "styled-components-breakpoint";
-import { BreakpointQuery } from "components/shared/breakpoints";
+import { styled } from "stitches.config";
+import { IoPerson } from "react-icons/io5";
 
-const ProductList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-`;
+const Title = styled(Typography, {
+  marginBottom: "1em",
+});
 
-const ProductListItem = styled.li`
-  border-bottom: 1px solid #efefef;
-  padding: 1em 0;
+const CenteredFlex = styled(Flex, {
+  alignItems: "center",
+  flexDirection: "column",
+  color: Colors["text-weak"].dark,
+  "& > *": {
+    margin: "0.5em",
+  },
+  "& > div": {
+    "&:first-of-type": {
+      marginTop: "2em",
+    },
+  },
+});
 
-  &:first-of-type {
-    border-top: 1px solid #efefef;
-  }
+const Avatar = styled("div", {
+  borderRadius: "50%",
+  height: "150px",
+  width: "150px",
 
-  display: grid;
-  grid-template-columns: 40px 1fr 90px;
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  align-items: center;
-`;
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: Colors.secondaryLight,
+});
 
-const ProductContent = styled.div`
-  ${BreakpointQuery("lg")`
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    align-items: center;
-  `}
-`;
+const AvatarImage = styled("img", {
+  height: "100%",
+  width: "100%",
+  objectFit: "cover",
+});
 
-const ProductLink = styled.a`
-  color: inherit;
-  text-decoration: inherit;
-`;
-
-const Title = styled(Typography)`
-  margin-bottom: 1em;
-`;
-
-const ProfilePhotoCard = ({ isLoading }) => {
+const ProfilePhotoCard = ({ image }) => {
   return (
     <React.Fragment>
       <MainCard content={false}>
         <CardContent>
           <Title variant="h4">Profile Picture</Title>
           <Divider />
+          <CenteredFlex>
+            <Avatar>
+              {image ? (
+                <AvatarImage src={image} />
+              ) : (
+                <IoPerson size="90px" color={Colors.brandDark} />
+              )}
+            </Avatar>
+            <Typography variant="p">
+              Upload / Change your profile image
+            </Typography>
+            <div>
+              <SubmitButton
+                primary
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log("sample");
+                }}
+              >
+                <Typography>Upload Picture</Typography>
+              </SubmitButton>
+            </div>
+          </CenteredFlex>
         </CardContent>
       </MainCard>
     </React.Fragment>

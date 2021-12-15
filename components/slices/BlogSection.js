@@ -100,7 +100,7 @@ const customTheme = deepMerge(grommet, {
       top: "10px",
       bottom: "10px",
     },
-    extend: () => css`
+    extend: () => `
       text-align: center;
     `,
   },
@@ -108,7 +108,7 @@ const customTheme = deepMerge(grommet, {
     background: undefined,
     header: {
       background: "#7FC622",
-      extend: () => css`
+      extend: () => `
         padding-bottom: 5px;
 
         button {
@@ -118,7 +118,7 @@ const customTheme = deepMerge(grommet, {
     },
     panel: {
       // TODO: Fix up shadows and follow design
-      extend: ({ theme }) => css`
+      extend: ({ theme }) => `
         border: 1px solid black;
       `,
     },

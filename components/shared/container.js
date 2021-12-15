@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
 import { BreakpointQuery } from "components/shared/breakpoints";
+import { Colors } from "./colors";
+import { Button } from "grommet";
 
 export const Container = styled.div`
   max-width: 87.5%;
@@ -39,6 +41,12 @@ export const DesktopOnly = styled.div`
   ${BreakpointQuery("lg")`
     display: initial;
   `}
+`;
+
+export const SubmitButton = styled(Button)`
+  padding: 0.75em 2.5em;
+  border-radius: 2em;
+  background-color: ${Colors.yellowGreen};
 `;
 
 export default Container;

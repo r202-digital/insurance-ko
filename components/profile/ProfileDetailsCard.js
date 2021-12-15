@@ -24,7 +24,7 @@ const tabTheme = deepMerge(grommet, {
     header: {
       border: undefined,
     },
-    extend: ({ theme }) => css`
+    extend: ({ theme }) => `
       & > div:first-of-type {
         width: 100%;
         border-bottom: 1px solid ${Colors.borderGray};

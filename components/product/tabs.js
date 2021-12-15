@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Box, Grommet, FormField, Tab, Tabs, Text, TextInput } from "grommet";
 import { grommet } from "grommet/themes";
@@ -55,7 +55,7 @@ const customTheme = deepMerge(grommet, {
     gap: "medium",
     header: {
       background: "white",
-      extend: ({ theme }) => css`
+      extend: ({ theme }) => `
         justify-content: flex-start;
         margin-bottom: 1em;
         flex-wrap: nowrap;
@@ -109,7 +109,7 @@ const customTheme = deepMerge(grommet, {
       `,
     },
     panel: {
-      extend: ({ theme }) => css`
+      extend: ({ theme }) => `
         padding: 48px;
         background-color: white;
       `,
