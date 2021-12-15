@@ -30,7 +30,7 @@ const Avatar = styled("div", {
   borderRadius: "50%",
   height: "150px",
   width: "150px",
-
+  overflow: "hidden",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",

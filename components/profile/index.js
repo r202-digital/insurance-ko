@@ -20,6 +20,7 @@ const DashboardLayout = () => {
         <ProfileLayout>
           <Grid container spacing={gridSpacing}>
             <Grid item xs={12} lg={4}>
+              {/* <ProfilePhotoCard image="https://ik.imagekit.io/4bspqouekiud/profile-sample.png?updatedAt=1639542450332" /> */}
               <ProfilePhotoCard />
             </Grid>
             <Grid item xs={12} lg={8}>
