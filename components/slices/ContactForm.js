@@ -14,6 +14,7 @@ import { Colors } from "components/shared/colors";
 import MetadataContext from "components/shared/context/metadata";
 import { extractText } from "lib/utils";
 import { BreakpointQuery } from "components/shared/breakpoints";
+import { RichText } from "prismic-reactjs";
 
 const ContactBg = styled(SectionContainer)`
   flex: 1;
@@ -111,22 +112,23 @@ const ContactDetails = styled.div`
   `}
 `;
 
-const ContactForm = () => {
+const ContactForm = ({ slice: { primary } }) => {
   const metadataContainer = MetadataContext.useContainer();
   const { contextMetadata } = metadataContainer;
   const { contact_number, email, address } = contextMetadata;
+  const { heading, subheading, description, map_description } = primary;
   return (
     <ContactGradient>
       <ContactBg>
         <ContactBubble>
           <FormSection>
-            <SectionHeading as="h3">A nice section heading</SectionHeading>
-            <ShowcaseText>Goes here</ShowcaseText>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed</p>
+            <SectionHeading as="h3">{extractText(heading)}</SectionHeading>
+            <ShowcaseText>{extractText(subheading)}</ShowcaseText>
+            <RichText render={description} />
             <ContactUsForm />
           </FormSection>
           <MapSection>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed</p>
+            <RichText render={map_description} />
             <MapComponent
               googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
               loadingElement={<div style={{ height: `100%` }} />}
