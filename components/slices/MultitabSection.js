@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Tab, Tabs, Box, Text } from "grommet";
+import { Tab, Tabs, Box, Button, Text } from "grommet";
 import { Container } from "components/shared/container";
 import {
   SectionHeading,
@@ -11,6 +11,7 @@ import {
 import { RichText } from "prismic-reactjs";
 import { extractText } from "lib/utils";
 import { BreakpointQuery } from "components/shared/breakpoints";
+import { Colors } from "components/shared/colors";
 
 const MultitabSectionBg = styled(SectionBg)`
   padding: 4em 0;
@@ -47,6 +48,14 @@ const SectionButtonContainer = styled.div`
   text-align: initial;
   p {
     margin: 0;
+  }
+  button {
+    padding: 0.5rem 1.5rem;
+    text-align: center;
+    background-color: ${Colors.brand};
+    color: white;
+    border-radius: 1.5rem;
+    min-width: 200px;
   }
 `;
 
@@ -143,10 +152,12 @@ const MultitabSection = ({ slice }) => {
                   <RichText render={item.tab_content} />
                 </ItemContent>
                 <SectionButtonContainer>
-                  <RichText
-                    render={item.tab_button}
-                    serializeHyperlink={myCustomLink}
-                  />
+                  <Button>
+                    <RichText
+                      render={item.tab_button}
+                      serializeHyperlink={myCustomLink}
+                    />
+                  </Button>
                 </SectionButtonContainer>
               </ContentSection>
               {!!Object.keys(item.tab_image).length && (

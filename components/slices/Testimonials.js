@@ -100,6 +100,7 @@ const TestimonialContainer = styled(SectionContainer)`
 
   p:first-of-type {
     margin-bottom: 2rem;
+    font-size: 1.2em;
   }
 `;
 
