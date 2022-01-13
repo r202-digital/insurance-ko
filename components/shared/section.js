@@ -69,6 +69,7 @@ export const SectionHeading = styled(Text)`
 export const HandwrittenText = styled(Text)`
   font-family: RedRock;
   font-size: 4em;
+  font-weight: 400;
   color: ${({ color }) =>
     color === "yellow" ? Colors.yellow : Colors.lightgreen};
   line-height: 1;

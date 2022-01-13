@@ -71,7 +71,7 @@ const ImageContainer = styled.div`
 `;
 
 const Image = styled.img`
-  height: 100%;
+  height: auto;
   width: 100%;
 
   ${BreakpointQuery("lg")`
@@ -95,6 +95,7 @@ const ContentSection = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: ${({ isBig }) => (isBig ? "left" : "center")};
+  padding-left: 5rem;
 `;
 
 const StyledParagraph = styled(ParagraphText)`
