@@ -151,7 +151,15 @@ const Header = ({ hasUser, user }) => {
                 }
               }}
             />
-            <NavCta primary>Get Insured Now!</NavCta>
+            <NavCta primary>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                    Router.push("/contact");
+                }}>
+                Get Insured Now!
+              </Button>
+            </NavCta>
             {/* <Link href="/about">
                   <Anchor label="About" />
                 </Link> */}
