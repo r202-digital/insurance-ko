@@ -7,8 +7,12 @@ import MetadataContext from "./context/metadata";
 const IconContainer = styled.div`
   display: flex;
   width: 175px;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 1em 0;
+
+  a {
+    margin-right: 2em;
+  }
 `;
 
 export const SocialIcons = ({ color = "black" }) => {
@@ -20,15 +24,21 @@ export const SocialIcons = ({ color = "black" }) => {
   const instagramLink = extractLink(instagram);
   return (
     <IconContainer>
-      <Anchor href={facebookLink}>
-        <FaFacebookF size="1.75em" color={color} />
-      </Anchor>
-      <Anchor href={linkedinLink}>
-        <FaLinkedinIn size="1.75em" color={color} />
-      </Anchor>
-      <Anchor href={instagramLink}>
-        <FaInstagram size="1.75em" color={color} />
-      </Anchor>
+      {facebookLink && (
+        <Anchor href={facebookLink}>
+          <FaFacebookF size="1.75em" color={color} />
+        </Anchor>
+      )}
+      {linkedinLink && (
+        <Anchor href={linkedinLink}>
+          <FaLinkedinIn size="1.75em" color={color} />
+        </Anchor>
+      )}
+      {instagramLink && (
+        <Anchor href={instagramLink}>
+          <FaInstagram size="1.75em" color={color} />
+        </Anchor>
+      )}
     </IconContainer>
   );
 };
