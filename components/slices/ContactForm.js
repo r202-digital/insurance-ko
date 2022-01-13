@@ -129,12 +129,14 @@ const ContactForm = ({ slice: { primary } }) => {
           </FormSection>
           <MapSection>
             <RichText render={map_description} />
-            <MapComponent
-              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-              loadingElement={<div style={{ height: `100%` }} />}
-              containerElement={<MapContainer />}
-              mapElement={<div style={{ height: `100%` }} />}
-            />
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1960.079570107004!2d122.55920000594072!3d10.722206142358322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33aee51f5475f7d1%3A0x8f27a9ae66d11eb9!2sMicroensure%20Insurance%20Brokers%20Philippines%20Incorporated!5e0!3m2!1sen!2sau!4v1642078579323!5m2!1sen!2sau"
+              width="600"
+              height="450"
+              style={{ border: "0" }}
+              allowfullscreen=""
+              loading="lazy"
+            ></iframe>
             <MapBottom>
               <ContactDetails>
                 <ParagraphHeading>Contact Us</ParagraphHeading>
