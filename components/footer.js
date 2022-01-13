@@ -31,11 +31,11 @@ const FooterContainer = styled.footer`
   background-color: ${Colors.brandDarkTwo};
   padding: 1.5rem 3rem;
   color: white;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
 
   ${BreakpointQuery("lg")`
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 10%;
+    grid-template-columns: 1fr 1fr 1.5fr 1fr;
     grid-template-rows: 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 0px;
@@ -103,7 +103,10 @@ const TopButton = styled.button`
 
 const BackFlex = styled(Flex)`
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  button {
+    margin-left: 1rem;
+  }
 `;
 
 const Footer = () => {
@@ -178,20 +181,9 @@ const Footer = () => {
               <RichText render={address} />
             </AddressContainer>
           </List>
+          <SocialIcons color="white" />
         </div>
       </HalfDivider>
-      <List>
-        <li>Questions? Comments?</li>
-        <li>
-          Email us at{" "}
-          <FooterLink href={`mailto:${emailContext}`}>
-            <u>{emailContext}</u>
-          </FooterLink>
-        </li>
-        <li>
-          <SocialIcons color="white" />
-        </li>
-      </List>
       <div>
         <BackFlex>
           Back to top

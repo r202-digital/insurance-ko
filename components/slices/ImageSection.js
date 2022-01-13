@@ -27,6 +27,7 @@ const ShowcaseText = styled(HandwrittenText)`
   margin-top: -0.35em;
   color: ${Colors.lightYellow};
   font-size: 2.5em;
+  text-align: center;
 
   ${({ isBig }) => {
     const color = isBig ? Colors.brand : Colors.lightgreen;
@@ -41,6 +42,7 @@ const ShowcaseText = styled(HandwrittenText)`
 
 const StyledHeading = styled(SectionHeading)`
   color: white;
+  text-align: center;
 
   ${BreakpointQuery("lg")(`
     color: ${Colors.brand};
@@ -95,12 +97,14 @@ const ContentSection = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: ${({ isBig }) => (isBig ? "left" : "center")};
-  padding-left: 5rem;
+  padding: 0 0 0 6rem;
 `;
 
 const StyledParagraph = styled(ParagraphText)`
-  padding: 0 1em;
   color: white;
+  p {
+    margin-bottom: 1rem;
+  }
 
   ${BreakpointQuery("lg")`
     color: initial;
