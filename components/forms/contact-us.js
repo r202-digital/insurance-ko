@@ -6,6 +6,7 @@ import { object, string, number } from "superstruct";
 import { breakpoint } from "styled-components-breakpoint";
 import { StyledFormField } from "components/shared/form/fields";
 import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
+import axios from "axios";
 
 const FormData = object({
   name: string(),
@@ -24,8 +25,22 @@ const SubmitButton = styled(Button)`
 `;
 
 const ContactUsForm = () => {
-  const onSubmit = (e) => {
-    console.log("Sample: ", e);
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+  const onSubmit = async (e) => {
+    const { data } = await axios.post("/api/contact-email", e);
+    form.reset();
+    if (data.success) {
+      setSuccess("Message sent!");
+      setTimeout(() => {
+        setSuccess("");
+      }, 3000);
+    } else {
+      setError("Something went wrong");
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    }
   };
   const { form, handleSubmit, values, pristine, submitting } = useForm({
     onSubmit, // the function to call with your form values upon valid submit
@@ -33,14 +48,23 @@ const ContactUsForm = () => {
   });
   const name = useField("name", form);
   const email = useField("email", form);
+  const mobile = useField("mobile", form);
   const helpOption = useField("help", form);
+  const specificConcern = useField("specificConcern", form);
   const message = useField("message", form);
 
   return (
     <Form
-      onChange={(value) => console.log("Change", value)}
+      onChange={(value) => {
+        if (success || error) {
+          setSuccess("");
+          setError("");
+        }
+      }}
       onSubmit={handleSubmit}
     >
+      {success && <p>{success}</p>}
+      {error && <p>{error}</p>}
       <FormContainer>
         <StyledFormField label="Name" name="name">
           <TextInput {...name.input} placeholder="John Doe" />
@@ -55,13 +79,48 @@ const ContactUsForm = () => {
           )}
         </StyledFormField>
 
+        <StyledFormField label="Mobile Phone" name="mobile">
+          <TextInput {...mobile.input} placeholder="0912123123" />
+          {mobile.meta.touched && mobile.meta.error && (
+            <span>{mobile.meta.error}</span>
+          )}
+        </StyledFormField>
+
         <StyledFormField label="How can we help?" name="help">
           <Select
             {...helpOption.input}
-            options={["small", "medium", "large"]}
+            options={[
+              "Inquiry",
+              "Complaint",
+              "Request",
+              "Suggestion",
+              "FeedBack",
+              "Notification",
+              "Other",
+            ]}
           />
           {helpOption.meta.touched && helpOption.meta.error && (
             <span>{helpOption.meta.error}</span>
+          )}
+        </StyledFormField>
+
+        <StyledFormField label="Any specific concern?" name="specificConcern">
+          <Select
+            {...specificConcern.input}
+            options={[
+              "Product Information",
+              "Cancellation",
+              "Claim",
+              "Enrollment",
+              "Premium Payment",
+              "Change/Update Customer Information",
+              "Upgrade/Downgrade",
+              "Policy Information",
+              "Other",
+            ]}
+          />
+          {specificConcern.meta.touched && specificConcern.meta.error && (
+            <span>{specificConcern.meta.error}</span>
           )}
         </StyledFormField>
 
