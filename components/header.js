@@ -99,7 +99,7 @@ const Header = ({ hasUser, user }) => {
           </Link>
           <ResponsiveDesktop>
             <StyledNav direction="row">
-              <Link href="/about">
+              {/* <Link href="/about">
                 <NavLink label="About" />
               </Link>
               <Link href="/blog">
@@ -110,7 +110,7 @@ const Header = ({ hasUser, user }) => {
               </Link>
               <Link href="/partners">
                 <NavLink label="Partners" />
-              </Link>
+              </Link> */}
               <Link href="/shop">
                 <NavLink label="Shop" />
               </Link>
