@@ -94,7 +94,7 @@ const ContactUsForm = () => {
               "Complaint",
               "Request",
               "Suggestion",
-              "FeedBack",
+              "Feedback",
               "Notification",
               "Other",
             ]}

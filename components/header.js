@@ -125,10 +125,10 @@ const Header = ({ hasUser, user }) => {
         </ResponsiveMobile>
         <ResponsiveDesktop>
           <RightNav>
-            <Button
+            {/* <Button
               icon={<FiSearch size="16px" color={Colors.brand} />}
               onClick={() => {}}
-            />
+            /> */}
             <Button
               icon={<FiShoppingCart size="16px" color={Colors.brand} />}
               onClick={() => {
@@ -151,7 +151,16 @@ const Header = ({ hasUser, user }) => {
                 }
               }}
             />
-            <NavCta primary>Get Insured Now!</NavCta>
+            <NavCta primary>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  Router.push("/contact");
+                }}
+              >
+                Get Insured Now!
+              </Button>
+            </NavCta>
             {/* <Link href="/about">
                   <Anchor label="About" />
                 </Link> */}

@@ -94,6 +94,7 @@ const FormSection = styled.div`
 `;
 
 const MapBottom = styled.div`
+  margin-top: 2em;
   ${BreakpointQuery("lg")`
     display: flex;
     flex-direction: row-reverse;
