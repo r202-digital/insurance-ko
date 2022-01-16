@@ -5,6 +5,13 @@ import MetadataContext from "components/shared/context/metadata";
 import DefaultLayout from "layouts";
 import React, { useEffect } from "react";
 import { Client } from "utils/prismicHelpers";
+import styled from "styled-components";
+
+const CartContainer = styled(DesktopContainer)`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
 
 const CartPage = ({ metadata = {} }) => {
   const metadataContext = MetadataContext.useContainer();
@@ -15,9 +22,9 @@ const CartPage = ({ metadata = {} }) => {
   return (
     <DefaultLayout>
       <VariantContext.Provider>
-        <DesktopContainer>
+        <CartContainer>
           <CartGrid />
-        </DesktopContainer>
+        </CartContainer>
       </VariantContext.Provider>
     </DefaultLayout>
   );
