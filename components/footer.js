@@ -62,6 +62,13 @@ const List = styled.ul`
 
 const DesktopOnly = styled.div`
   display: none;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
   ${BreakpointQuery("lg")`
     display: initial;
   `}
@@ -126,7 +133,7 @@ const Footer = () => {
           </Anchor>
         </Link>
         <DesktopOnly>
-          <p>Privacy Policy | Website Policy</p>
+          <p><a href="https://insuranceko.box.com/s/209kalgaxb9xy04o9scpfvmxuowoy4ew">Website Terms & Conditions</a></p>
           <p>© 2021 InsuranceKo | All rights reserved</p>
         </DesktopOnly>
       </div>
@@ -142,22 +149,22 @@ const Footer = () => {
               </li>
               <li>
                 <Link href="/about">
-                  <FooterLink href="/about">About Us</FooterLink>
+                  <FooterLink href="/">About Us</FooterLink>
                 </Link>
               </li>
               <li>
                 <Link href="/shop">
-                  <FooterLink href="/shop">Our Shop</FooterLink>
+                  <FooterLink href="/">Our Shop</FooterLink>
                 </Link>
               </li>
               <li>
                 <Link href="/claims">
-                  <FooterLink href="/claims">Claims & Support</FooterLink>
+                  <FooterLink href="/">Claims & Support</FooterLink>
                 </Link>
               </li>
               <li>
                 <Link href="/blog">
-                  <FooterLink href="/blog">Our Blog</FooterLink>
+                  <FooterLink href="/">Our Blog</FooterLink>
                 </Link>
               </li>
               <li>
