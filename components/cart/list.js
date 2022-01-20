@@ -9,7 +9,7 @@ import { Colors } from "components/shared/colors";
 import { Flex } from "components/shared/container";
 
 const CartContainer = styled.div`
-  padding: 1em;
+  padding: 2em;
 `;
 
 const CartListContainer = styled.ul`
