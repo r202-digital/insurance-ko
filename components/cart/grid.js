@@ -113,7 +113,6 @@ const CardGrid = styled.div`
 `;
 
 const Card = styled.div`
-  border: 1px solid black;
   border-radius: 1em;
   background-color: white;
 `;
