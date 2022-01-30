@@ -129,12 +129,12 @@ const Header = ({ hasUser, user }) => {
               icon={<FiSearch size="16px" color={Colors.brand} />}
               onClick={() => {}}
             /> */}
-            <Button
+            {/* <Button
               icon={<FiShoppingCart size="16px" color={Colors.brand} />}
               onClick={() => {
                 Router.push("/cart");
               }}
-            />
+            /> */}
 
             <Button
               icon={<FiUser size="16px" color={Colors.brand} />}

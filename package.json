@@ -33,6 +33,7 @@
     "framer-motion": "^4.1.17",
     "grommet": "^2.17.3",
     "hamburgers": "^1.1.3",
+    "js-cookie": "^3.0.1",
     "keen-slider": "^5.5.1",
     "material-ui-popup-state": "^1.9.3",
     "moment": "^2.18.1",

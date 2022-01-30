@@ -1,43 +1,39 @@
+import CartGrid from "components/cart/grid";
 import VariantContext from "components/product/context";
-import ProductHero from "components/product/hero";
-import Recommendations from "components/product/recommendations";
-import ProductTabs from "components/product/tabs";
 import { DesktopContainer } from "components/shared/container";
 import MetadataContext from "components/shared/context/metadata";
-import ProductDetailContext from "components/shared/context/product-detail";
 import DefaultLayout from "layouts";
-import { getProduct, getProducts } from "lib/product";
-import ErrorPage from "pages/404";
 import React, { useEffect } from "react";
 import { Client } from "utils/prismicHelpers";
+import styled from "styled-components";
+import { getProduct, getProducts } from "lib/product";
+import ProductDetailContext from "components/shared/context/product-detail";
+// import Cookies from "js-cookie";
 
-const ProductPage = ({ productProps = {}, metadata = {} }) => {
+const CartContainer = styled(DesktopContainer)`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
+
+const CheckoutPage = ({ productProps = {}, metadata = {} }) => {
   const metadataContext = MetadataContext.useContainer();
+  // const option = Cookies.get("option");
+  // console.log(option);
   useEffect(() => {
     metadataContext.setContextMetadata(metadata.data);
   }, []);
 
-  if (!!Object.keys(productProps).length) {
-    return (
-      <DefaultLayout>
-        <VariantContext.Provider>
-          <DesktopContainer>
-            <ProductDetailContext.Provider initialState={productProps}>
-              <ProductHero />
-              <ProductTabs />
-              <Recommendations />
-            </ProductDetailContext.Provider>
-          </DesktopContainer>
-        </VariantContext.Provider>
-      </DefaultLayout>
-    );
-  }
-
-  // Call the standard error page if the document was not found
   return (
-    <>
-      <ErrorPage />
-    </>
+    <DefaultLayout>
+      <VariantContext.Provider>
+        <ProductDetailContext.Provider initialState={productProps}>
+          <CartContainer>
+            <CartGrid />
+          </CartContainer>
+        </ProductDetailContext.Provider>
+      </VariantContext.Provider>
+    </DefaultLayout>
   );
 };
 
@@ -82,9 +78,9 @@ export async function getStaticPaths() {
   const products = await getProducts();
 
   return {
-    paths: products.map((product) => `/product/${product.uid}`),
+    paths: products.map((product) => `/buy/${product.uid}`),
     fallback: true,
   };
 }
 
-export default ProductPage;
+export default CheckoutPage;

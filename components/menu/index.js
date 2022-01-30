@@ -146,12 +146,12 @@ const MobileMenu = ({ hasUser, isAdmin }) => {
               <NavCta primary>Get Insured Now!</NavCta>
             </StyledNav>
             <BottomBox>
-              <BottomButton
+              {/* <BottomButton
                 icon={<FiShoppingCart size="24px" color={Colors.lightYellow} />}
                 label="My Cart"
                 onClick={() => {}}
               />
-              <Divider />
+              <Divider /> */}
               <BottomButton
                 icon={<FiUser size="24px" color={Colors.lightYellow} />}
                 label="My Account"

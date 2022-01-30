@@ -3359,6 +3359,7 @@ __metadata:
     framer-motion: ^4.1.17
     grommet: ^2.17.3
     hamburgers: ^1.1.3
+    js-cookie: ^3.0.1
     keen-slider: ^5.5.1
     material-ui-popup-state: ^1.9.3
     moment: ^2.18.1
@@ -3687,6 +3688,13 @@ __metadata:
     merge-stream: ^2.0.0
     supports-color: ^8.0.0
   checksum: d56bfe67cdb32472d5ffe120bf4956a158155f8d7083c2ef258dc6b498a77d80cbee9aa029bbfb7e72f49e2de0c0dfbf5f76b48d39573f7d020578739ac5ea0d
+  languageName: node
+  linkType: hard
+
+"js-cookie@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "js-cookie@npm:3.0.1"
+  checksum: bb48de67e2a6bd1ae3dfd6b2d5a167c33dd0c5a37e909206161eb0358c98f17cb55acd55827a58e9eea3630d89444e7479f7938ef4420dda443218b8c434a4c3
   languageName: node
   linkType: hard
 

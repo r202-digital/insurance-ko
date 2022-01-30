@@ -9,6 +9,8 @@ import { deepMerge } from "grommet/utils";
 import React from "react";
 import styled from "styled-components";
 import CartList from "./list";
+import ProductDetailContext from "components/shared/context/product-detail";
+import Cookies from "js-cookie";
 
 const customTheme = {
   global: {
@@ -117,26 +119,30 @@ const Card = styled.div`
   background-color: white;
 `;
 
-const DarkHeading = styled(SectionHeading, {
-  color: Colors.brandDark,
-  fontSize: "1.75em",
-  marginTop: "1.5em",
-});
-
 const StyledTabs = styled(Tabs)`
   margin: 2em;
 
   &:before {
     content: "Customer Details";
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: 700;
     color: ${Colors.brand};
+    width: 50%;
+
+    ${BreakpointQuery("lg")`
+      font-size: 1.5em;
+      width: 70%;
+    `}
   }
   & > div {
     &:first-of-type {
-      margin-top: -2em;
+      margin-top: -2.5em;
       margin-bottom: 1em;
       align-self: flex-end;
+
+      ${BreakpointQuery("lg")`
+        margin-top: -2em;
+      `}
     }
   }
 `;
@@ -149,12 +155,31 @@ const RichTabTitle = ({ label }) => (
   </Box>
 );
 
-function CartGrid(props) {
+const CustomerCard = styled(Card)`
+  margin: 2em;
+  ${BreakpointQuery("lg")`
+    margin: 0;
+  `}
+`;
+
+const CartHeading = styled(SectionHeading)`
+  margin: 0;
+`;
+
+const PaymentContainer = styled.div`
+  padding: 2em;
+`;
+
+function CartGrid() {
+  const { contextProductDetail: product } = ProductDetailContext.useContainer();
+  // console.log(product);
+  // const option = Cookies.get("option");
+  // console.log(product, option);
   return (
     <GridLayout>
       <CartList />
       <CardGrid>
-        <Card>
+        <CustomerCard>
           <Grommet theme={deepMerge(grommet, customTheme)}>
             <StyledTabs>
               <Tab title={<RichTabTitle label="Sign in" />}>
@@ -170,9 +195,11 @@ function CartGrid(props) {
               </Tab>
             </StyledTabs>
           </Grommet>
-        </Card>
+        </CustomerCard>
         <Card>
-          <h1>Payment Summary</h1>
+          <PaymentContainer>
+            <CartHeading>Payment Summary</CartHeading>
+          </PaymentContainer>
         </Card>
       </CardGrid>
     </GridLayout>

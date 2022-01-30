@@ -3,6 +3,7 @@ import axios from "axios";
 import { BreakpointQuery } from "components/shared/breakpoints";
 import { Colors } from "components/shared/colors";
 import { Flex } from "components/shared/container";
+import ProductDetailContext from "components/shared/context/product-detail";
 import {
   PrimaryYellowGreenButton,
   SecondaryYellowGreenButton,
@@ -13,12 +14,14 @@ import { useKeenSlider } from "keen-slider/react";
 import { useUser } from "lib/hooks";
 import NextImage from "next/image";
 import Link from "next/link";
+import Router from "next/router";
 import React from "react";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { RiHeart3Line } from "react-icons/ri";
 import styled from "styled-components";
 import { useSWRConfig } from "swr";
 import VariantContext from "./context";
+import Cookies from "js-cookie";
 
 const HeroContainer = styled.div`
   background-color: white;
@@ -195,16 +198,18 @@ const ActionSection = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-top: 1em;
-    padding: 2em 1.5em;
+    padding: 2em 0;
+    padding-right: 3em;
     border: 1px solid ${Colors.borderGray};
     border-radius: 20px;
   `}
 `;
 
-const ProductHero = ({ product }) => {
-  const { mutate } = useSWRConfig();
-  const userHook = useUser();
+const ProductHero = () => {
+  // const { mutate } = useSWRConfig();
+  // const userHook = useUser();
   const variantContext = VariantContext.useContainer();
+  const { contextProductDetail: product } = ProductDetailContext.useContainer();
   const { price, planOptions } = product;
   const mapOptions = planOptions.map((option) => option.name);
   const [currentSlide, setCurrentSlide] = React.useState(0);
@@ -290,8 +295,8 @@ const ProductHero = ({ product }) => {
           </PlanSelection>
           <ActionSection>
             <Price>₱{price}</Price>
-            <ButtonRow>
-              <SecondaryYellowGreenButton
+            {/* <ButtonRow> */}
+            {/* <SecondaryYellowGreenButton
                 label="Add to Cart"
                 onClick={async () => {
                   const { user } = userHook;
@@ -318,9 +323,17 @@ const ProductHero = ({ product }) => {
                     }, 3000);
                   }
                 }}
-              />
-              <PrimaryYellowGreenButton label="Buy Now" onClick={() => {}} />
-            </ButtonRow>
+              /> */}
+            <PrimaryYellowGreenButton
+              label="Purchase"
+              onClick={() => {
+                const option = mapOptions[variantContext.contextVariant];
+                Cookies.set("option", option);
+
+                Router.push(`/buy/${product.uid}`);
+              }}
+            />
+            {/* </ButtonRow> */}
           </ActionSection>
           <p>
             Notes: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed

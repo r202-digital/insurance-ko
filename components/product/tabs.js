@@ -6,6 +6,7 @@ import { grommet } from "grommet/themes";
 import { deepMerge } from "grommet/utils";
 import { Colors } from "components/shared/colors";
 import VariantContext from "./context";
+import ProductDetailContext from "components/shared/context/product-detail";
 
 const RichTabTitle = ({ icon, label }) => (
   <Box direction="row" align="center" gap="xsmall" margin="xsmall">
@@ -122,8 +123,8 @@ const StyledGrommet = styled(Grommet)`
   background-color: transparent;
 `;
 
-const ProductTabs = ({ product }) => {
-  // console.log(product)
+const ProductTabs = () => {
+  const { contextProductDetail: product } = ProductDetailContext.useContainer();
   const variantContext = VariantContext.useContainer();
   const { planOptions } = product;
   const onActive = (nextIndex) => {

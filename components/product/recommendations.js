@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { breakpoint } from "styled-components-breakpoint";
 import Product from "./item";
 import { BreakpointQuery } from "components/shared/breakpoints";
+import ProductDetailContext from "components/shared/context/product-detail";
 
 const RecommendationHeading = styled.h2`
   font-size: 1em;
@@ -37,10 +38,10 @@ const RecoContainer = styled.div`
   margin-top: 2em;
 `;
 
-const Recommendations = ({ product }) => {
+const Recommendations = () => {
+  const { contextProductDetail: product } = ProductDetailContext.useContainer();
   const [allProducts, setAllProducts] = useState([]);
   const [recoLoading, setRecoLoading] = useState(true);
-  // console.log(product)
   const { planOptions } = product;
   useEffect(async () => {
     try {
