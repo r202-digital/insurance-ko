@@ -5,6 +5,7 @@ import { SectionHeading } from "components/shared/section";
 import { Box, Grommet, Tab, Tabs, Text } from "grommet";
 import { grommet } from "grommet/themes";
 import { deepMerge } from "grommet/utils";
+import { RichText } from "prismic-reactjs";
 import { styled, css } from "stitches.config";
 
 const customTheme = {
@@ -21,6 +22,7 @@ const customTheme = {
   tabs: {
     header: {
       extend: () => `
+      align-self: flex-start;
         justify-content: flex-start;
         border-radius: 20px;
         padding: 2px;
@@ -111,25 +113,21 @@ const FormContainer = styled("div", {
   borderRadius: "20px",
   backgroundColor: "white",
   padding: "3em",
-  "& > div": {
-    alignItems: "flex-start",
-  },
   "@lg": {
     margin: "2.5em 4em",
     flex: "1",
   },
 });
-const LoginContainer = () => {
+const LoginContainer = ({ content }) => {
   return (
     <StyledGrommet theme={deepMerge(grommet, customTheme)}>
       <FormContainer>
         <Tabs>
           <Tab title={<RichTabTitle label="Sign in" />}>
-            <DarkHeading as="h2">Lorem Ipsum Dolor!</DarkHeading>
-            <Text size="small">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod.
-            </Text>
+            <DarkHeading as="h2">
+              {RichText.asText(content.heading)}
+            </DarkHeading>
+            <RichText render={content.subheading} />
             <LoginForm />
           </Tab>
           <Tab title={<RichTabTitle label="Sign up" />}>

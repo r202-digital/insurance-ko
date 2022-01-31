@@ -1,4 +1,4 @@
-import { Alert } from "@material-ui/core";
+import { Alert, Box, Modal, Typography } from "@material-ui/core";
 import axios from "axios";
 import { BreakpointQuery } from "components/shared/breakpoints";
 import { Colors } from "components/shared/colors";
@@ -205,6 +205,17 @@ const ActionSection = styled.div`
   `}
 `;
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "white",
+  boxShadow: 24,
+  p: 4,
+};
+
 const ProductHero = () => {
   // const { mutate } = useSWRConfig();
   // const userHook = useUser();
@@ -220,6 +231,9 @@ const ProductHero = () => {
       setCurrentSlide(s.details().relativeSlide);
     },
   });
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   //TODO: link to imagekit
   const items = [
@@ -242,6 +256,21 @@ const ProductHero = () => {
 
   return (
     <>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Terms & Conditions
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
       <Flex>
         <Link href="/shop">
           <ShopLink href="/shop">
@@ -330,7 +359,8 @@ const ProductHero = () => {
                 const option = mapOptions[variantContext.contextVariant];
                 Cookies.set("option", option);
 
-                Router.push(`/buy/${product.uid}`);
+                handleOpen();
+                // Router.push(`/buy/${product.uid}`);
               }}
             />
             {/* </ButtonRow> */}

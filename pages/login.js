@@ -27,7 +27,7 @@ const StyledImage = styled(NextImage)`
   object-fit: cover;
 `;
 
-const Login = ({ metadata }) => {
+const Login = ({ metadata, loginContent }) => {
   const metadataContext = MetadataContext.useContainer();
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const Login = ({ metadata }) => {
             </Carousel>
           </CarouselContainer>
         </div>
-        <LoginContainer />
+        <LoginContainer content={loginContent.data} />
       </SplitContainer>
     </DefaultLayout>
   );
@@ -61,11 +61,14 @@ export async function getStaticProps({ preview = null, previewData = {} }) {
 
   const metadata =
     (await client.getSingle("metadata", ref ? { ref } : null)) || {};
+  const loginContent =
+    (await client.getSingle("login", ref ? { ref } : null)) || {};
 
   return {
     props: {
       metadata,
       preview,
+      loginContent,
     },
   };
 }
