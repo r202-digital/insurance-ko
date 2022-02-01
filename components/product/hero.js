@@ -22,7 +22,7 @@ import styled from "styled-components";
 import { useSWRConfig } from "swr";
 import VariantContext from "./context";
 import Cookies from "js-cookie";
-// import Html from "slate-html-serializer";
+import { convertToHtml } from "components/shared/serializer";
 
 const HeroContainer = styled.div`
   background-color: white;
@@ -236,8 +236,6 @@ const ProductHero = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  // console.log(Html.serialize(terms));
-
   //TODO: link to imagekit
   const items = [
     {
@@ -270,7 +268,7 @@ const ProductHero = () => {
             Terms & Conditions
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            {convertToHtml(terms)}
           </Typography>
         </Box>
       </Modal>
