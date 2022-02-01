@@ -13,6 +13,7 @@ import { ModalHeading } from "components/shared/section";
 import ProductsContext from "./context/product-context";
 import Router from "next/router";
 import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
+import { ImSpinner3 } from "react-icons/im";
 
 const SubmitButton = styled(Button)`
   margin-top: 2em;
@@ -67,6 +68,30 @@ const Flex = styled.div`
   justify-content: space-between;
 `;
 
+const SpinningIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: spin 1.5s infinite linear;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(359deg);
+    }
+  }
+`;
+
+const ButtonLabel = styled.span`
+  display: flex;
+  align-items: center;
+
+  ${SpinningIcon} {
+    margin-left: 0.5em;
+  }
+`;
+
 export default function DeleteModal({ product, index }) {
   const productsContainer = ProductsContext.useContainer();
   const { contextProducts, setContextProducts } = productsContainer;
@@ -95,13 +120,24 @@ export default function DeleteModal({ product, index }) {
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
   const [formError, setFormError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setSubmitting(true);
     try {
       const { data } = await axios.post("/api/delete-product", {
         uid: product.uid,
       });
+
+      // Deploy so we can load products
+      await axios.get(
+        "https://api.vercel.com/v1/integrations/deploy/prj_BTku6lN9lWyLUloUYAQoxqorvY8R/YotmKWQP0J"
+      );
+      await axios.get(
+        "https://api.vercel.com/v1/integrations/deploy/prj_BTku6lN9lWyLUloUYAQoxqorvY8R/z7WmQIgpda"
+      );
+
       const newProducts = [...contextProducts];
       newProducts.splice(index, 1);
       setContextProducts(newProducts);
@@ -109,6 +145,8 @@ export default function DeleteModal({ product, index }) {
     } catch (e) {
       setFormError(e.message || e);
     }
+
+    setSubmitting(false);
   };
 
   const handleOpen = () => {
@@ -147,7 +185,21 @@ export default function DeleteModal({ product, index }) {
           </ErrorContainer>
           <ButtonContainer>
             <SubmitButton secondary label="Cancel" onClick={handleClose} />
-            <SubmitButton primary label="Confirm" onClick={onSubmit} />
+            <SubmitButton
+              primary
+              label={
+                <ButtonLabel>
+                  <span>Confirm</span>
+                  {submitting && (
+                    <SpinningIcon>
+                      <ImSpinner3 />
+                    </SpinningIcon>
+                  )}
+                </ButtonLabel>
+              }
+              onClick={onSubmit}
+              disabled={submitting}
+            />
           </ButtonContainer>
         </div>
       </Modal>

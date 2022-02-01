@@ -3304,6 +3304,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immutable@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "immutable@npm:4.0.0"
+  checksum: 4b5e9181e4d5fa06728a481835ec09c86367e5d03268666c95b522b7644ab891098022e4479a43c4c81a68f2ed82f10751ce5d33e208d7b873b6e7f9dfaf4d87
+  languageName: node
+  linkType: hard
+
 "import-fresh@npm:^3.1.0":
   version: 3.3.0
   resolution: "import-fresh@npm:3.3.0"
@@ -3388,6 +3395,7 @@ __metadata:
     framer-motion: ^4.1.17
     grommet: ^2.17.3
     hamburgers: ^1.1.3
+    immutable: ^4.0.0
     js-cookie: ^3.0.1
     keen-slider: ^5.5.1
     material-ui-popup-state: ^1.9.3
@@ -3418,6 +3426,7 @@ __metadata:
     sass: ^1.39.0
     slate: ^0.72.8
     slate-history: ^0.66.0
+    slate-html-serializer: ^0.8.13
     slate-react: ^0.72.8
     styled-components: ^5.3.0
     styled-components-breakpoint: ^3.0.0-preview.20
@@ -5616,6 +5625,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"slate-html-serializer@npm:^0.8.13":
+  version: 0.8.13
+  resolution: "slate-html-serializer@npm:0.8.13"
+  dependencies:
+    type-of: ^2.0.1
+  peerDependencies:
+    immutable: ">=3.8.1 || >4.0.0-rc"
+    react: ">=0.14.0"
+    react-dom: ">=0.14.0"
+    slate: ">=0.36.0 <0.50.0"
+  checksum: bdeaf2062384ee06ed7477ead9a12fe7a7f859aaeffb9344e770670f3fcd2f15a7fbc19c180e1bce43c4ee3e20f9c181ae7394815b723cf4f8640b421f0191f5
+  languageName: node
+  linkType: hard
+
 "slate-react@npm:^0.72.8":
   version: 0.72.8
   resolution: "slate-react@npm:0.72.8"
@@ -6176,6 +6199,13 @@ __metadata:
   version: 0.7.1
   resolution: "type-fest@npm:0.7.1"
   checksum: 5b1b113529d59949d97b76977d545989ddc11b81bb0c766b6d2ccc65473cb4b4a5c7d24f5be2c2bb2de302a5d7a13c1732ea1d34c8c59b7e0ec1f890cf7fc424
+  languageName: node
+  linkType: hard
+
+"type-of@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "type-of@npm:2.0.1"
+  checksum: 51e889c9b09644ce4ec343ae24cfaa73399f6416c68532d46df1f068bd1773f639bb9dbf5d4bf0078825d0767810e6c7940489c17bd94998ad4e3770488956fe
   languageName: node
   linkType: hard
 

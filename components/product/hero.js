@@ -22,6 +22,7 @@ import styled from "styled-components";
 import { useSWRConfig } from "swr";
 import VariantContext from "./context";
 import Cookies from "js-cookie";
+// import Html from "slate-html-serializer";
 
 const HeroContainer = styled.div`
   background-color: white;
@@ -221,7 +222,7 @@ const ProductHero = () => {
   // const userHook = useUser();
   const variantContext = VariantContext.useContainer();
   const { contextProductDetail: product } = ProductDetailContext.useContainer();
-  const { price, planOptions } = product;
+  const { price, planOptions, terms = [] } = product;
   const mapOptions = planOptions.map((option) => option.name);
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [success, setSuccess] = React.useState("");
@@ -234,6 +235,8 @@ const ProductHero = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // console.log(Html.serialize(terms));
 
   //TODO: link to imagekit
   const items = [

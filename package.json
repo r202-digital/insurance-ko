@@ -64,6 +64,7 @@
     "sass": "^1.39.0",
     "slate": "^0.72.8",
     "slate-history": "^0.66.0",
+    "slate-html-serializer": "^0.8.13",
     "slate-react": "^0.72.8",
     "styled-components": "^5.3.0",
     "styled-components-breakpoint": "^3.0.0-preview.20",
@@ -81,7 +82,8 @@
     "url": "https://github.com/r202-digital/insurance-ko"
   },
   "devDependencies": {
-    "case-sensitive-paths-webpack-plugin": "^2.4.0"
+    "case-sensitive-paths-webpack-plugin": "^2.4.0",
+    "immutable": "^4.0.0"
   },
   "packageManager": "yarn@3.1.1"
 }

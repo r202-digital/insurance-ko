@@ -18,6 +18,7 @@ import ProductsContext from "./context/product-context";
 import CreateSelect from "components/shared/form/creatable-select";
 import { ModalHeading } from "components/shared/section";
 import { Breakpoint, BreakpointQuery } from "components/shared/breakpoints";
+import { ImSpinner3 } from "react-icons/im";
 
 const FormContainer = styled.div`
   text-align: initial;
@@ -68,6 +69,30 @@ const AddButton = styled(Button)`
   }
 `;
 
+const SpinningIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: spin 1.5s infinite linear;
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(359deg);
+    }
+  }
+`;
+
+const ButtonLabel = styled.span`
+  display: flex;
+  align-items: center;
+
+  ${SpinningIcon} {
+    margin-left: 0.5em;
+  }
+`;
+
 export default function ProductModal() {
   const promoContainer = PromoContext.useContainer();
   const optionsContainer = OptionsContext.useContainer();
@@ -95,8 +120,10 @@ export default function ProductModal() {
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
   const [formError, setFormError] = useState("");
+  const [allSubmitting, setAllSubmitting] = useState(false);
 
   const onSubmit = async (val) => {
+    setAllSubmitting(true);
     try {
       const nanoid = customAlphabet("1234567890", 10);
       const newArr = [...productsContainer.contextProducts];
@@ -111,6 +138,15 @@ export default function ProductModal() {
         throw "Please create plan options";
       }
       await axios.post("/api/create-product", item);
+
+      // Deploy so we can load products
+      await axios.get(
+        "https://api.vercel.com/v1/integrations/deploy/prj_BTku6lN9lWyLUloUYAQoxqorvY8R/YotmKWQP0J"
+      );
+      await axios.get(
+        "https://api.vercel.com/v1/integrations/deploy/prj_BTku6lN9lWyLUloUYAQoxqorvY8R/z7WmQIgpda"
+      );
+
       newArr.push(item);
       productsContainer.setContextProducts(newArr);
       setFormError("");
@@ -118,6 +154,7 @@ export default function ProductModal() {
     } catch (e) {
       setFormError(e.message || e);
     }
+    setAllSubmitting(false);
   };
 
   const { form, handleSubmit, values, pristine, submitting } = useForm({
@@ -218,9 +255,18 @@ export default function ProductModal() {
           </ErrorContainer>
           <SubmitButton
             primary
-            label="Create Product"
+            label={
+              <ButtonLabel>
+                <span>Confirm</span>
+                {submitting && (
+                  <SpinningIcon>
+                    <ImSpinner3 />
+                  </SpinningIcon>
+                )}
+              </ButtonLabel>
+            }
             onClick={form.submit}
-            disabled={pristine || submitting}
+            disabled={pristine || submitting || allSubmitting}
           />
         </div>
       </Modal>
