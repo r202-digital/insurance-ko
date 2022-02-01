@@ -19,6 +19,8 @@ import OptionsContext from "../context/options-context";
 import ProductDetailContext from "../context/product-detail-context";
 import PromoContext from "../context/promo-context";
 import ProfileLayout from "../ProfileLayout";
+import KycForm from "../KycForm";
+import TermsContext from "../context/terms-context";
 
 const FormContainer = styled.div`
   text-align: initial;
@@ -69,21 +71,36 @@ const SuccessMessage = styled(Typography)`
   font-weight: 600;
 `;
 
+const UnsavedMessage = styled(Typography)`
+  color: ${Colors.tagRed};
+  margin-right: 1rem;
+  font-weight: 600;
+`;
+
 const ProductDetails = () => {
   const productDetailContainer = ProductDetailContext.useContainer();
   const promoContainer = PromoContext.useContainer();
   const optionContainer = OptionsContext.useContainer();
+  const termsContainer = TermsContext.useContainer();
   const { contextProductDetail, setContextProductDetail } =
     productDetailContainer;
   const { contextPromo } = promoContainer;
   const { contextOptions } = optionContainer;
+  const { contextTerms } = termsContainer;
   const [success, setSuccess] = useState(false);
+  const newVals = {
+    ...contextProductDetail,
+    promos: contextPromo,
+    planOptions: contextOptions,
+    terms: contextTerms,
+  };
   const onSubmit = async (val) => {
     const obj = {
       ...contextProductDetail,
       ...val,
       promos: contextPromo,
       planOptions: contextOptions,
+      terms: contextTerms,
     };
     setContextProductDetail(obj);
 
@@ -94,6 +111,9 @@ const ProductDetails = () => {
       setSuccess(false);
     }, 3000);
   };
+
+  const otherValPristine =
+    JSON.stringify(contextProductDetail) === JSON.stringify(newVals);
 
   const { form, handleSubmit, values, pristine, submitting } = useForm({
     onSubmit,
@@ -138,10 +158,13 @@ const ProductDetails = () => {
                 </ProductName>
                 <Flex>
                   {success && <SuccessMessage>Success!</SuccessMessage>}
+                  {!(pristine && otherValPristine) && (
+                    <UnsavedMessage>Unsaved Changes</UnsavedMessage>
+                  )}
                   <div>
                     <SubmitButton
                       primary
-                      disabled={submitting}
+                      disabled={submitting || (pristine && otherValPristine)}
                       onClick={(e) => {
                         e.preventDefault();
                         form.submit();
@@ -214,7 +237,8 @@ const ProductDetails = () => {
             </Grid>
           </Grid>
           <Grid item xs={12} md={4}>
-            <MainCard content={false}>
+            <Grid item xs={12}></Grid>
+            <MainCard content={false} sx={{ marginBottom: "24px" }}>
               <CardContent>
                 <Grid container spacing={gridSpacing}>
                   <Grid item xs={12}>
@@ -227,6 +251,15 @@ const ProductDetails = () => {
                       )}
                     </ErrorContainer>
                     <PromoForm small />
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </MainCard>
+            <MainCard content={false}>
+              <CardContent>
+                <Grid container spacing={gridSpacing}>
+                  <Grid item xs={12}>
+                    <KycForm small />
                   </Grid>
                 </Grid>
               </CardContent>

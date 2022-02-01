@@ -11,6 +11,7 @@ import ProductDetails from "components/admin/product/ProductDetails";
 import PromoContext from "components/admin/context/promo-context";
 import OptionsContext from "components/admin/context/options-context";
 import ProductDetailContext from "components/admin/context/product-detail-context";
+import TermsContext from "components/admin/context/terms-context";
 
 const ProductDetailsPage = ({ metadata, data }) => {
   const metadataContext = MetadataContext.useContainer();
@@ -24,7 +25,9 @@ const ProductDetailsPage = ({ metadata, data }) => {
     <ProductDetailContext.Provider initialState={data}>
       <PromoContext.Provider initialState={data.promos}>
         <OptionsContext.Provider initialState={data.planOptions}>
-          <ProductDetails />
+          <TermsContext.Provider initialState={data.terms}>
+            <ProductDetails />
+          </TermsContext.Provider>
         </OptionsContext.Provider>
       </PromoContext.Provider>
     </ProductDetailContext.Provider>

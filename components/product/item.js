@@ -37,10 +37,6 @@ const ProductLink = styled.a`
   width: 100%;
   top: 0;
   left: 0;
-
-  ${BreakpointQuery("lg")`
-    display: none;
-  `}
 `;
 
 const Description = styled.div`
@@ -96,7 +92,9 @@ const DescriptionLink = styled.a`
 const Product = ({ image, tag, name, price, promos = [], id, loading }) => {
   return (
     <ProductListItem>
-      <ProductLink href={`/product/${id}`} />
+      <Link href={`/product/${id}`}>
+        <ProductLink href={`/product/${id}`} />
+      </Link>
       <ProductListItemContainer>
         {!!promos.length && (
           <TopTag>
@@ -121,13 +119,7 @@ const Product = ({ image, tag, name, price, promos = [], id, loading }) => {
           </BottomTag>
         )}
         <Description>
-          {loading ? (
-            <Skeleton />
-          ) : (
-            <Link href={`/product/${id}`}>
-              <DescriptionLink href={`/product/${id}`}>{name}</DescriptionLink>
-            </Link>
-          )}
+          {loading ? <Skeleton /> : <span>{name}</span>}
           {loading ? <Skeleton /> : <strong>₱{price}</strong>}
         </Description>
       </ProductListItemContainer>
