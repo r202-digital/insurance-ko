@@ -21,6 +21,7 @@ import PromoContext from "../context/promo-context";
 import ProfileLayout from "../ProfileLayout";
 import KycForm from "../KycForm";
 import TermsContext from "../context/terms-context";
+import Link from "next/link";
 
 const FormContainer = styled.div`
   text-align: initial;
@@ -75,6 +76,15 @@ const UnsavedMessage = styled(Typography)`
   color: ${Colors.tagRed};
   margin-right: 1rem;
   font-weight: 600;
+`;
+
+const BackLink = styled.a`
+  text-decoration: initial;
+  color: ${Colors.textGray};
+
+  &:hover {
+    font-weight: 700;
+  }
 `;
 
 const ProductDetails = () => {
@@ -154,7 +164,10 @@ const ProductDetails = () => {
             <MainCard content={false}>
               <ProductHeading>
                 <ProductName>
-                  Products / <span>{contextProductDetail.name}</span>
+                  <Link href="/admin/products">
+                    <BackLink href="/admin/products">Products</BackLink>
+                  </Link>{" "}
+                  / <span>{contextProductDetail.name}</span>
                 </ProductName>
                 <Flex>
                   {success && <SuccessMessage>Success!</SuccessMessage>}
