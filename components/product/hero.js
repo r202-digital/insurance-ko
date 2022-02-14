@@ -1,28 +1,22 @@
-import { Alert, Box, Modal, Typography } from "@material-ui/core";
-import axios from "axios";
+import { Alert, Modal, Typography } from "@material-ui/core";
 import { BreakpointQuery } from "components/shared/breakpoints";
 import { Colors } from "components/shared/colors";
 import { Flex } from "components/shared/container";
 import ProductDetailContext from "components/shared/context/product-detail";
-import {
-  PrimaryYellowGreenButton,
-  SecondaryYellowGreenButton,
-} from "components/shared/section";
+import { PrimaryYellowGreenButton } from "components/shared/section";
+import { convertToHtml } from "components/shared/serializer";
 import { Anchor, Button, Select } from "grommet";
+import Cookies from "js-cookie";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import { useUser } from "lib/hooks";
 import NextImage from "next/image";
 import Link from "next/link";
-import Router from "next/router";
 import React from "react";
+import { fadeInRight } from "react-animations";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { RiHeart3Line } from "react-icons/ri";
-import styled from "styled-components";
-import { useSWRConfig } from "swr";
+import styled, { keyframes } from "styled-components";
 import VariantContext from "./context";
-import Cookies from "js-cookie";
-import { convertToHtml } from "components/shared/serializer";
 
 const HeroContainer = styled.div`
   background-color: white;
@@ -206,16 +200,25 @@ const ActionSection = styled.div`
   `}
 `;
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "white",
-  boxShadow: 24,
-  p: 4,
-};
+const fadeInRightAnimation = keyframes`${fadeInRight}`;
+
+const ModalBody = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: white;
+  box-shadow: 0px 11px 15px -7px rgb(0 0 0 / 20%),
+    0px 24px 38px 3px rgb(0 0 0 / 14%), 0px 9px 46px 8px rgb(0 0 0 / 12%);
+  padding: 32px;
+  border-radius: 20px;
+  overflow: hidden;
+`;
+
+const ModalContainer = styled.div`
+  animation: 1s ${fadeInRightAnimation};
+`;
 
 const ProductHero = () => {
   // const { mutate } = useSWRConfig();
@@ -263,14 +266,16 @@ const ProductHero = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Terms & Conditions
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {convertToHtml(terms)}
-          </Typography>
-        </Box>
+        <ModalBody>
+          <ModalContainer>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Terms & Conditions
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              {convertToHtml(terms)}
+            </Typography>
+          </ModalContainer>
+        </ModalBody>
       </Modal>
       <Flex>
         <Link href="/shop">

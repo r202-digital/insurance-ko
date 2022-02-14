@@ -3408,6 +3408,7 @@ __metadata:
     prismic-reactjs: ^1.3.4
     prop-types: ^15.7.2
     react: ^17.0.2
+    react-animations: ^1.0.0
     react-apexcharts: ^1.3.9
     react-dates: ^21.8.0
     react-device-detect: ^1.17.0
@@ -4918,6 +4919,13 @@ __metadata:
     iconv-lite: 0.4.24
     unpipe: 1.0.0
   checksum: d5e9179d2f1f0a652cd107c080f25d165c724f546124d620c8df7fb80322df42bff547a8b310e55e1f7952556d013716a21b30162192eb0b3332d7efcba75883
+  languageName: node
+  linkType: hard
+
+"react-animations@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "react-animations@npm:1.0.0"
+  checksum: dc4425628fe33bf3a49c7128167f765ee16089902535285db1b377136f422ae9463dcb0df0532a82dfaf4c378ae18909409d6b66606c460962c361ec5a951ba1
   languageName: node
   linkType: hard
 

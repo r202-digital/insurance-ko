@@ -1,4 +1,4 @@
-export const convertToHtml = (json) => {
+export const convertToHtml = (json, isList) => {
   return json.map((obj) => {
     switch (obj.type) {
       case "code":
@@ -8,7 +8,11 @@ export const convertToHtml = (json) => {
           </pre>
         );
       case "paragraph":
-        return <p {...obj.attributes}>{convertToHtml(obj.children)}</p>;
+        return isList ? (
+          <li {...obj.attributes}>{convertToHtml(obj.children)}</li>
+        ) : (
+          <p {...obj.attributes}>{convertToHtml(obj.children)}</p>
+        );
       case "quote":
         return (
           <blockquote {...obj.attributes}>
@@ -16,25 +20,21 @@ export const convertToHtml = (json) => {
           </blockquote>
         );
       case "numbered-list":
-        return <ol {...obj.attributes}>{convertToHtml(obj.children)}</ol>;
+        return <ol {...obj.attributes}>{convertToHtml(obj.children, true)}</ol>;
       case "bulleted-list":
-        return <ul {...obj.attributes}>{convertToHtml(obj.children)}</ul>;
+        return <ul {...obj.attributes}>{convertToHtml(obj.children, true)}</ul>;
       default:
-        if (obj.type) {
-          return convertToHtml(obj);
-        } else {
-          let text = obj.text;
-          if (obj.bold) {
-            text = <strong>{obj.text}</strong>;
-          }
-          if (obj.italic) {
-            text = <em>{text}</em>;
-          }
-          if (obj.underline) {
-            text = <u>{text}</u>;
-          }
-          return <span>{text}</span>;
+        let text = obj.text;
+        if (obj.bold) {
+          text = <strong>{obj.text}</strong>;
         }
+        if (obj.italic) {
+          text = <em>{text}</em>;
+        }
+        if (obj.underline) {
+          text = <u>{text}</u>;
+        }
+        return text;
     }
   });
 };
