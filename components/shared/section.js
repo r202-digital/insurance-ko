@@ -118,6 +118,7 @@ const BiggerButton = styled(Button)`
   padding: 0.5em 1em;
   border-radius: 1.5em;
   font-weight: bold;
+  font-family: Open Sans;
 `;
 
 export const PrimaryYellowGreenButton = styled((props) => (

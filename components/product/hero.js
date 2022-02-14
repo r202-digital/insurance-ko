@@ -3,7 +3,10 @@ import { BreakpointQuery } from "components/shared/breakpoints";
 import { Colors } from "components/shared/colors";
 import { Flex } from "components/shared/container";
 import ProductDetailContext from "components/shared/context/product-detail";
-import { PrimaryYellowGreenButton } from "components/shared/section";
+import {
+  PrimaryYellowGreenButton,
+  SecondaryYellowGreenButton,
+} from "components/shared/section";
 import { convertToHtml } from "components/shared/serializer";
 import { Anchor, Button, Select } from "grommet";
 import Cookies from "js-cookie";
@@ -11,8 +14,8 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import NextImage from "next/image";
 import Link from "next/link";
-import React from "react";
-import { fadeInRight } from "react-animations";
+import React, { useState } from "react";
+import { fadeIn } from "react-animations";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { RiHeart3Line } from "react-icons/ri";
 import styled, { keyframes } from "styled-components";
@@ -200,7 +203,7 @@ const ActionSection = styled.div`
   `}
 `;
 
-const fadeInRightAnimation = keyframes`${fadeInRight}`;
+const fadeInAnimation = keyframes`${fadeIn}`;
 
 const ModalBody = styled.div`
   position: absolute;
@@ -217,8 +220,58 @@ const ModalBody = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  animation: 1s ${fadeInRightAnimation};
+  animation: 1s ${fadeInAnimation};
 `;
+
+const TermsModal = ({ terms, setModalOption }) => (
+  <>
+    <Typography id="modal-modal-title" variant="h6" component="h2">
+      Terms & Conditions
+    </Typography>
+    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+      {convertToHtml(terms)}
+    </Typography>
+    <ButtonRow>
+      <SecondaryYellowGreenButton
+        label="Go Back"
+        onClick={() => {
+          console.log("sample");
+        }}
+      />
+      <PrimaryYellowGreenButton
+        label="Agree"
+        onClick={() => {
+          setModalOption(1);
+        }}
+      />
+    </ButtonRow>
+  </>
+);
+
+const DataPrivacyModal = ({ terms, setModalOption }) => (
+  <>
+    <Typography id="modal-modal-title" variant="h6" component="h2">
+      Data Privacy
+    </Typography>
+    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+      {convertToHtml(terms)}
+    </Typography>
+    <ButtonRow>
+      <SecondaryYellowGreenButton
+        label="Go Back"
+        onClick={() => {
+          setModalOption(0);
+        }}
+      />
+      <PrimaryYellowGreenButton
+        label="Agree"
+        onClick={() => {
+          console.log("sample");
+        }}
+      />
+    </ButtonRow>
+  </>
+);
 
 const ProductHero = () => {
   // const { mutate } = useSWRConfig();
@@ -227,17 +280,23 @@ const ProductHero = () => {
   const { contextProductDetail: product } = ProductDetailContext.useContainer();
   const { price, planOptions, terms = [] } = product;
   const mapOptions = planOptions.map((option) => option.name);
-  const [currentSlide, setCurrentSlide] = React.useState(0);
-  const [success, setSuccess] = React.useState("");
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [success, setSuccess] = useState("");
   const [sliderRef] = useKeenSlider({
     initial: 0,
     slideChanged: (s) => {
       setCurrentSlide(s.details().relativeSlide);
     },
   });
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [modalOption, setModalOption] = useState(0);
+
+  const ModalContent = [
+    <TermsModal terms={terms} setModalOption={setModalOption} />,
+    <DataPrivacyModal terms={terms} setModalOption={setModalOption} />,
+  ];
 
   //TODO: link to imagekit
   const items = [
@@ -267,14 +326,7 @@ const ProductHero = () => {
         aria-describedby="modal-modal-description"
       >
         <ModalBody>
-          <ModalContainer>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Terms & Conditions
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {convertToHtml(terms)}
-            </Typography>
-          </ModalContainer>
+          <ModalContainer>{ModalContent[modalOption]}</ModalContainer>
         </ModalBody>
       </Modal>
       <Flex>
