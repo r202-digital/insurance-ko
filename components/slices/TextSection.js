@@ -1,6 +1,6 @@
 import React from "react";
 import { RichText } from "prismic-reactjs";
-
+import styled from "styled-components";
 import { linkResolver } from "prismic-configuration";
 import { customLink } from "utils/prismicHelpers";
 
@@ -9,14 +9,20 @@ const TextSection = ({ slice }) => {
     ? `text-section-${slice.slice_label}`
     : "text-section-1col";
 
+  const RichTextContainer = styled.div`
+    padding: 3rem;
+  `;
+
   return (
-    <section className={`content-section ${sectionClass}`}>
-      <RichText
-        render={slice.primary.rich_text}
-        linkResolver={linkResolver}
-        serializeHyperlink={customLink}
-      />
-    </section>
+    <RichTextContainer>
+      <section className={`content-section ${sectionClass}`}>
+        <RichText
+          render={slice.primary.rich_text}
+          linkResolver={linkResolver}
+          serializeHyperlink={customLink}
+        />
+      </section>
+    </RichTextContainer>
   );
 };
 

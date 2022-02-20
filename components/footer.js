@@ -133,7 +133,7 @@ const Footer = () => {
           </Anchor>
         </Link>
         <DesktopOnly>
-          <p><a href="https://insuranceko.box.com/s/209kalgaxb9xy04o9scpfvmxuowoy4ew" target="_blank">Website Terms & Conditions</a></p>
+          <p><a href="/terms-and-conditions">Website Terms & Conditions</a></p>
           <p>© 2021 InsuranceKo | All rights reserved</p>
         </DesktopOnly>
       </div>
@@ -154,7 +154,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link href="/shop">
-                  <FooterLink href="/">Our Shop</FooterLink>
+                  <FooterLink href="/shop">Our Shop</FooterLink>
                 </Link>
               </li>
               <li>
