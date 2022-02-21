@@ -50,7 +50,8 @@ const SectionButtonContainer = styled.div`
     margin: 0;
   }
   button {
-    padding: 0.5rem 1.5rem;
+    padding: 0.3rem 1.5rem;
+    margin: 0rem;
     text-align: center;
     background-color: ${Colors.brand};
     color: white;
