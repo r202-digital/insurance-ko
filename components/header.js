@@ -111,9 +111,9 @@ const Header = ({ hasUser, user }) => {
               <Link href="/partners">
                 <NavLink label="Partners" />
               </Link> */}
-              <Link href="/shop">
+              {/* <Link href="/shop">
                 <NavLink label="Shop" />
-              </Link>
+              </Link> */}
               <Link href="/contact">
                 <NavLink label="Contact" />
               </Link>
