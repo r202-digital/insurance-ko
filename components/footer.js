@@ -133,7 +133,7 @@ const Footer = () => {
           </Anchor>
         </Link>
         <DesktopOnly>
-          <p><a href="/terms-and-conditions">Website Terms & Conditions</a></p>
+          <p><a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-and-conditions">Website Terms & Conditions</a></p>
           <p>© 2021 InsuranceKo | All rights reserved</p>
         </DesktopOnly>
       </div>
