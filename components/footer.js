@@ -148,22 +148,22 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/about">
+                <Link href="/">
                   <FooterLink href="/">About Us</FooterLink>
                 </Link>
               </li>
               <li>
-                <Link href="/shop">
-                  <FooterLink href="/shop">Our Shop</FooterLink>
+                <Link href="/">
+                  <FooterLink href="/">Our Shop</FooterLink>
                 </Link>
               </li>
               <li>
-                <Link href="/claims">
+                <Link href="/">
                   <FooterLink href="/">Claims & Support</FooterLink>
                 </Link>
               </li>
               <li>
-                <Link href="/blog">
+                <Link href="/">
                   <FooterLink href="/">Our Blog</FooterLink>
                 </Link>
               </li>
