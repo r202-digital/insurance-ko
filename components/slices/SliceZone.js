@@ -18,6 +18,12 @@ const Testimonials = dynamic(() => import("./Testimonials"));
 const HighlightSection = dynamic(() => import("./HighlightSection"));
 const ContactForm = dynamic(() => import("./ContactForm"));
 const ShopSection = dynamic(() => import("./ShopSection"));
+const AboutHero = dynamic(() => import("./AboutHero"));
+const IconCard = dynamic(() => import("./IconCard"));
+const Milestone = dynamic(() => import("./Milestone"));
+const Team = dynamic(() => import("./Team"));
+const Partners = dynamic(() => import("./Partners"));
+// const DownloadableFilesList = dynamic(() => import("./DownloadableFilesList"));
 
 const SliceZone = ({ sliceZone }) => (
   <div className="container">
@@ -57,6 +63,18 @@ const SliceZone = ({ sliceZone }) => (
           return <ContactForm slice={slice} key={`slice-${index}`} />;
         case "shop_section":
           return <ShopSection slice={slice} key={`slice-${index}`} />;
+        case "about_hero":
+          return <AboutHero slice={slice} key={`slice-${index}`} />;
+        case "icon_card":
+          return <IconCard slice={slice} key={`slice-${index}`} />;
+        case "milestone":
+          return <Milestone slice={slice} key={`slice-${index}`} />;
+        case "team":
+          return <Team slice={slice} key={`slice-${index}`} />;
+        case "partners":
+          return <Partners slice={slice} key={`slice-${index}`} />;
+        // case "downloadable_files_list":
+        //   return <DownloadableFilesList slice={slice} key={`slice-${index}`} />;
         default:
           return null;
       }

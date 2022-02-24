@@ -1,7 +1,7 @@
 {
   "name": "insurance-ko",
   "description": "Website for InsuranceKo",
-  "author": "Sidney Ramos <sidney@r202digital.com>",
+  "author": "R202 Digital <team.r202creatives@gmail.com>",
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "@emotion/react": "^11.4.0",

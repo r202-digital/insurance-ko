@@ -149,7 +149,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link href="/">
-                  <FooterLink href="/">About Us</FooterLink>
+                  <FooterLink href="/about">About Us</FooterLink>
                 </Link>
               </li>
               <li>

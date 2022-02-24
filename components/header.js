@@ -114,6 +114,9 @@ const Header = ({ hasUser, user }) => {
               {/* <Link href="/shop">
                 <NavLink label="Shop" />
               </Link> */}
+              <Link href="/about">
+                <NavLink label="About" />
+              </Link>
               <Link href="/contact">
                 <NavLink label="Contact" />
               </Link>
